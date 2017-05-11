@@ -38,6 +38,12 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Source Files\Algorithms Impl">
+      <UniqueIdentifier>{7b52f042-0252-4846-82cb-669958d9fba9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Algorithms Header">
+      <UniqueIdentifier>{3512714b-a3bd-4ed6-99a3-f4454ba56247}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -55,6 +61,15 @@
     <ClCompile Include="GeneratedFiles\qrc_SimplePolygonConvexHull.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataStruc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sklansky72.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="SimplePolygonConvexHull.h">
@@ -70,6 +85,18 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_SimplePolygonConvexHull.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStruc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sklansky72.h">
+      <Filter>Header Files\Algorithms Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
