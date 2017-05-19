@@ -4,35 +4,145 @@
 
 using namespace std;
 
-class Point {
+#define tolerance 0.000001 // 定义容差为10^-6
+
+// 颜色枚举类，用于区分颜色
+// 其他颜色根据情况使用。
+enum Color
+{
+	// BLACK:给定的原多边形的点，在Display类中不需要添加原有多边形的所有点，默认会在界面绘制。
+	BLACK, 
+	// WHITE:根据情况使用
+	WHITE,
+	// RED:当前正在检查的点。
+	RED,
+	// GREEN:凸包上的点。最后一步会根据SimplePolygon中的值显示。
+	GREEN, 
+	// BLUE:根据情况使用
+	BLUE,
+	// YELLOW:当前检查所用到的点。
+	YELLOW,
+	// PINK:根据情况使用
+	PINK,
+	// PURPLE:根据情况使用
+	PURPLE,
+	// GREY:（可能需要显示的）已经排除掉的点。
+	GREY
+};
+
+typedef vector<Color> Colors;
+
+// 点的数据类
+class Point
+{
 public:
 	double x;
 	double y;
 
 public:
-	Point(int a = 0, int b = 0) {
-		x = a;
-		y = b;
+	Point(double a = 0, double b = 0) : x(a), y(b) {}
+	Point(const Point &m) : x(m.x), y(m.y) {}
+	Point() {}
+	void setPoint(double X, double Y) {
+		x = X;
+		y = Y;
 	}
-	Point(void) {
-		x = 0;
-		y = 0;
-	}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 };
 
-class SimplePolygon {
+typedef vector<Point> Points;
+
+// 线段类型枚举类
+enum LineType
+{
+	LINE, RAY, SEGMENT
+};
+
+// 线的数据类
+// 显示时，直线、射线、线段都显示虚线
+class Line 
+{
 public:
-	bool isClockWise = false;
+	Point a;
+	Point b;
+	// LINE:直线(a,b),RAY:直线(a,b),SEGMENT:线段(a,b)
+	LineType type; // 默认为直线
+
+public:
+	// 默认为直线
+	Line(Point &A, Point &B, LineType Type = LINE) : a(A), b(B), type(Type) {}
+	// 默认为直线
+	Line(double x1, double y1, double x2, double y2, LineType Type = LINE) : a(x1, y1), b(x2, y2), type(Type) {}
+	// 默认为直线
+	Line(const Line & line) : a(line.a), b(line.b), type(line.type) {}
+};
+
+typedef vector<Line> Lines;
+
+// 区域的数据类
+class Area 
+{
+public:
+	Points points;
+};
+
+typedef vector<Area> Areas;
+
+
+// 用于演示的数据类
+// 在Display类中不需要添加原有多边形的所有点，这些点默认会在界面绘制。
+// 最终确定的凸包，会根据SimplePolygon中的值在所有Display演示结束后显示，无需考虑。
+class Display
+{
+public:
+	Points points;
+	Colors pointColors;
+	Lines lines;
+	Colors lineColors;
+	Areas areas;
+	Colors areaColors;
+};
+
+typedef vector<Display> Displays;
+
+// 简单多边形类
+class SimplePolygon 
+{
+public:
+	bool isCounterClockWise = false;
 	// 存储了简单多边形中所有的点，默认按照逆时针顺序存储
-	vector<Point> points;
+	Points points;
 	// 用于存储凸包中所含的点的下标，默认按照逆时针顺序存储
 	vector<int> convexHull;
 
 public:
-	// 根据后续决定来判断是只改变标记位isClockWise来确定方向，还是更改整个数组的顺序
+	// 根据后续决定来判断是只改变标记位isCounterClockWise来确定方向，还是更改整个数组的顺序
 	void reverse();
 	// 判定当前的简单多边形是否合法，即是否存在自交、重合嵌套等
+	// 点集的个数必须大于等于3，整个简单多边形面积不为0。
 	bool isLegal();
-	// 初步设计用于排除输入中连续的重复点
-	void makeSimple();
+	// 用于排除输入中连续的重复点，并且通过调换次序使得第一个点为最左最下点，从而令点集序列正规化
+	// 注：	可能会出现非连续的点出现重合的现象，若后续对任意可能重合的两个点进行比较则花费至少O(nlogn)的时间在排序中。
+	//		而调换次序的工作可以在排序后进行，不提升时间复杂度。
+	//		过程中调用makeDirection()来确定点集的方向。
+	void normalize();
+
+private:
+	// 根据点的下标来得出当前简单多边形的点集顺序，并据此设置isCounterClockWise的值
+	// 在normalize()中进行调用
+	void makeDirectoin();
 };
+
+
+// 判定范围如备注中图：
+//  ==o----o----  
+//     (b)   (a)
+// 如图，在线段ab的b侧延长线上以及直线ab左侧的点判定为true，其他为false
+// 注：不考虑三个点存在任意两点重合的情况，此种情况应该在之前的处理中已经排除
+extern bool toLeft(const Point & a, const Point & b, const Point & c);
+
+//返回值为true,点的序列为逆时针
+//返回值为false,点的序列为顺时针
+extern bool getPolygonDirection(const Points& points);
+
+//获得由一系列点围成的多边形有向面积，逆时针形成的有向面积为正，顺时针形成的为负
+extern double getDirectedArea(const Points& points);

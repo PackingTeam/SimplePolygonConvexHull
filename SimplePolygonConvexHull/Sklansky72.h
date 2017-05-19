@@ -2,7 +2,10 @@
 
 #include "Algorithm.h"
 
-class Sklansky72 : Algorithm {
+// 该算法假设传入的SimplePolygon中的points序列的第一个点，为最左最下点
+class Sklansky72 : Algorithm 
+{
 public:
-	void getConvexHull(SimplePolygon & sp, Commands & result);
+	void getConvexHull(SimplePolygon & sp);
+	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);
 };

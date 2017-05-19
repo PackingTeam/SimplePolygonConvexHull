@@ -1,29 +1,213 @@
-<UI version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>SimplePolygonConvexHullClass</class>
- <widget class="QMainWindow" name="SimplePolygonConvexHullClass" >
-  <property name="objectName" >
-   <string notr="true">SimplePolygonConvexHullClass</string>
-  </property>
-  <property name="geometry" >
+ <widget class="QMainWindow" name="SimplePolygonConvexHullClass">
+  <property name="geometry">
    <rect>
-	<x>0</x>
-	<y>0</y>
-	<width>600</width>
-	<height>400</height>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>600</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>SimplePolygonConvexHull</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <widget class="QComboBox" name="Method">
+     <property name="geometry">
+      <rect>
+       <x>57</x>
+       <y>5</y>
+       <width>220</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Sklansky 1972</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>McCallum &amp; Avis 1979</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Sklansky 1982</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>ElGindy, Avis &amp; Toussaint 1983</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Lee 1983 - Graham &amp; Yao 1983</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Ghosh &amp; Shyamasundar 1983</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Bhattacharya &amp; ElGindy 1984</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Orlowski 1985</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Preparata &amp; Shamos 1985</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Shin &amp; Woo 1986</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Melkman 1987</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QSlider" name="ProcessControl">
+     <property name="geometry">
+      <rect>
+       <x>591</x>
+       <y>5</y>
+       <width>160</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Calculate">
+     <property name="geometry">
+      <rect>
+       <x>294</x>
+       <y>5</y>
+       <width>75</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Calculate</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="MethodLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>5</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Method</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Pre">
+     <property name="geometry">
+      <rect>
+       <x>447</x>
+       <y>5</y>
+       <width>50</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Pre</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Next">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>5</y>
+       <width>50</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Next</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>1000</width>
+      <height>547</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources>
-   <include location="SimplePolygonConvexHull.qrc"/>
+  <include location="SimplePolygonConvexHull.qrc"/>
  </resources>
  <connections/>
-</UI>
+</ui>

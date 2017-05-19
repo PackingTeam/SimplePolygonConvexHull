@@ -68,7 +68,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Commands.cpp" />
     <ClCompile Include="DataStruc.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_SimplePolygonConvexHull.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -112,7 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithm.h" />
-    <ClInclude Include="Commands.h" />
     <ClInclude Include="DataStruc.h" />
     <ClInclude Include="GeneratedFiles\ui_SimplePolygonConvexHull.h" />
     <ClInclude Include="Sklansky72.h" />

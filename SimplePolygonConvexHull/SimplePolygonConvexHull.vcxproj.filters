@@ -64,9 +64,6 @@
     <ClCompile Include="DataStruc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Commands.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sklansky72.cpp">
       <Filter>Source Files\Algorithms Impl</Filter>
     </ClCompile>
@@ -87,9 +84,6 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="DataStruc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Commands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Algorithm.h">
