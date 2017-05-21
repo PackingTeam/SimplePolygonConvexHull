@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "Sklansky72.h"
+#include "../SimplePolygonConvexHull/Sklansky72.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
