@@ -11,6 +11,10 @@ void Sklansky72::getConvexHull(SimplePolygon & sp)
 	// 因为已经经过合法性检验，点集大小为3时必定为凸包
 	if (size == 3)
 	{
+		sp.convexHull.push_back(0);
+		sp.convexHull.push_back(1);
+		sp.convexHull.push_back(2);
+
 		return;
 	}
 	else
@@ -60,10 +64,10 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 			for (int i = 0; i < rsize; i++)
 			{
 				temp.points.push_back(points[result[i]]);
-				temp.pointColors.push_back(GREEN);
+				temp.pointColors.push_back(Qt::green);
 			}
 			temp.points.push_back(points[next]);
-			temp.pointColors.push_back(RED);
+			temp.pointColors.push_back(Qt::red);
 			displays.push_back(temp);
 
 			if (rsize <= 1)
@@ -72,7 +76,7 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 				next++;
 
 				// 添加演示所需内容
-				temp.pointColors[temp.pointColors.size() - 1] = GREEN;
+				temp.pointColors[temp.pointColors.size() - 1] = Qt::green;
 				displays.push_back(temp);
 			}
 			else if (toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[next]))
@@ -80,9 +84,9 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 				// 添加演示所需内容
 				Line line(points[result[rsize - 2]], points[result[rsize - 1]], LINE);
 				temp.lines.push_back(line);
-				temp.lineColors.push_back(BLUE);
-				temp.pointColors[temp.pointColors.size() - 3] = YELLOW;
-				temp.pointColors[temp.pointColors.size() - 2] = YELLOW;
+				temp.lineColors.push_back(Qt::blue);
+				temp.pointColors[temp.pointColors.size() - 3] = Qt::yellow;
+				temp.pointColors[temp.pointColors.size() - 2] = Qt::yellow;
 				displays.push_back(temp);
 
 				result.push_back(next);
@@ -91,9 +95,9 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 				// 添加演示所需内容
 				temp.lineColors.pop_back();
 				temp.lines.pop_back();
-				temp.pointColors[temp.pointColors.size() - 3] = GREEN;
-				temp.pointColors[temp.pointColors.size() - 2] = GREEN;
-				temp.pointColors[temp.pointColors.size() - 1] = GREEN;
+				temp.pointColors[temp.pointColors.size() - 3] = Qt::green;
+				temp.pointColors[temp.pointColors.size() - 2] = Qt::green;
+				temp.pointColors[temp.pointColors.size() - 1] = Qt::green;
 				displays.push_back(temp);
 			}
 			else
@@ -101,9 +105,9 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 				// 添加演示所需内容
 				Line line(points[result[rsize - 2]], points[result[rsize - 1]], LINE);
 				temp.lines.push_back(line);
-				temp.lineColors.push_back(BLUE);
-				temp.pointColors[temp.pointColors.size() - 3] = YELLOW;
-				temp.pointColors[temp.pointColors.size() - 2] = YELLOW;
+				temp.lineColors.push_back(Qt::blue);
+				temp.pointColors[temp.pointColors.size() - 3] = Qt::yellow;
+				temp.pointColors[temp.pointColors.size() - 2] = Qt::yellow;
 				displays.push_back(temp);
 
 				result.pop_back();
@@ -111,7 +115,7 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 				// 添加演示所需内容
 				temp.lineColors.pop_back();
 				temp.lines.pop_back();
-				temp.pointColors[temp.pointColors.size() - 2] = GREY;
+				temp.pointColors[temp.pointColors.size() - 2] = Qt::gray;
 				displays.push_back(temp);
 			}
 		}
@@ -125,18 +129,18 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 			for (int i = 1; i < rsize; i++)
 			{
 				temp.points.push_back(points[result[i]]);
-				temp.pointColors.push_back(GREEN);
+				temp.pointColors.push_back(Qt::green);
 			}
 			temp.points.push_back(points[0]);
-			temp.pointColors.push_back(RED);
+			temp.pointColors.push_back(Qt::red);
 			displays.push_back(temp);
 
 			// 添加演示所需显示内容
 			Line line(points[result[rsize - 2]], points[result[rsize - 1]], LINE);
 			temp.lines.push_back(line);
-			temp.lineColors.push_back(BLUE);
-			temp.pointColors[temp.pointColors.size() - 3] = YELLOW;
-			temp.pointColors[temp.pointColors.size() - 2] = YELLOW;
+			temp.lineColors.push_back(Qt::blue);
+			temp.pointColors[temp.pointColors.size() - 3] = Qt::yellow;
+			temp.pointColors[temp.pointColors.size() - 2] = Qt::yellow;
 			displays.push_back(temp);
 
 			result.pop_back();
@@ -145,7 +149,7 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 			// 添加演示所需显示内容
 			temp.lineColors.pop_back();
 			temp.lines.pop_back();
-			temp.pointColors[temp.pointColors.size() - 2] = GREY;
+			temp.pointColors[temp.pointColors.size() - 2] = Qt::gray;
 			displays.push_back(temp);
 		}
 
@@ -154,26 +158,26 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 		for (int i = 1; i < rsize; i++)
 		{
 			temp.points.push_back(points[result[i]]);
-			temp.pointColors.push_back(GREEN);
+			temp.pointColors.push_back(Qt::green);
 		}
 		temp.points.push_back(points[0]);
-		temp.pointColors.push_back(RED);
+		temp.pointColors.push_back(Qt::red);
 		displays.push_back(temp);
 
 		// 添加演示所需显示内容
 		Line line(points[result[rsize - 2]], points[result[rsize - 1]], LINE);
 		temp.lines.push_back(line);
-		temp.lineColors.push_back(BLUE);
-		temp.pointColors[temp.pointColors.size() - 3] = YELLOW;
-		temp.pointColors[temp.pointColors.size() - 2] = YELLOW;
+		temp.lineColors.push_back(Qt::blue);
+		temp.pointColors[temp.pointColors.size() - 3] = Qt::yellow;
+		temp.pointColors[temp.pointColors.size() - 2] = Qt::yellow;
 		displays.push_back(temp);
 
 		// 添加演示所需显示内容
 		temp.lineColors.pop_back();
 		temp.lines.pop_back();
-		temp.pointColors[temp.pointColors.size() - 3] = GREEN;
-		temp.pointColors[temp.pointColors.size() - 2] = GREEN;
-		temp.pointColors[temp.pointColors.size() - 1] = GREEN;
+		temp.pointColors[temp.pointColors.size() - 3] = Qt::green;
+		temp.pointColors[temp.pointColors.size() - 2] = Qt::green;
+		temp.pointColors[temp.pointColors.size() - 1] = Qt::green;
 		displays.push_back(temp);
 	}
 }

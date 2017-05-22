@@ -41,6 +41,7 @@ public:
     QLabel *MethodLabel;
     QPushButton *Pre;
     QPushButton *Next;
+    QPushButton *Clear;
     QGraphicsView *graphicsView;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -72,20 +73,26 @@ public:
         ProcessControl->setOrientation(Qt::Horizontal);
         Calculate = new QPushButton(widget);
         Calculate->setObjectName(QStringLiteral("Calculate"));
-        Calculate->setGeometry(QRect(294, 5, 75, 22));
+        Calculate->setGeometry(QRect(294, 4, 75, 22));
         MethodLabel = new QLabel(widget);
         MethodLabel->setObjectName(QStringLiteral("MethodLabel"));
         MethodLabel->setGeometry(QRect(10, 5, 41, 16));
         Pre = new QPushButton(widget);
         Pre->setObjectName(QStringLiteral("Pre"));
-        Pre->setGeometry(QRect(447, 5, 50, 22));
+        Pre->setGeometry(QRect(447, 4, 50, 22));
         Next = new QPushButton(widget);
         Next->setObjectName(QStringLiteral("Next"));
-        Next->setGeometry(QRect(500, 5, 50, 22));
+        Next->setGeometry(QRect(500, 4, 50, 22));
+        Clear = new QPushButton(widget);
+        Clear->setObjectName(QStringLiteral("Clear"));
+        Clear->setGeometry(QRect(900, 5, 50, 22));
+        Clear->setAutoRepeatDelay(302);
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setGeometry(QRect(0, 30, 1000, 547));
         SimplePolygonConvexHullClass->setCentralWidget(centralWidget);
+        graphicsView->raise();
+        widget->raise();
         menuBar = new QMenuBar(SimplePolygonConvexHullClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1000, 23));
@@ -128,6 +135,7 @@ public:
         MethodLabel->setText(QApplication::translate("SimplePolygonConvexHullClass", "Method", Q_NULLPTR));
         Pre->setText(QApplication::translate("SimplePolygonConvexHullClass", "Pre", Q_NULLPTR));
         Next->setText(QApplication::translate("SimplePolygonConvexHullClass", "Next", Q_NULLPTR));
+        Clear->setText(QApplication::translate("SimplePolygonConvexHullClass", "Clear", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("SimplePolygonConvexHullClass", "File", Q_NULLPTR));
     } // retranslateUi
 

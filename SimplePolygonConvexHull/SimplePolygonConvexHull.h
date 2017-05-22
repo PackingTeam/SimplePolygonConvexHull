@@ -1,8 +1,10 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMessageBox>
+#include "GraphicsScene.h"
 #include "ui_SimplePolygonConvexHull.h"
-#include "DataStruc.h"
+#include "AlgorithmFactory.h"
 
 class SimplePolygonConvexHull : public QMainWindow
 {
@@ -17,10 +19,16 @@ private:
 	SimplePolygon sp;
 	// 用于储存计算后每一步的结果
 	Displays displays;
+	// 用于存放各个场景数据
+	GraphicsScene scene;
+	// 用于存放当前的方法
+	Algorithm *method;
 
 private slots:
 	void Calculate();
 	void Pre();
 	void Next();
 	void ProcessChange();
+	void Clear();
+
 };

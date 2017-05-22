@@ -13,11 +13,13 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
     <Keyword>Qt4VSv1.0</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -68,6 +70,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AlgorithmFactory.cpp" />
     <ClCompile Include="DataStruc.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_SimplePolygonConvexHull.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -81,6 +84,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SimplePolygonConvexHull.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GraphicsScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SimplePolygonConvexHull.cpp" />
     <ClCompile Include="Sklansky72.cpp" />
@@ -113,7 +117,9 @@
     <ClInclude Include="Algorithm.h" />
     <ClInclude Include="DataStruc.h" />
     <ClInclude Include="GeneratedFiles\ui_SimplePolygonConvexHull.h" />
+    <ClInclude Include="GraphicsScene.h" />
     <ClInclude Include="Sklansky72.h" />
+    <ClInclude Include="AlgorithmFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="SimplePolygonConvexHull.qrc">
@@ -126,6 +132,9 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SimplePolygonConvexHull.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

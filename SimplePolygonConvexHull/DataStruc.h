@@ -1,36 +1,27 @@
 #pragma once
 
 #include <vector>
+#include <QPointF>
+#include <QLineF>
+#include <QPolygonF>
 
 using namespace std;
 
 #define tolerance 0.000001 // 定义容差为10^-6
+#define sceneWidth 990 // 界面显示的区域宽度
+#define sceneHeight 537 // 界面显示的区域高度
 
 // 颜色枚举类，用于区分颜色
 // 其他颜色根据情况使用。
-enum Color
-{
-	// BLACK:给定的原多边形的点，在Display类中不需要添加原有多边形的所有点，默认会在界面绘制。
-	BLACK, 
-	// WHITE:根据情况使用
-	WHITE,
-	// RED:当前正在检查的点。
-	RED,
-	// GREEN:凸包上的点。最后一步会根据SimplePolygon中的值显示。
-	GREEN, 
-	// BLUE:根据情况使用
-	BLUE,
-	// YELLOW:当前检查所用到的点。
-	YELLOW,
-	// PINK:根据情况使用
-	PINK,
-	// PURPLE:根据情况使用
-	PURPLE,
-	// GREY:（可能需要显示的）已经排除掉的点。
-	GREY
-};
+//// Qt::black:给定的原多边形的点，在Display类中不需要添加原有多边形的所有点，默认会在界面绘制。
+//// Qt::red:当前正在检查的点。
+//// Qt::gray:（可能需要显示的）已经排除掉的点。
+//// Qt::yellow:当前检查所用到的点。
+//// Qt::green:凸包上的点。最后一步会根据SimplePolygon中的值显示。
+//// Qt::white,Qt::darkRed,Qt::darkGreen,Qt::blue,Qt::darkBlue,Qt::cyan,Qt::darkCyan
+//// Qt::magenta,Qt::darkMagenta,Qt::darkYellow,Qt::lightGray,Qt::darkGray根据情况使用
 
-typedef vector<Color> Colors;
+typedef vector<Qt::GlobalColor> Colors;
 
 // 点的数据类
 class Point
@@ -43,9 +34,32 @@ public:
 	Point(double a = 0, double b = 0) : x(a), y(b) {}
 	Point(const Point &m) : x(m.x), y(m.y) {}
 	Point() {}
-	void setPoint(double X, double Y) {
+	Point(const QPointF &qpoint)
+	{
+		x = qpoint.x();
+		y = qpoint.y();
+	}
+	void getQPointF(QPointF &qpoint)
+	{
+		qpoint.setX(x);
+		qpoint.setY(y);
+	}
+	void setPoint(const QPointF &qpoint)
+	{
+		x = qpoint.x();
+		y = qpoint.y();
+	}
+	void setPoint(double X, double Y) 
+	{
 		x = X;
 		y = Y;
+	}
+	bool operator==(const Point &point2)
+	{
+		if (x == point2.x && y == point2.y)
+			return true;
+		else
+			return false;
 	}
 };
 
@@ -54,7 +68,7 @@ typedef vector<Point> Points;
 // 线段类型枚举类
 enum LineType
 {
-	LINE, RAY, SEGMENT
+	LINE, RAY, SEGMENT, SOLID, DASH, DOT
 };
 
 // 线的数据类
@@ -65,15 +79,17 @@ public:
 	Point a;
 	Point b;
 	// LINE:直线(a,b),RAY:直线(a,b),SEGMENT:线段(a,b)
-	LineType type; // 默认为直线
+	LineType type; // 默认为实线直线
 
 public:
-	// 默认为直线
+	// 默认为实线直线
 	Line(Point &A, Point &B, LineType Type = LINE) : a(A), b(B), type(Type) {}
-	// 默认为直线
+	// 默认为实线直线
 	Line(double x1, double y1, double x2, double y2, LineType Type = LINE) : a(x1, y1), b(x2, y2), type(Type) {}
-	// 默认为直线
+	// 默认为实线直线
 	Line(const Line & line) : a(line.a), b(line.b), type(line.type) {}
+	// 将该直线转化为显示用的直线
+	void getQLineF(QLineF &qline);
 };
 
 typedef vector<Line> Lines;
@@ -83,6 +99,8 @@ class Area
 {
 public:
 	Points points;
+	// 将其转化为显示用的polygon
+	void getQPolygon(QPolygonF &qpolygon);
 };
 
 typedef vector<Area> Areas;
@@ -125,6 +143,12 @@ public:
 	//		而调换次序的工作可以在排序后进行，不提升时间复杂度。
 	//		过程中调用makeDirection()来确定点集的方向。
 	void normalize();
+	// 将其转化为显示用的polygon
+	void getQPolygon(QPolygonF &qpolygon);
+	// 将凸包转化为显示用的polygon
+	void getConvexHullPolygon(QPolygonF &qpolygon);
+	// 清除已有的所有数据
+	void clearAll();
 
 private:
 	// 根据点的下标来得出当前简单多边形的点集顺序，并据此设置isCounterClockWise的值

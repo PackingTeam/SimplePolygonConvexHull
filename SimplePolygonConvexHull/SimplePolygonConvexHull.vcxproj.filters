@@ -67,6 +67,12 @@
     <ClCompile Include="Sklansky72.cpp">
       <Filter>Source Files\Algorithms Impl</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AlgorithmFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="SimplePolygonConvexHull.h">
@@ -92,5 +98,14 @@
     <ClInclude Include="Sklansky72.h">
       <Filter>Header Files\Algorithms Header</Filter>
     </ClInclude>
+    <ClInclude Include="GraphicsScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AlgorithmFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SimplePolygonConvexHull.rc" />
   </ItemGroup>
 </Project>

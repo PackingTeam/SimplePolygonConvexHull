@@ -1,5 +1,59 @@
 #include "DataStruc.h"
 
+// 将该直线转化为显示用的直线
+void Line::getQLineF(QLineF &qline)
+{
+	qline.setLine(a.x,a.y,b.x,b.y);
+}
+
+// 将其转化为显示用的polygon
+void Area::getQPolygon(QPolygonF &qpolygon)
+{
+	qpolygon.clear();
+	int size = points.size();
+	for (int i = 0; i < size; i++)
+	{
+		QPointF temp;
+		points[i].getQPointF(temp);
+		qpolygon << temp;
+	}
+	QPointF temp;
+	points[0].getQPointF(temp);
+	qpolygon << temp;
+}
+
+// 将其转化为显示用的polygon
+void SimplePolygon::getQPolygon(QPolygonF &qpolygon)
+{
+	qpolygon.clear();
+	int size = points.size();
+	for (int i = 0; i < size; i++)
+	{
+		QPointF temp;
+		points[i].getQPointF(temp);
+		qpolygon << temp;
+	}
+	QPointF temp;
+	points[0].getQPointF(temp);
+	qpolygon << temp;
+}
+
+// 将凸包转化为显示用的polygon
+void SimplePolygon::getConvexHullPolygon(QPolygonF &qpolygon)
+{
+	qpolygon.clear();
+	int size = convexHull.size();
+	for (int i = 0; i < size; i++)
+	{
+		QPointF temp;
+		points[convexHull[i]].getQPointF(temp);
+		qpolygon << temp;
+	}
+	QPointF temp;
+	points[convexHull[0]].getQPointF(temp);
+	qpolygon << temp;
+}
+
 // 判定范围如备注中图：
 //  ==o----o----  
 //      (b)   (a)
@@ -61,6 +115,14 @@ extern double getDirectedArea(const Points& points)
 void SimplePolygon::reverse()
 {
 
+}
+
+// 清除已有的所有数据
+void SimplePolygon::clearAll()
+{
+	isCounterClockWise = false;
+	points.clear();
+	convexHull.clear();
 }
 
 // 根据给定的点集顺序来得出当前简单多边形的点集顺序，并据此设置isCounterClockWise的值
