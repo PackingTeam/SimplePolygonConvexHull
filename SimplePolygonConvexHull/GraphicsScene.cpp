@@ -85,7 +85,7 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
 // 不调用clear()方法
 void GraphicsScene::displayPolygon()
 {
-	for each (Point p in sp.points)
+    for (const Point &p : sp.points)
 	{
 		QGraphicsRectItem *item = new QGraphicsRectItem(p.x - 2, p.y - 2, 4, 4);
 		item->setBrush(Qt::black);
@@ -137,7 +137,7 @@ void GraphicsScene::displayConvexHull()
 
 		addItem(item);
 
-		for each (int id in sp.convexHull)
+        for (int id : sp.convexHull)
 		{
 			Point p = sp.points[id];
 			QGraphicsRectItem *item = new QGraphicsRectItem(p.x - 2, p.y - 2, 4, 4);
