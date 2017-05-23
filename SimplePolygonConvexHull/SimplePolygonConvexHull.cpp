@@ -20,6 +20,7 @@ void SimplePolygonConvexHull::Calculate()
 {
 	if (scene.isEndInserting())
 	{
+		sp.normalize();
 		int methodId = ui.Method->currentIndex();
 		method = getMethodById(methodId);
 		method->getConvexHull(sp);
