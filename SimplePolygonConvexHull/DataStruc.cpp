@@ -1,4 +1,5 @@
 #include "DataStruc.h"
+#include <cmath>
 
 // 将该直线转化为显示用的直线
 void Line::getQLineF(QLineF &qline)
