@@ -8,7 +8,7 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	connect(ui.Calculate, SIGNAL(clicked()), this, SLOT(Calculate()));
 	connect(ui.Next, SIGNAL(clicked()), this, SLOT(Next()));
 	connect(ui.Pre, SIGNAL(clicked()), this, SLOT(Pre()));
-	connect(ui.ProcessControl, SIGNAL(valueChanged()), this, SLOT(ProcessChange()));
+    connect(ui.ProcessControl, SIGNAL(valueChanged(int)), this, SLOT(ProcessChange()));
 	connect(ui.Clear, SIGNAL(clicked()), this, SLOT(Clear()));
 
 	// …Ë÷√—› æ«¯”Ú
