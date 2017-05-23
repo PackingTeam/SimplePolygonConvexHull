@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Sklansky72.h"
 
 // 该算法假设传入的SimplePolygon中的points序列的第一个点，为最左最下点
