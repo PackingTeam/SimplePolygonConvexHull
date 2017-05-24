@@ -28,7 +28,7 @@ private slots:
 	void Calculate();
 	void Pre();
 	void Next();
-	void ProcessChange();
+	void ProcessChange(int k);
 	void Clear();
 
 };

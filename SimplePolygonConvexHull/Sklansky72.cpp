@@ -4,6 +4,7 @@
 void Sklansky72::getConvexHull(SimplePolygon & sp)
 {
 	int size = sp.points.size();
+	int start = sp.getLeftMostThenLowestPoint();
 	Points & points = sp.points;
 	vector<int> & result = sp.convexHull;
 	// 因为已经经过合法性检验，点集大小为3时必定为凸包
@@ -21,9 +22,9 @@ void Sklansky72::getConvexHull(SimplePolygon & sp)
 		while (next < size)
 		{
 			rsize = result.size();
-			if (rsize <= 1 || toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[next]))
+			if (rsize <= 1 || toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[(start + next) % size]))
 			{
-				result.push_back(next);
+				result.push_back((next + start) % size);
 				next++;
 			}
 			else
@@ -32,7 +33,7 @@ void Sklansky72::getConvexHull(SimplePolygon & sp)
 			}
 		}
 		rsize = result.size();
-		while (rsize > 3 && !toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[0]))
+		while (rsize > 3 && !toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[start]))
 		{
 			result.pop_back();
 			rsize = result.size();

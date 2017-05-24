@@ -73,6 +73,36 @@
     <ClCompile Include="AlgorithmFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sklansky82.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="BhattacharyaElGindy84.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="ElGindyAvisToussaint83.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="GhoshShyamasundar83.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="LeeGrahamYao83.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="McCallumAvis79.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="Melkman87.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="Orlowski85.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="ShinWoo86.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="PreparataShamos85.cpp">
+      <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="SimplePolygonConvexHull.h">
@@ -103,6 +133,36 @@
     </ClInclude>
     <ClInclude Include="AlgorithmFactory.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="McCallumAvis79.h">
+      <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Sklansky82.h">
+      <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ElGindyAvisToussaint83.h">
+      <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="LeeGrahamYao83.h">
+      <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GhoshShyamasundar83.h">
+      <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="BhattacharyaElGindy84.h">
+      <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Orlowski85.h">
+      <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="PreparataShamos85.h">
+      <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ShinWoo86.h">
+      <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Melkman87.h">
+      <Filter>Header Files\Algorithms Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

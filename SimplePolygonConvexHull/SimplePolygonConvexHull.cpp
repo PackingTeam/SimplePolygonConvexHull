@@ -8,7 +8,7 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	connect(ui.Calculate, SIGNAL(clicked()), this, SLOT(Calculate()));
 	connect(ui.Next, SIGNAL(clicked()), this, SLOT(Next()));
 	connect(ui.Pre, SIGNAL(clicked()), this, SLOT(Pre()));
-    connect(ui.ProcessControl, SIGNAL(valueChanged(int)), this, SLOT(ProcessChange()));
+    connect(ui.ProcessControl, SIGNAL(valueChanged(int)), this, SLOT(ProcessChange(int)));
 	connect(ui.Clear, SIGNAL(clicked()), this, SLOT(Clear()));
 
 	// ÉèÖÃÑÝÊ¾ÇøÓò
@@ -20,6 +20,7 @@ void SimplePolygonConvexHull::Calculate()
 {
 	if (scene.isEndInserting())
 	{
+		sp.normalize();
 		int methodId = ui.Method->currentIndex();
 		method = getMethodById(methodId);
 		method->getConvexHull(sp);
@@ -41,7 +42,7 @@ void SimplePolygonConvexHull::Next()
 
 }
 
-void SimplePolygonConvexHull::ProcessChange()
+void SimplePolygonConvexHull::ProcessChange(int k)
 {
 
 }

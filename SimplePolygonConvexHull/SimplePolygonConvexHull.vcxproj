@@ -71,7 +71,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AlgorithmFactory.cpp" />
+    <ClCompile Include="BhattacharyaElGindy84.cpp" />
     <ClCompile Include="DataStruc.cpp" />
+    <ClCompile Include="ElGindyAvisToussaint83.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_SimplePolygonConvexHull.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -84,10 +86,18 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SimplePolygonConvexHull.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GhoshShyamasundar83.cpp" />
     <ClCompile Include="GraphicsScene.cpp" />
+    <ClCompile Include="LeeGrahamYao83.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="McCallumAvis79.cpp" />
+    <ClCompile Include="Melkman87.cpp" />
+    <ClCompile Include="Orlowski85.cpp" />
+    <ClCompile Include="PreparataShamos85.cpp" />
+    <ClCompile Include="ShinWoo86.cpp" />
     <ClCompile Include="SimplePolygonConvexHull.cpp" />
     <ClCompile Include="Sklansky72.cpp" />
+    <ClCompile Include="Sklansky82.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="SimplePolygonConvexHull.h">
@@ -115,11 +125,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithm.h" />
+    <ClInclude Include="BhattacharyaElGindy84.h" />
     <ClInclude Include="DataStruc.h" />
+    <ClInclude Include="ElGindyAvisToussaint83.h" />
     <ClInclude Include="GeneratedFiles\ui_SimplePolygonConvexHull.h" />
+    <ClInclude Include="GhoshShyamasundar83.h" />
     <ClInclude Include="GraphicsScene.h" />
+    <ClInclude Include="LeeGrahamYao83.h" />
+    <ClInclude Include="McCallumAvis79.h" />
+    <ClInclude Include="Melkman87.h" />
+    <ClInclude Include="Orlowski85.h" />
+    <ClInclude Include="PreparataShamos85.h" />
+    <ClInclude Include="ShinWoo86.h" />
     <ClInclude Include="Sklansky72.h" />
     <ClInclude Include="AlgorithmFactory.h" />
+    <ClInclude Include="Sklansky82.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="SimplePolygonConvexHull.qrc">
