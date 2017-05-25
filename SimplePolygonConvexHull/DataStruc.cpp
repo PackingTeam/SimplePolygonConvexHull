@@ -173,12 +173,12 @@ int SimplePolygon::getLeftMostThenLowestPoint()
 // 获得最右最上点的坐标
 int SimplePolygon::getRightMostThenHighestPoint()
 {
-    int max = 0, size = points.size();
-    for (int i = 0; i < size; i++) {
-        if ((points[i].x > points[max].x) || (abs(points[i].x - points[max].x) < tolerance && points[i].y > points[max].y))
-        {
-            max = i;
-        }
-    }
-    return max;
+	int max = 0, size = points.size();
+	for (int i = 0; i < size; i++) {
+		if ((points[i].x > points[max].x) || (abs(points[i].x - points[max].x) < tolerance && points[i].y > points[max].y))
+		{
+			max = i;
+		}
+	}
+	return max;
 }

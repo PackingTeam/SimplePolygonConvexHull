@@ -122,7 +122,7 @@ void GraphicsScene::displayPolygon()
 // 不调用clear()方法
 void GraphicsScene::displayConvexHull()
 {
-	if (sp.convexHull.size() <= 3)
+	if (sp.convexHull.size() < 3)
 		return;
 	else
 	{
@@ -137,7 +137,7 @@ void GraphicsScene::displayConvexHull()
 
 		addItem(item);
 
-        for (int id : sp.convexHull)
+		for (int id : sp.convexHull)
 		{
 			Point p = sp.points[id];
 			QGraphicsRectItem *item = new QGraphicsRectItem(p.x - 2, p.y - 2, 4, 4);
