@@ -12,8 +12,9 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	connect(ui.Clear, SIGNAL(clicked()), this, SLOT(Clear()));
 
 	// ÉèÖÃÑÝÊ¾ÇøÓò
-	scene.setSceneRect(0, 0, sceneWidth, sceneHeight);
+	scene.setSceneRect(-sceneWidth/2, -sceneHeight/2, sceneWidth, sceneHeight);
 	ui.graphicsView->setScene(&scene);
+	ui.graphicsView->scale(1, -1);
 }
 
 void SimplePolygonConvexHull::Calculate()
