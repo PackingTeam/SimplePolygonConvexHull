@@ -51,6 +51,8 @@ public:
         if (SimplePolygonConvexHullClass->objectName().isEmpty())
             SimplePolygonConvexHullClass->setObjectName(QStringLiteral("SimplePolygonConvexHullClass"));
         SimplePolygonConvexHullClass->resize(1000, 600);
+        SimplePolygonConvexHullClass->setMinimumSize(QSize(1000, 600));
+        SimplePolygonConvexHullClass->setMaximumSize(QSize(1000, 600));
         actionOpen = new QAction(SimplePolygonConvexHullClass);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionSave = new QAction(SimplePolygonConvexHullClass);
