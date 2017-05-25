@@ -6,6 +6,7 @@
 class GhoshShyamasundar83 : Algorithm
 {
 public:
+	static void getHalfConvexHull(SimplePolygon &sp, int max, int min);
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);
 };
