@@ -88,6 +88,12 @@ bool toLeft(const Point & a, const Point & b, const Point & c)
 	}
 }
 
+// 线段ab与线段cd是否有交点
+bool intersect(const Point & a, const Point & b, const Point & c, const Point & d)
+{
+	return toLeft(a, b, c) == toLeft(b, a, d) && toLeft(c, d, a) == toLeft(d, c, b);
+}
+
 // 返回值为true,点的序列为逆时针
 // 返回值为false,点的序列为顺时针
 bool getPolygonDirection(const Points& points)
