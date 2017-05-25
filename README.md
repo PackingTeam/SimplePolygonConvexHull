@@ -5,6 +5,8 @@
 > 小组成员： @spwlyzx, @zyeric, @xskxzr
 >
 > 由邓俊辉老师指导。
+>
+> 基于以下网址提到的算法：http://cgm.cs.mcgill.ca/~athens/cs601/
 
 ### 文件列表
 
