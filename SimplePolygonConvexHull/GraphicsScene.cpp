@@ -122,7 +122,7 @@ void GraphicsScene::displayPolygon()
 // 不调用clear()方法
 void GraphicsScene::displayConvexHull()
 {
-	if (sp.convexHull.size() <= 3)
+	if (sp.convexHull.size() < 3)
 		return;
 	else
 	{

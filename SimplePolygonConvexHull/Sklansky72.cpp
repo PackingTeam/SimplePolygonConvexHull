@@ -7,6 +7,7 @@ void Sklansky72::getConvexHull(SimplePolygon & sp)
 	int start = sp.getLeftMostThenLowestPoint();
 	Points & points = sp.points;
 	vector<int> & result = sp.convexHull;
+	result.clear();
 	// 因为已经经过合法性检验，点集大小为3时必定为凸包
 	if (size == 3)
 	{
