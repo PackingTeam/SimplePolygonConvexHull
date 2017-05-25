@@ -1,6 +1,8 @@
 #include "DataStruc.h"
 #include <cmath>
 
+using std::abs;
+
 // 将该直线转化为显示用的直线
 void Line::getQLineF(QLineF &qline)
 {
@@ -166,4 +168,17 @@ int SimplePolygon::getLeftMostThenLowestPoint()
 		}
 	}
 	return min;
+}
+
+// 获得最右最上点的坐标
+int SimplePolygon::getRightMostThenHighestPoint()
+{
+	int max = 0, size = points.size();
+	for (int i = 0; i < size; i++) {
+		if ((points[i].x > points[max].x) || (abs(points[i].x - points[max].x) < tolerance && points[i].y > points[max].y))
+		{
+			max = i;
+		}
+	}
+	return max;
 }
