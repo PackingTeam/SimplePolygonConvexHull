@@ -148,6 +148,8 @@ public:
 	void clearAll();
 	// 获得最左最下点的坐标
 	int getLeftMostThenLowestPoint();
+    // 获得最右最上点的坐标
+    int getRightMostThenHighestPoint();
 };
 
 
