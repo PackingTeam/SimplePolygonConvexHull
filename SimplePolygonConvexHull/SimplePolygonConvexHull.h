@@ -19,10 +19,12 @@ private:
 	SimplePolygon sp;
 	// 用于储存计算后每一步的结果
 	Displays displays;
-	// 用于存放各个场景数据
-	GraphicsScene scene;
 	// 用于存放当前的方法
 	Algorithm *method;
+	// 用于存储当前演示步骤为第几步
+	int step;
+	// 用于存放各个场景数据
+	GraphicsScene scene;
 
 private slots:
 	void Calculate();
