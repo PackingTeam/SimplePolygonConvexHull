@@ -33,7 +33,6 @@ public:
 public:
 	Point(double a = 0, double b = 0) : x(a), y(b) {}
 	Point(const Point &m) : x(m.x), y(m.y) {}
-	Point() {}
 	Point(const QPointF &qpoint)
 	{
 		x = qpoint.x();

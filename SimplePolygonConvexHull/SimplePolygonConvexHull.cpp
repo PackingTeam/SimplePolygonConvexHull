@@ -3,6 +3,8 @@
 SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	: QMainWindow(parent), scene(sp, displays)
 {
+	step = -1;
+
 	// °ó¶¨ÊÂ¼þ
 	ui.setupUi(this);
 	connect(ui.Calculate, SIGNAL(clicked()), this, SLOT(Calculate()));
@@ -21,11 +23,13 @@ void SimplePolygonConvexHull::Calculate()
 {
 	if (scene.isEndInserting())
 	{
+		step = -1;
 		sp.normalize();
 		int methodId = ui.Method->currentIndex();
 		method = getMethodById(methodId);
-		method->getConvexHull(sp);
-		scene.display();
+		//method->getConvexHull(sp);
+		method->getConvexHullForDisplay(sp, displays);
+		scene.display(step);
 	}
 	else
 	{
@@ -35,12 +39,29 @@ void SimplePolygonConvexHull::Calculate()
 
 void SimplePolygonConvexHull::Pre()
 {
-
+	if (step > -1)
+	{
+		step--;
+		scene.display(step);
+	}
+	else
+	{
+		QMessageBox::warning(this, "Warning", "No step before.");
+	}
 }
 
 void SimplePolygonConvexHull::Next() 
 {
-
+	int size = displays.size();
+	if (step < size)
+	{
+		step++;
+		scene.display(step);
+	}
+	else
+	{
+		QMessageBox::warning(this, "Warning", "No step after.");
+	}
 }
 
 void SimplePolygonConvexHull::ProcessChange(int k)
@@ -51,4 +72,5 @@ void SimplePolygonConvexHull::ProcessChange(int k)
 void SimplePolygonConvexHull::Clear()
 {
 	scene.beginInsert();
+	step = -1;
 }

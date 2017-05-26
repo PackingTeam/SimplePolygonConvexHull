@@ -31,7 +31,7 @@ public:
 	// 用于获取当前插入点是否结束
 	bool isEndInserting();
 	// 用于显示displays
-	void display();
+	void display(int step);
 
 protected:
 	// 鼠标按键事件处理

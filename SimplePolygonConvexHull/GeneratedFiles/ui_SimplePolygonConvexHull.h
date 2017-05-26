@@ -78,7 +78,7 @@ public:
         Calculate->setGeometry(QRect(294, 4, 75, 22));
         MethodLabel = new QLabel(widget);
         MethodLabel->setObjectName(QStringLiteral("MethodLabel"));
-        MethodLabel->setGeometry(QRect(10, 5, 41, 16));
+        MethodLabel->setGeometry(QRect(10, 7, 41, 16));
         Pre = new QPushButton(widget);
         Pre->setObjectName(QStringLiteral("Pre"));
         Pre->setGeometry(QRect(447, 4, 50, 22));
