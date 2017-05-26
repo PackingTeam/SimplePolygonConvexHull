@@ -159,6 +159,9 @@ public:
 // 注：不考虑三个点存在任意两点重合的情况，此种情况应该在之前的处理中已经排除
 extern bool toLeft(const Point & a, const Point & b, const Point & c);
 
+// 线段ab与线段cd是否有交点
+extern bool intersect(const Point & a, const Point & b, const Point & c, const Point & d);
+
 //返回值为true,点的序列为逆时针
 //返回值为false,点的序列为顺时针
 extern bool getPolygonDirection(const Points& points);
