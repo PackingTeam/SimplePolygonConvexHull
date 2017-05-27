@@ -8,4 +8,5 @@ class LeeGrahamYao83 : Algorithm
 public:
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);
+
 };
