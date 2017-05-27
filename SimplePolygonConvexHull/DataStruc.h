@@ -4,6 +4,7 @@
 #include <QPointF>
 #include <QLineF>
 #include <QPolygonF>
+#include <deque>
 
 using namespace std;
 
