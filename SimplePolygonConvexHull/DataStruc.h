@@ -61,6 +61,10 @@ public:
 		else
 			return false;
 	}
+	// 从序列化字符串恢复数据
+	void setPoint(const string& str);
+	// 序列化
+	string toString();
 };
 
 typedef vector<Point> Points;
@@ -150,6 +154,10 @@ public:
 	int getLeftMostThenLowestPoint();
 	// 获得最右最上点的坐标
 	int getRightMostThenHighestPoint();
+	// 从序列化字符串恢复数据
+	void setPolygon(const string& str);
+	// 序列化
+	string toString();
 };
 
 
@@ -163,9 +171,12 @@ extern bool toLeft(const Point & a, const Point & b, const Point & c);
 // 线段ab与线段cd是否有交点
 extern bool intersect(const Point & a, const Point & b, const Point & c, const Point & d);
 
-//返回值为true,点的序列为逆时针
-//返回值为false,点的序列为顺时针
+// 返回值为true,点的序列为逆时针
+// 返回值为false,点的序列为顺时针
 extern bool getPolygonDirection(const Points& points);
 
-//获得由一系列点围成的多边形有向面积，逆时针形成的有向面积为正，顺时针形成的为负
+// 获得由一系列点围成的多边形有向面积，逆时针形成的有向面积为正，顺时针形成的为负
 extern double getDirectedArea(const Points& points);
+
+// 用于分割字符串
+extern void SplitString(const string& s, std::vector<std::string>& v, const std::string& c);

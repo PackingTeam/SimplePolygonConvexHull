@@ -1,5 +1,6 @@
 #include "Sklansky82.h"
 
+Sklansky82* Sklansky82::instance = NULL;
 
 void Sklansky82::getConvexHull(SimplePolygon & sp)
 {

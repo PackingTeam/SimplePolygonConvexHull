@@ -29,7 +29,7 @@ bool GraphicsScene::isEndInserting()
 	return !isInsertingPoint;
 }
 
-// 用于显示displays
+// 用于显示displays, step<0只显示原多边形，step>=display.size()只显示原多边形和凸包
 void GraphicsScene::display(int step)
 {
 	clear();
