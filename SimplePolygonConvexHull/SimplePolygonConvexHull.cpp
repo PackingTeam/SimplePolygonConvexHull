@@ -29,6 +29,7 @@ void SimplePolygonConvexHull::Calculate()
 		method = getMethodById(methodId);
 		//method->getConvexHull(sp);
 		method->getConvexHullForDisplay(sp, displays);
+		delete method;
 		scene.display(step);
 	}
 	else
