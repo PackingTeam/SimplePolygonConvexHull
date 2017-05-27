@@ -1,5 +1,7 @@
 #include "GhoshShyamasundar83.h"
 
+GhoshShyamasundar83* GhoshShyamasundar83::instance = NULL;
+
 // 从max到min构造一半的凸包
 void GhoshShyamasundar83::getHalfConvexHull(SimplePolygon &sp, int max, int min)
 {
@@ -31,7 +33,6 @@ void GhoshShyamasundar83::getHalfConvexHull(SimplePolygon &sp, int max, int min)
 
 void GhoshShyamasundar83::getConvexHull(SimplePolygon & sp)
 {
-	sp.convexHull.clear();
 	auto min = sp.getLeftMostThenLowestPoint(), max = sp.getRightMostThenHighestPoint();
 	getHalfConvexHull(sp, max, min);
 	getHalfConvexHull(sp, min, max);

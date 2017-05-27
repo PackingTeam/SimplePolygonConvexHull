@@ -25,11 +25,19 @@ void SimplePolygonConvexHull::Calculate()
 	{
 		step = -1;
 		sp.normalize();
+		displays.clear();
+		sp.convexHull.clear();
+
 		int methodId = ui.Method->currentIndex();
 		method = getMethodById(methodId);
-		//method->getConvexHull(sp);
-		method->getConvexHullForDisplay(sp, displays);
-		delete method;
+
+		if (ui.Result->isChecked())
+		{
+			method->getConvexHull(sp);
+			step = 0;
+		}
+		else
+			method->getConvexHullForDisplay(sp, displays);
 		scene.display(step);
 	}
 	else
@@ -41,28 +49,18 @@ void SimplePolygonConvexHull::Calculate()
 void SimplePolygonConvexHull::Pre()
 {
 	if (step > -1)
-	{
-		step--;
-		scene.display(step);
-	}
+		previous();
 	else
-	{
 		QMessageBox::warning(this, "Warning", "No step before.");
-	}
 }
 
 void SimplePolygonConvexHull::Next() 
 {
 	int size = displays.size();
 	if (step < size)
-	{
-		step++;
-		scene.display(step);
-	}
+		next();
 	else
-	{
 		QMessageBox::warning(this, "Warning", "No step after.");
-	}
 }
 
 void SimplePolygonConvexHull::ProcessChange(int k)
@@ -74,4 +72,23 @@ void SimplePolygonConvexHull::Clear()
 {
 	scene.beginInsert();
 	step = -1;
+}
+
+
+// 用于操控演示步骤变化的方法
+void SimplePolygonConvexHull::next()
+{
+	step++;
+	scene.display(step);
+}
+
+void SimplePolygonConvexHull::previous()
+{
+	step--;
+	scene.display(step);
+}
+
+void SimplePolygonConvexHull::jumpTo(int step)
+{
+
 }

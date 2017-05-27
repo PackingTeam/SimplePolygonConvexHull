@@ -30,7 +30,7 @@ public:
 	void endInsert();
 	// 用于获取当前插入点是否结束
 	bool isEndInserting();
-	// 用于显示displays
+	// 用于显示displays, step<0只显示原多边形，step>=display.size()只显示原多边形和凸包
 	void display(int step);
 
 protected:

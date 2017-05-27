@@ -26,6 +26,11 @@ private:
 	// 用于存放各个场景数据
 	GraphicsScene scene;
 
+	// 用于操控演示步骤变化的方法
+	void next();
+	void previous();
+	void jumpTo(int step);
+
 private slots:
 	void Calculate();
 	void Pre();

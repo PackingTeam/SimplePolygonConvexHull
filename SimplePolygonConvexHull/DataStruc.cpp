@@ -158,21 +158,16 @@ void SimplePolygon::normalize()
 	}
 	
 	if (!getPolygonDirection(points))
-	{
 		reverse();
-	}
 }
 
 // 获得最左最下点的坐标
 int SimplePolygon::getLeftMostThenLowestPoint()
 {
 	int min = 0, size = points.size();
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size; i++)
 		if ((points[i].x < points[min].x) || (abs(points[i].x - points[min].x) < tolerance && points[i].y < points[min].y))
-		{
 			min = i;
-		}
-	}
 	return min;
 }
 
@@ -180,11 +175,8 @@ int SimplePolygon::getLeftMostThenLowestPoint()
 int SimplePolygon::getRightMostThenHighestPoint()
 {
 	int max = 0, size = points.size();
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size; i++)
 		if ((points[i].x > points[max].x) || (abs(points[i].x - points[max].x) < tolerance && points[i].y > points[max].y))
-		{
 			max = i;
-		}
-	}
 	return max;
 }
