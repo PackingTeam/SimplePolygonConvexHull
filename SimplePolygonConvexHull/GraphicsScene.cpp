@@ -5,13 +5,10 @@
 // 会调用clear()，并清除displays和sp中所有数据
 void GraphicsScene::beginInsert()
 {
-	if (!isInsertingPoint)
-	{
-		isInsertingPoint = true;
-		sp.clearAll();
-		displays.clear();
-		clear();
-	}
+	isInsertingPoint = true;
+	sp.clearAll();
+	displays.clear();
+	clear();
 }
 
 // 中止插入点，更改状态位已经结束插入
@@ -33,11 +30,57 @@ bool GraphicsScene::isEndInserting()
 }
 
 // 用于显示displays
-void GraphicsScene::display()
+void GraphicsScene::display(int step)
 {
 	clear();
 	displayPolygon();
-	displayConvexHull();
+	if (step < 0)
+	{
+		return;
+	}
+	else if (step >= displays.size())
+	{
+		displayConvexHull();
+	}
+	else
+	{
+		int size = displays[step].points.size();
+		for (int i = 0; i < size; i++)
+		{
+			QGraphicsRectItem *item = new QGraphicsRectItem(displays[step].points[i].x - 5, displays[step].points[i].y - 5, 10, 10);
+			item->setBrush(displays[step].pointColors[i]);
+			addItem(item);
+		}
+
+		size = displays[step].lines.size();
+		QPointF a, b;
+		for (int i = 0; i < size; i++)
+		{
+			QGraphicsLineItem *item = new QGraphicsLineItem(displays[step].lines[i].a.x, displays[step].lines[i].a.y, displays[step].lines[i].b.x, displays[step].lines[i].b.y);
+
+			QPen pen;
+			pen.setColor(displays[step].lineColors[i]);
+			pen.setWidth(5);
+			item->setPen(pen);
+
+			addItem(item);
+		}
+
+		size = displays[step].areas.size();
+		for (int i = 0; i < size; i++)
+		{
+			QPolygonF polygon;
+			displays[step].areas[i].getQPolygon(polygon);
+			QGraphicsPolygonItem *item = new QGraphicsPolygonItem(polygon);
+
+			QPen pen;
+			pen.setColor(displays[step].areaColors[i]);
+			pen.setWidth(5);
+			item->setPen(pen);
+
+			addItem(item);
+		}
+	}
 }
 
 // 鼠标按键事件处理
@@ -122,7 +165,7 @@ void GraphicsScene::displayPolygon()
 // 不调用clear()方法
 void GraphicsScene::displayConvexHull()
 {
-	if (sp.convexHull.size() <= 3)
+	if (sp.convexHull.size() < 3)
 		return;
 	else
 	{
@@ -137,7 +180,7 @@ void GraphicsScene::displayConvexHull()
 
 		addItem(item);
 
-        for (int id : sp.convexHull)
+		for (int id : sp.convexHull)
 		{
 			Point p = sp.points[id];
 			QGraphicsRectItem *item = new QGraphicsRectItem(p.x - 2, p.y - 2, 4, 4);

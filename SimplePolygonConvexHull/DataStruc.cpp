@@ -1,6 +1,8 @@
 #include "DataStruc.h"
 #include <cmath>
 
+using std::abs;
+
 // 将该直线转化为显示用的直线
 void Line::getQLineF(QLineF &qline)
 {
@@ -86,6 +88,12 @@ bool toLeft(const Point & a, const Point & b, const Point & c)
 	}
 }
 
+// 线段ab与线段cd是否有交点
+bool intersect(const Point & a, const Point & b, const Point & c, const Point & d)
+{
+	return toLeft(a, b, c) == toLeft(b, a, d) && toLeft(c, d, a) == toLeft(d, c, b);
+}
+
 // 返回值为true,点的序列为逆时针
 // 返回值为false,点的序列为顺时针
 bool getPolygonDirection(const Points& points)
@@ -112,24 +120,17 @@ extern double getDirectedArea(const Points& points)
 	return total;
 }
 
-// 根据后续决定来判断是只改变标记位isCounterClockWise来确定方向，还是更改整个数组的顺序
+// 将更改整个数组的顺序
 void SimplePolygon::reverse()
 {
-
+	std::reverse(points.begin(), points.end());
 }
 
 // 清除已有的所有数据
 void SimplePolygon::clearAll()
 {
-	isCounterClockWise = false;
 	points.clear();
 	convexHull.clear();
-}
-
-// 根据给定的点集顺序来得出当前简单多边形的点集顺序，并据此设置isCounterClockWise的值
-void SimplePolygon::makeDirectoin()
-{
-	isCounterClockWise = getPolygonDirection(points);
 }
 
 // 判定当前的简单多边形是否合法，即是否存在自交、重合嵌套等
@@ -138,24 +139,52 @@ bool SimplePolygon::isLegal()
 	return true;
 }
 
-// 用于排除输入中连续的重复点，并且通过调换次序使得第一个点为最左最下点，从而令点集序列正规化
-// 注：	可能会出现非连续的点出现重合的现象，若后续对任意可能重合的两个点进行比较则花费至少O(nlogn)的时间在排序中。
-//		而调换次序的工作可以在排序后进行，不提升时间复杂度。
+// 用于排除输入中连续的重复点，并使得整个点集为逆时针方向
+// 注： 目前版本并没有删除所有重合的点，仅仅删除了连续的重合的点。
 void SimplePolygon::normalize()
 {
-	int size = points.size();
 	double x1, y1, x2, y2;
 	int j;
-	for (int i = 0; i < size; i++) {
-		j = (i + 1) % size;
+	for (int i = 0; i < points.size();) {
+		j = (i + 1) % points.size();
 		x1 = points[i].x;
 		y1 = points[i].y;
 		x2 = points[j].x;
 		y2 = points[j].y;
 		if (abs(x1 - x2) < tolerance && abs(y1 - y2) < tolerance)
-			// 考虑remove和erase的效率问题后再作操作
-		{
+			points.erase(points.begin() + j);
+		else
+			i++;
+	}
+	
+	if (!getPolygonDirection(points))
+	{
+		reverse();
+	}
+}
 
+// 获得最左最下点的坐标
+int SimplePolygon::getLeftMostThenLowestPoint()
+{
+	int min = 0, size = points.size();
+	for (int i = 0; i < size; i++) {
+		if ((points[i].x < points[min].x) || (abs(points[i].x - points[min].x) < tolerance && points[i].y < points[min].y))
+		{
+			min = i;
 		}
 	}
+	return min;
+}
+
+// 获得最右最上点的坐标
+int SimplePolygon::getRightMostThenHighestPoint()
+{
+	int max = 0, size = points.size();
+	for (int i = 0; i < size; i++) {
+		if ((points[i].x > points[max].x) || (abs(points[i].x - points[max].x) < tolerance && points[i].y > points[max].y))
+		{
+			max = i;
+		}
+	}
+	return max;
 }

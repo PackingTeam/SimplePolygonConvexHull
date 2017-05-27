@@ -33,7 +33,6 @@ public:
 public:
 	Point(double a = 0, double b = 0) : x(a), y(b) {}
 	Point(const Point &m) : x(m.x), y(m.y) {}
-	Point() {}
 	Point(const QPointF &qpoint)
 	{
 		x = qpoint.x();
@@ -126,22 +125,19 @@ typedef vector<Display> Displays;
 class SimplePolygon 
 {
 public:
-	bool isCounterClockWise = false;
 	// 存储了简单多边形中所有的点，默认按照逆时针顺序存储
 	Points points;
 	// 用于存储凸包中所含的点的下标，默认按照逆时针顺序存储
 	vector<int> convexHull;
 
 public:
-	// 根据后续决定来判断是只改变标记位isCounterClockWise来确定方向，还是更改整个数组的顺序
+	// 将更改整个数组的顺序
 	void reverse();
 	// 判定当前的简单多边形是否合法，即是否存在自交、重合嵌套等
 	// 点集的个数必须大于等于3，整个简单多边形面积不为0。
 	bool isLegal();
-	// 用于排除输入中连续的重复点，并且通过调换次序使得第一个点为最左最下点，从而令点集序列正规化
-	// 注：	可能会出现非连续的点出现重合的现象，若后续对任意可能重合的两个点进行比较则花费至少O(nlogn)的时间在排序中。
-	//		而调换次序的工作可以在排序后进行，不提升时间复杂度。
-	//		过程中调用makeDirection()来确定点集的方向。
+	// 用于排除输入中连续的重复点，并使得整个点集为逆时针方向
+	// 注： 目前版本并没有删除所有重合的点，仅仅删除了连续的重合的点。
 	void normalize();
 	// 将其转化为显示用的polygon
 	void getQPolygon(QPolygonF &qpolygon);
@@ -149,11 +145,10 @@ public:
 	void getConvexHullPolygon(QPolygonF &qpolygon);
 	// 清除已有的所有数据
 	void clearAll();
-
-private:
-	// 根据点的下标来得出当前简单多边形的点集顺序，并据此设置isCounterClockWise的值
-	// 在normalize()中进行调用
-	void makeDirectoin();
+	// 获得最左最下点的坐标
+	int getLeftMostThenLowestPoint();
+	// 获得最右最上点的坐标
+	int getRightMostThenHighestPoint();
 };
 
 
@@ -163,6 +158,9 @@ private:
 // 如图，在线段ab的b侧延长线上以及直线ab左侧的点判定为true，其他为false
 // 注：不考虑三个点存在任意两点重合的情况，此种情况应该在之前的处理中已经排除
 extern bool toLeft(const Point & a, const Point & b, const Point & c);
+
+// 线段ab与线段cd是否有交点
+extern bool intersect(const Point & a, const Point & b, const Point & c, const Point & d);
 
 //返回值为true,点的序列为逆时针
 //返回值为false,点的序列为顺时针

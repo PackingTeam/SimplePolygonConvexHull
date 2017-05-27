@@ -4,8 +4,10 @@
 void Sklansky72::getConvexHull(SimplePolygon & sp)
 {
 	int size = sp.points.size();
+	int start = sp.getLeftMostThenLowestPoint();
 	Points & points = sp.points;
 	vector<int> & result = sp.convexHull;
+	result.clear();
 	// 因为已经经过合法性检验，点集大小为3时必定为凸包
 	if (size == 3)
 	{
@@ -21,9 +23,9 @@ void Sklansky72::getConvexHull(SimplePolygon & sp)
 		while (next < size)
 		{
 			rsize = result.size();
-			if (rsize <= 1 || toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[next]))
+			if (rsize <= 1 || toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[(start + next) % size]))
 			{
-				result.push_back(next);
+				result.push_back((next + start) % size);
 				next++;
 			}
 			else
@@ -32,7 +34,7 @@ void Sklansky72::getConvexHull(SimplePolygon & sp)
 			}
 		}
 		rsize = result.size();
-		while (rsize > 3 && !toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[0]))
+		while (rsize > 3 && !toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[start]))
 		{
 			result.pop_back();
 			rsize = result.size();
@@ -43,11 +45,17 @@ void Sklansky72::getConvexHull(SimplePolygon & sp)
 void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 {
 	int size = sp.points.size();
+	int start = sp.getLeftMostThenLowestPoint();
 	Points & points = sp.points;
 	vector<int> & result = sp.convexHull;
+	result.clear();
+	displays.clear();
 	// 因为已经经过合法性检验，点集大小为3时必定为凸包
 	if (size == 3)
 	{
+		sp.convexHull.push_back(0);
+		sp.convexHull.push_back(1);
+		sp.convexHull.push_back(2);
 		return;
 	}
 	else
@@ -64,20 +72,20 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 				temp.points.push_back(points[result[i]]);
 				temp.pointColors.push_back(Qt::green);
 			}
-			temp.points.push_back(points[next]);
+			temp.points.push_back(points[(next + start) % size]);
 			temp.pointColors.push_back(Qt::red);
 			displays.push_back(temp);
 
 			if (rsize <= 1)
 			{
-				result.push_back(next);
+				result.push_back((next + start) % size);
 				next++;
 
 				// 添加演示所需内容
 				temp.pointColors[temp.pointColors.size() - 1] = Qt::green;
 				displays.push_back(temp);
 			}
-			else if (toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[next]))
+			else if (toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[(start + next) % size]))
 			{
 				// 添加演示所需内容
 				Line line(points[result[rsize - 2]], points[result[rsize - 1]], LINE);
@@ -87,7 +95,7 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 				temp.pointColors[temp.pointColors.size() - 2] = Qt::yellow;
 				displays.push_back(temp);
 
-				result.push_back(next);
+				result.push_back((next + start) % size);
 				next++;
 
 				// 添加演示所需内容
@@ -120,7 +128,7 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 
 		rsize = result.size();
 
-		while (rsize > 3 && !toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[0]))
+		while (rsize > 3 && !toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[start]))
 		{
 			// 添加演示所需显示内容
 			Display temp;
@@ -129,7 +137,7 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 				temp.points.push_back(points[result[i]]);
 				temp.pointColors.push_back(Qt::green);
 			}
-			temp.points.push_back(points[0]);
+			temp.points.push_back(points[start]);
 			temp.pointColors.push_back(Qt::red);
 			displays.push_back(temp);
 
@@ -158,7 +166,7 @@ void Sklansky72::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 			temp.points.push_back(points[result[i]]);
 			temp.pointColors.push_back(Qt::green);
 		}
-		temp.points.push_back(points[0]);
+		temp.points.push_back(points[start]);
 		temp.pointColors.push_back(Qt::red);
 		displays.push_back(temp);
 

@@ -51,6 +51,8 @@ public:
         if (SimplePolygonConvexHullClass->objectName().isEmpty())
             SimplePolygonConvexHullClass->setObjectName(QStringLiteral("SimplePolygonConvexHullClass"));
         SimplePolygonConvexHullClass->resize(1000, 600);
+        SimplePolygonConvexHullClass->setMinimumSize(QSize(1000, 600));
+        SimplePolygonConvexHullClass->setMaximumSize(QSize(1000, 600));
         actionOpen = new QAction(SimplePolygonConvexHullClass);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionSave = new QAction(SimplePolygonConvexHullClass);
@@ -76,7 +78,7 @@ public:
         Calculate->setGeometry(QRect(294, 4, 75, 22));
         MethodLabel = new QLabel(widget);
         MethodLabel->setObjectName(QStringLiteral("MethodLabel"));
-        MethodLabel->setGeometry(QRect(10, 5, 41, 16));
+        MethodLabel->setGeometry(QRect(10, 7, 41, 16));
         Pre = new QPushButton(widget);
         Pre->setObjectName(QStringLiteral("Pre"));
         Pre->setGeometry(QRect(447, 4, 50, 22));
