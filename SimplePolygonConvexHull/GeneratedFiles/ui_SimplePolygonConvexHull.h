@@ -45,6 +45,7 @@ public:
     QPushButton *Clear;
     QRadioButton *Result;
     QRadioButton *Display;
+    QPushButton *Pause;
     QGraphicsView *graphicsView;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -74,24 +75,24 @@ public:
         Method->setGeometry(QRect(57, 5, 220, 20));
         ProcessControl = new QSlider(widget);
         ProcessControl->setObjectName(QStringLiteral("ProcessControl"));
-        ProcessControl->setGeometry(QRect(710, 5, 160, 22));
+        ProcessControl->setGeometry(QRect(750, 5, 160, 22));
         ProcessControl->setOrientation(Qt::Horizontal);
         Calculate = new QPushButton(widget);
         Calculate->setObjectName(QStringLiteral("Calculate"));
-        Calculate->setGeometry(QRect(445, 4, 75, 22));
+        Calculate->setGeometry(QRect(440, 4, 75, 22));
         MethodLabel = new QLabel(widget);
         MethodLabel->setObjectName(QStringLiteral("MethodLabel"));
         MethodLabel->setGeometry(QRect(10, 7, 41, 16));
         Pre = new QPushButton(widget);
         Pre->setObjectName(QStringLiteral("Pre"));
-        Pre->setGeometry(QRect(555, 4, 50, 22));
+        Pre->setGeometry(QRect(550, 4, 50, 22));
         Next = new QPushButton(widget);
         Next->setObjectName(QStringLiteral("Next"));
-        Next->setGeometry(QRect(620, 4, 50, 22));
+        Next->setGeometry(QRect(680, 4, 50, 22));
         Next->setAutoRepeatDelay(300);
         Clear = new QPushButton(widget);
         Clear->setObjectName(QStringLiteral("Clear"));
-        Clear->setGeometry(QRect(920, 5, 50, 22));
+        Clear->setGeometry(QRect(930, 4, 50, 22));
         Clear->setAutoRepeatDelay(300);
         Result = new QRadioButton(widget);
         Result->setObjectName(QStringLiteral("Result"));
@@ -100,6 +101,9 @@ public:
         Display = new QRadioButton(widget);
         Display->setObjectName(QStringLiteral("Display"));
         Display->setGeometry(QRect(365, 7, 61, 16));
+        Pause = new QPushButton(widget);
+        Pause->setObjectName(QStringLiteral("Pause"));
+        Pause->setGeometry(QRect(610, 4, 60, 22));
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setGeometry(QRect(0, 30, 1000, 547));
@@ -155,6 +159,8 @@ public:
         Clear->setShortcut(QApplication::translate("SimplePolygonConvexHullClass", "C", Q_NULLPTR));
         Result->setText(QApplication::translate("SimplePolygonConvexHullClass", "result", Q_NULLPTR));
         Display->setText(QApplication::translate("SimplePolygonConvexHullClass", "display", Q_NULLPTR));
+        Pause->setText(QApplication::translate("SimplePolygonConvexHullClass", "Pause", Q_NULLPTR));
+        Pause->setShortcut(QApplication::translate("SimplePolygonConvexHullClass", "Left", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("SimplePolygonConvexHullClass", "File", Q_NULLPTR));
     } // retranslateUi
 

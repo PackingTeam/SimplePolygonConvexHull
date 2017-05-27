@@ -2,9 +2,12 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMessageBox>
+#include <QtWidgets/QFileDialog>
 #include "GraphicsScene.h"
 #include "ui_SimplePolygonConvexHull.h"
 #include "AlgorithmFactory.h"
+#include <iostream>
+#include <fstream>
 
 class SimplePolygonConvexHull : public QMainWindow
 {
@@ -25,11 +28,12 @@ private:
 	int step;
 	// 用于存放各个场景数据
 	GraphicsScene scene;
+	// 用于判断当前是否暂停播放
+	bool isStop;
 
 	// 用于操控演示步骤变化的方法
 	void next();
 	void previous();
-	void jumpTo(int step);
 
 private slots:
 	void Calculate();
@@ -37,5 +41,7 @@ private slots:
 	void Next();
 	void ProcessChange(int k);
 	void Clear();
-
+	void Pause();
+	void Save();
+	void Open();
 };

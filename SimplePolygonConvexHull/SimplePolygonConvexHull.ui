@@ -103,7 +103,7 @@
     <widget class="QSlider" name="ProcessControl">
      <property name="geometry">
       <rect>
-       <x>710</x>
+       <x>750</x>
        <y>5</y>
        <width>160</width>
        <height>22</height>
@@ -116,7 +116,7 @@
     <widget class="QPushButton" name="Calculate">
      <property name="geometry">
       <rect>
-       <x>445</x>
+       <x>440</x>
        <y>4</y>
        <width>75</width>
        <height>22</height>
@@ -145,7 +145,7 @@
     <widget class="QPushButton" name="Pre">
      <property name="geometry">
       <rect>
-       <x>555</x>
+       <x>550</x>
        <y>4</y>
        <width>50</width>
        <height>22</height>
@@ -161,7 +161,7 @@
     <widget class="QPushButton" name="Next">
      <property name="geometry">
       <rect>
-       <x>620</x>
+       <x>680</x>
        <y>4</y>
        <width>50</width>
        <height>22</height>
@@ -180,8 +180,8 @@
     <widget class="QPushButton" name="Clear">
      <property name="geometry">
       <rect>
-       <x>920</x>
-       <y>5</y>
+       <x>930</x>
+       <y>4</y>
        <width>50</width>
        <height>22</height>
       </rect>
@@ -223,6 +223,22 @@
      </property>
      <property name="text">
       <string>display</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Pause">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>4</y>
+       <width>60</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Pause</string>
+     </property>
+     <property name="shortcut">
+      <string>Left</string>
      </property>
     </widget>
    </widget>

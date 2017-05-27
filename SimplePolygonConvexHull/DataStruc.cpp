@@ -180,3 +180,67 @@ int SimplePolygon::getRightMostThenHighestPoint()
 			max = i;
 	return max;
 }
+
+// 从序列化字符串恢复数据
+void SimplePolygon::setPolygon(const string& str)
+{
+	// 清空原本数据
+	clearAll();
+
+	vector<string> temp;
+	SplitString(str, temp, ";");
+	Point tp;
+	int size = temp.size();
+	for (int i = 0; i < size; i++)
+	{
+		tp.setPoint(temp[i]);
+		points.push_back(tp);
+	}
+}
+
+// 序列化
+string SimplePolygon::toString()
+{
+	string temp = "";
+	int size = points.size();
+	for (int i = 0; i < size; i++)
+	{
+		temp += points[i].toString() + ";";
+	}
+	return temp;
+}
+
+// 从序列化字符串恢复数据
+void Point::setPoint(const string& str)
+{
+	vector<string> temp;
+	SplitString(str, temp, ",");
+	if (temp.size() != 2) // 错误情况
+		return;
+	double td = stod(temp[0].substr(1, temp[0].size() - 1));
+	x = td;
+	td = stod(temp[1].substr(0, temp[0].size() - 1));
+	y = td;
+}
+
+// 序列化
+string Point::toString()
+{
+	return "(" + to_string(x) + "," + to_string(y) + ")";
+}
+
+void SplitString(const string& s, vector<string>& v, const string& c)
+{
+	string::size_type pos1, pos2;
+	pos2 = s.find(c);
+	pos1 = 0;
+	while (string::npos != pos2)
+	{
+		v.push_back(s.substr(pos1, pos2 - pos1));
+
+		pos1 = pos2 + c.size();
+		pos2 = s.find(c, pos1);
+	}
+	if (pos1 != s.length())
+		v.push_back(s.substr(pos1));
+}
