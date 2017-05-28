@@ -15,79 +15,141 @@ void LeeGrahamYao83::getConvexHull(SimplePolygon & sp)
 		return;
 	}
 
-	// 实现 Graham&Yao 的方法
+	bool isCCW = getPolygonDirection(sp.points);
+	if (isCCW) {
+		sp.reverse();
+	}
 
-	// 将点列顺时针排列
-	reverse(points.begin(), points.end());
+	int leftIndex = sp.getLeftMostThenLowestPoint();
+	int rightIndex = sp.getRightMostThenHighestPoint();
 
-	//找最右最上点
+	vector<int> upHull;
+	upHull.push_back(rightIndex);
+	upHull.push_back(leftIndex);
+	int upHull_Size = 2;
 
-	int m = -1;
-	double xMax = -1e9;
-	double yMax = -1e9;
-
-	for (int i = 0; i < N; ++i) {
-		if (points[i].x > xMax) {
-			m = i;
-			xMax = points[i].x;
-			yMax = points[i].y;
+	int i = leftIndex + 1;
+	while (true) {
+		if (i % N == rightIndex) {
+			goto upHullFinish;
 		}
-		else if (points[i].x == xMax) {
-			if (points[i].y > yMax) {
-				m = i;
-				yMax = points[i].y;
+		if (toLeft(sp.points[upHull[upHull_Size - 2]], sp.points[upHull[upHull_Size - 1]], sp.points[i % N])) {
+			i++;
+		}
+		else {
+			upHull.push_back(i % N);
+			upHull_Size++;
+			i++;
+			break;
+		}
+	}
+
+	if (upHull_Size > 2) {
+		while (true) {
+			if ((i % N) == rightIndex) {
+				goto upHullFinish;
 			}
+
+			if (!toLeft(sp.points[upHull[upHull_Size - 2]], sp.points[upHull[upHull_Size - 1]], sp.points[i % N])) {
+				int LS = -1, LE = -1;
+				if (toLeft(sp.points[(upHull.back() - 1 + N) % N], sp.points[upHull.back()], sp.points[i % N])) {
+					LS = upHull[upHull_Size - 2];
+					LE = upHull[upHull_Size - 1];
+				}
+				else {
+					LS = upHull.back();
+					LE = rightIndex;
+				}
+				while (true) {
+					if (toLeft(sp.points[LS], sp.points[LE], sp.points[i % N])) {
+						break;
+					}
+					++i;
+					if (i % N == rightIndex) {
+						goto upHullFinish;
+					}
+				}
+			}
+
+			while (toLeft(sp.points[upHull[upHull_Size - 2]], sp.points[upHull[upHull_Size - 1]], sp.points[i % N])) {
+				upHull.pop_back();
+				upHull_Size--;
+			}
+
+			upHull.push_back(i % N);
+			upHull_Size++;
+
+			i++;
+		}
+	}
+upHullFinish:
+	vector<int> downHull;
+	downHull.push_back(leftIndex);
+	downHull.push_back(rightIndex);
+	int downHull_Size = 2;
+
+	i = rightIndex + 1;
+	while (true) {
+		if (i % N == leftIndex) {
+			goto downHullFinish;
+		}
+		if (toLeft(sp.points[downHull[downHull_Size - 2]], sp.points[downHull[downHull_Size - 1]], sp.points[i % N])) {
+			i++;
+		}
+		else {
+			downHull.push_back(i % N);
+			downHull_Size++;
+			i++;
+			break;
 		}
 	}
 
-	// 先处理一半凸包
+	if (downHull_Size > 2) {
+		while (true) {
+			if ((i % N) == leftIndex) {
+				goto downHullFinish;
+			}
 
-	vector<int> inds;
-	// 现在最后一个点是最左最下点
-	inds.push_back(N - 1);
-	for (int i = m; i + 1 < N; ++i) {
-		inds.push_back(i);
+			if (!toLeft(sp.points[downHull[downHull_Size - 2]], sp.points[downHull[downHull_Size - 1]], sp.points[i % N])) {
+				int LS = -1, LE = -1;
+				if (toLeft(sp.points[(downHull.back() - 1 + N) % N], sp.points[downHull.back()], sp.points[i % N])) {
+					LS = downHull[downHull_Size - 2];
+					LE = downHull[downHull_Size - 1];
+				}
+				else {
+					LS = downHull.back();
+					LE = leftIndex;
+				}
+				while (true) {
+					if (toLeft(sp.points[LS], sp.points[LE], sp.points[i % N])) {
+						break;
+					}
+					++i;
+					if (i % N == leftIndex) {
+						goto downHullFinish;
+					}
+				}
+			}
+
+			while (toLeft(sp.points[downHull[downHull_Size - 2]], sp.points[downHull[downHull_Size - 1]], sp.points[i % N])) {
+				downHull.pop_back();
+				downHull_Size--;
+			}
+
+			downHull.push_back(i % N);
+			downHull_Size++;
+
+			i++;
+		}
 	}
 
-	int CH = 2;
-	result.push_back(inds[0]);
-	result.push_back(inds[1]);
-
-	int X = 2;
+downHullFinish:
 	
-
-	while (toLeft(points[result[CH - 1]], points[result[CH - 2]], points[inds[X]])) {
-		++X;
+	for (i = 1; i < upHull_Size; ++i) {
+		sp.convexHull.push_back(upHull[i]);
 	}
-
-	result.push_back(inds[X]);
-	++CH;
-
-	while (X < inds.size()) {
-		++X;
-		if (!toLeft(points[result[CH - 1]], points[result[CH - 2]], points[inds[X]])) {
-			int LS = -1, LE = -1;
-			if (toLeft(points[inds[X - 1]], points[result[CH - 1]], points[inds[X]])) {
-				LS = result[CH - 2];
-				LE = result[CH - 1];
-			}
-			else {
-				LS = result[CH - 1];
-				LE = result[0];
-			}
-			while (!toLeft(points[LS], points[LE], points[inds[X]])) {
-				++X;
-			}
-		}
-		if (X >= inds.size())	break;
-
-		while (toLeft(points[result[CH - 1]], points[result[CH - 2]], points[inds[X]])) {
-			result.pop_back();
-			--CH;
-		}
-
-		result.push_back(inds[X]);
-		++CH;
+	for (i = 1; i < downHull_Size; ++i) {
+		sp.convexHull.push_back(downHull[i]);
 	}
 }
 
