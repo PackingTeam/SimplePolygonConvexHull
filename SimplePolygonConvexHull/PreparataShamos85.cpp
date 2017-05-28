@@ -138,7 +138,7 @@ void PreparataShamos85::getConvexHull(SimplePolygon & sp)
 	}
 }
 
-Display PreparataShamos85::createDisplay(SimplePolygon& sp, vector<int>& hull, Point& support, int leftIndex, int rightIndex) {
+Display PreparataShamos85::createDisplay(SimplePolygon& sp, vector<int>& hull, Point& support, int leftIndex, int rightIndex, int curIndex) {
 	Display ret;
 	ret.points.push_back(support);
 	ret.pointColors.push_back(Qt::gray);
@@ -182,6 +182,9 @@ Display PreparataShamos85::createDisplay(SimplePolygon& sp, vector<int>& hull, P
 		ret.lineColors.push_back(Qt::red);
 	}
 
+	ret.points.push_back(sp.points[curIndex]);
+	ret.pointColors.push_back(Qt::red);
+
 	return ret;
 }
 
@@ -208,7 +211,7 @@ void PreparataShamos85::getConvexHullForDisplay(SimplePolygon & sp, Displays & d
 	// -1 表示添加的辅助点
 	// 横坐标与x_min一致 y坐标比x_min小
 	upHull.push_back(-1);
-	Point supportLeft(sp.points[leftIndex].x, sp.points[leftIndex].y - 2);
+	Point supportLeft(sp.points[leftIndex].x, sp.points[leftIndex].y - 20);
 	upHull.push_back(leftIndex);
 
 	int upHull_Size = 2;
@@ -228,7 +231,7 @@ void PreparataShamos85::getConvexHullForDisplay(SimplePolygon & sp, Displays & d
 		// flag3：栈顶元素到最右端点
 		bool flag3 = false;
 
-		displays.push_back(createDisplay(sp, upHull, supportLeft, leftIndex, rightIndex));
+		displays.push_back(createDisplay(sp, upHull, supportLeft, leftIndex, rightIndex, index));
 
 		flag1 = upHull[upHull_Size - 2] == -1 ? toLeft(supportLeft, sp.points[upHull.back()], sp.points[index]) : toLeft(sp.points[upHull[upHull_Size - 2]], sp.points[upHull.back()], sp.points[index]);
 
@@ -238,7 +241,7 @@ void PreparataShamos85::getConvexHullForDisplay(SimplePolygon & sp, Displays & d
 			while (true) {
 				upHull.pop_back();
 				upHull_Size--;
-				displays.push_back(createDisplay(sp, upHull, supportLeft, leftIndex, rightIndex));
+				displays.push_back(createDisplay(sp, upHull, supportLeft, leftIndex, rightIndex, index));
 				flag1 = upHull[upHull_Size - 2] == -1 ? toLeft(supportLeft, sp.points[upHull.back()], sp.points[index]) : toLeft(sp.points[upHull[upHull_Size - 2]], sp.points[upHull.back()], sp.points[index]);
 				if (!flag1)	break;
 			}
@@ -265,7 +268,7 @@ void PreparataShamos85::getConvexHullForDisplay(SimplePolygon & sp, Displays & d
 	vector<int> downHull;
 	// 添加辅助点 x坐标等于x_max 在rightIndex的上方
 	downHull.push_back(-1);
-	Point supportRight(sp.points[rightIndex].x, sp.points[rightIndex].y + 2);
+	Point supportRight(sp.points[rightIndex].x, sp.points[rightIndex].y + 20);
 	downHull.push_back(rightIndex);
 	int downHull_Size = 2;
 
@@ -284,7 +287,7 @@ void PreparataShamos85::getConvexHullForDisplay(SimplePolygon & sp, Displays & d
 		// flag3：栈顶元素到最右端点
 		bool flag3 = false;
 
-		displays.push_back(createDisplay(sp, downHull, supportRight, rightIndex, leftIndex));
+		displays.push_back(createDisplay(sp, downHull, supportRight, rightIndex, leftIndex, index));
 
 		flag1 = downHull[downHull_Size - 2] == -1 ? toLeft(supportRight, sp.points[downHull.back()], sp.points[index]) : toLeft(sp.points[downHull[downHull_Size - 2]], sp.points[downHull.back()], sp.points[index]);
 
@@ -294,7 +297,7 @@ void PreparataShamos85::getConvexHullForDisplay(SimplePolygon & sp, Displays & d
 			while (true) {
 				downHull.pop_back();
 				downHull_Size--;
-				displays.push_back(createDisplay(sp, downHull, supportRight, rightIndex, leftIndex));
+				displays.push_back(createDisplay(sp, downHull, supportRight, rightIndex, leftIndex, index));
 				flag1 = downHull[downHull_Size - 2] == -1 ? toLeft(supportRight, sp.points[downHull.back()], sp.points[index]) : toLeft(sp.points[downHull[downHull_Size - 2]], sp.points[downHull.back()], sp.points[index]);
 				if (!flag1)	break;
 			}

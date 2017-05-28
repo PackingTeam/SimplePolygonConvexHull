@@ -25,5 +25,6 @@ public:
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);
-
+private:
+	Display createDisplay(vector<int>& hull, SimplePolygon& sp, int L1, int E1, int L2, int E2, int index);
 };

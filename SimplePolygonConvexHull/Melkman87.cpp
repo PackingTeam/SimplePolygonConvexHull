@@ -48,7 +48,7 @@ void Melkman87::getConvexHull(SimplePolygon & sp)
 	}
 }
 
-Display Melkman87::createDisplay(SimplePolygon& sp, deque<int>& Q)
+Display Melkman87::createDisplay(SimplePolygon& sp, deque<int>& Q, int curIndex)
 {
 	Display ret;
 	int Q_Size = (int)Q.size();
@@ -72,6 +72,11 @@ Display Melkman87::createDisplay(SimplePolygon& sp, deque<int>& Q)
 		ret.lines.push_back(line);
 		ret.lineColors.push_back(Qt::yellow);
 	}
+
+	if (curIndex >= 0) {
+		ret.points.push_back(sp.points[curIndex]);
+		ret.pointColors.push_back(Qt::red);
+	}
 	return ret;
 }
 
@@ -92,14 +97,18 @@ void Melkman87::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 
 	Q.push_back(2);
 	Q.push_front(2);
-	displays.push_back(createDisplay(sp, Q));
+	
 
 	int index = 3;
 	int Q_Size = 4;
 
 	while (index < N) {
+		displays.push_back(createDisplay(sp, Q, index));
 		while ((index < N) && !toLeft(sp.points[index], sp.points[Q[0]], sp.points[Q[1]]) && !toLeft(sp.points[Q[Q_Size - 2]], sp.points[Q[Q_Size - 1]], sp.points[index])) {
 			index++;
+			if (index < N) {
+				displays.push_back(createDisplay(sp, Q, index));
+			}
 		}
 		if (index >= N)	break;
 		while (toLeft(sp.points[Q[Q_Size - 2]], sp.points[Q[Q_Size - 1]], sp.points[index])) {
@@ -114,8 +123,8 @@ void Melkman87::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 		}
 		Q.push_front(index);
 		Q_Size++;
+		displays.push_back(createDisplay(sp, Q, -1));
 		index++;
-		displays.push_back(createDisplay(sp, Q));
 	}
 
 	for (int i = 0; i + 1 < Q_Size; ++i) {
