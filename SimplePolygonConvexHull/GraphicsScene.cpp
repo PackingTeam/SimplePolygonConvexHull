@@ -44,29 +44,7 @@ void GraphicsScene::display(int step)
 	}
 	else
 	{
-		int size = displays[step].points.size();
-		for (int i = 0; i < size; i++)
-		{
-			QGraphicsRectItem *item = new QGraphicsRectItem(displays[step].points[i].x - 5, displays[step].points[i].y - 5, 10, 10);
-			item->setBrush(displays[step].pointColors[i]);
-			addItem(item);
-		}
-
-		size = displays[step].lines.size();
-		QPointF a, b;
-		for (int i = 0; i < size; i++)
-		{
-			QGraphicsLineItem *item = new QGraphicsLineItem(displays[step].lines[i].a.x, displays[step].lines[i].a.y, displays[step].lines[i].b.x, displays[step].lines[i].b.y);
-
-			QPen pen;
-			pen.setColor(displays[step].lineColors[i]);
-			pen.setWidth(5);
-			item->setPen(pen);
-
-			addItem(item);
-		}
-
-		size = displays[step].areas.size();
+		int size = displays[step].areas.size();
 		for (int i = 0; i < size; i++)
 		{
 			QPolygonF polygon;
@@ -75,9 +53,87 @@ void GraphicsScene::display(int step)
 
 			QPen pen;
 			pen.setColor(displays[step].areaColors[i]);
-			pen.setWidth(5);
+			pen.setWidth(3);
 			item->setPen(pen);
 
+			QBrush brush;
+			brush.setColor(displays[step].areaColors[i]);
+			item->setBrush(brush);
+
+			addItem(item);
+		}
+
+		size = displays[step].lines.size();
+		for (int i = 0; i < size; i++)
+		{
+			Line line = displays[step].lines[i];
+			QGraphicsLineItem *item;
+			if (line.type == SEGMENT)
+				item = new QGraphicsLineItem(line.a.x, line.a.y, line.b.x, line.b.y);
+			else if (line.type == RAY)
+			{
+				if (line.b.x - line.a.x > tolerance)
+				{
+					double x = 2 * sceneWidth;
+					double y = (x - line.a.x) / (line.b.x - line.a.x)*(line.b.y - line.a.y) + line.a.y;
+					item = new QGraphicsLineItem(line.a.x, line.a.y, x, y);
+				}
+				else if (line.b.x - line.a.x < tolerance)
+				{
+					double x = -2 * sceneWidth;
+					double y = (x - line.a.x) / (line.b.x - line.a.x)*(line.b.y - line.a.y) + line.a.y;
+					item = new QGraphicsLineItem(line.a.x, line.a.y, x, y);
+				}
+				else
+				{
+					if (line.b.y > line.a.y)
+					{
+						double x = line.a.x;
+						double y = 2 * sceneHeight;
+						item = new QGraphicsLineItem(line.a.x, line.a.y, x, y);
+					}
+					else
+					{
+						double x = line.a.x;
+						double y = -2 * sceneHeight;
+						item = new QGraphicsLineItem(line.a.x, line.a.y, x, y);
+					}
+				}
+			}
+			else if (line.type == LINE)
+			{
+				if (abs(line.a.x - line.b.x) < tolerance)
+				{
+					double x = line.a.x;
+					double y1 = 2 * sceneHeight;
+					double y2 = -2 * sceneHeight;
+					item = new QGraphicsLineItem(x, y1, x, y2);
+				}
+				else
+				{
+					double x1 = 2 * sceneWidth;
+					double y1 = (x1 - line.a.x) / (line.b.x - line.a.x)*(line.b.y - line.a.y) + line.a.y;
+					double x2 = -2 * sceneWidth;
+					double y2 = (x2 - line.a.x) / (line.b.x - line.a.x)*(line.b.y - line.a.y) + line.a.y;
+					item = new QGraphicsLineItem(x1, y1, x2, y2);
+				}
+			}
+
+			QPen pen;
+			pen.setColor(displays[step].lineColors[i]);
+			pen.setWidth(2);
+			item->setPen(pen);
+
+			addItem(item);
+		}
+
+		size = displays[step].points.size();
+
+		for (int i = 0; i < size; i++)
+		{
+			Point point = displays[step].points[i];
+			QGraphicsRectItem *item = new QGraphicsRectItem(point.x - 3, point.y - 3, 6, 6);
+			item->setBrush(displays[step].pointColors[i]);
 			addItem(item);
 		}
 	}
@@ -95,8 +151,8 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
 				QPointF point = event->scenePos();
 				sp.points.push_back(Point(point));
 
-				QGraphicsRectItem *item = new QGraphicsRectItem(point.x() - 2, point.y() - 2, 4, 4);
-				item->setBrush(QColor(0, 0, 0));
+				QGraphicsRectItem *item = new QGraphicsRectItem(point.x() - 1, point.y() - 1, 2, 2);
+				item->setBrush(Qt::black);
 				addItem(item);
 
 				if (sp.points.size() > 1)
@@ -105,8 +161,8 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
 					QGraphicsLineItem *item = new QGraphicsLineItem(sp.points[size-2].x, sp.points[size-2].y, sp.points[size-1].x, sp.points[size-1].y);
 
 					QPen pen;
-					pen.setColor(QColor(0, 0, 0));
-					pen.setWidth(2);
+					pen.setColor(Qt::gray);
+					pen.setWidth(1);
 					item->setPen(pen);
 
 					addItem(item);
@@ -130,7 +186,7 @@ void GraphicsScene::displayPolygon()
 {
     for (const Point &p : sp.points)
 	{
-		QGraphicsRectItem *item = new QGraphicsRectItem(p.x - 2, p.y - 2, 4, 4);
+		QGraphicsRectItem *item = new QGraphicsRectItem(p.x - 1, p.y - 1, 2, 2);
 		item->setBrush(Qt::black);
 		addItem(item);
 	}
@@ -142,8 +198,8 @@ void GraphicsScene::displayPolygon()
 		QGraphicsPolygonItem *item = new QGraphicsPolygonItem(polygon);
 
 		QPen pen;
-		pen.setColor(Qt::black);
-		pen.setWidth(2);
+		pen.setColor(Qt::gray);
+		pen.setWidth(1);
 		item->setPen(pen);
 
 		addItem(item);
@@ -153,8 +209,8 @@ void GraphicsScene::displayPolygon()
 		QGraphicsLineItem *item = new QGraphicsLineItem(sp.points[0].x, sp.points[0].y, sp.points[1].x, sp.points[1].y);
 
 		QPen pen;
-		pen.setColor(Qt::black);
-		pen.setWidth(2);
+		pen.setColor(Qt::gray);
+		pen.setWidth(1);
 		item->setPen(pen);
 
 		addItem(item);

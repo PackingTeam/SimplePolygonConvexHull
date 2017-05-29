@@ -30,6 +30,10 @@ private:
 	GraphicsScene scene;
 	// 用于判断当前是否暂停播放
 	bool isStop;
+	// 用于暂存计时器id
+	int timerId;
+	// 计时间隔
+	int timeInterval;
 
 	// 用于操控演示步骤变化的方法
 	void next();
@@ -44,4 +48,12 @@ private slots:
 	void Pause();
 	void Save();
 	void Open();
+	void methodChanged(int k);
+	void time100();
+	void time200();
+	void time500();
+	void time1000();
+
+protected:
+	void timerEvent(QTimerEvent *event);
 };
