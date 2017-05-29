@@ -235,7 +235,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Pause</string>
+      <string>Start</string>
      </property>
      <property name="shortcut">
       <string>Left</string>
@@ -272,7 +272,23 @@
     <addaction name="actionSave"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuSetting">
+    <property name="title">
+     <string>Setting</string>
+    </property>
+    <widget class="QMenu" name="menuDisplay_Time">
+     <property name="title">
+      <string>Display Time</string>
+     </property>
+     <addaction name="action100ms"/>
+     <addaction name="action200ms"/>
+     <addaction name="action500ms"/>
+     <addaction name="action1000ms"/>
+    </widget>
+    <addaction name="menuDisplay_Time"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuSetting"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -292,6 +308,26 @@
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="action100ms">
+   <property name="text">
+    <string>100ms</string>
+   </property>
+  </action>
+  <action name="action200ms">
+   <property name="text">
+    <string>200ms</string>
+   </property>
+  </action>
+  <action name="action500ms">
+   <property name="text">
+    <string>500ms</string>
+   </property>
+  </action>
+  <action name="action1000ms">
+   <property name="text">
+    <string>1000ms</string>
    </property>
   </action>
  </widget>
