@@ -50,6 +50,8 @@ void SimplePolygonConvexHull::Calculate()
 	displays.clear();
 	sp.convexHull.clear();
 
+	killTimer(timerId);
+
 	int methodId = ui.Method->currentIndex();
 	method = getMethodById(methodId);
 	ui.Pause->setText("Start");
