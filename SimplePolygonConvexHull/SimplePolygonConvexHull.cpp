@@ -1,7 +1,7 @@
 #include "SimplePolygonConvexHull.h"
 
 SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
-	: QMainWindow(parent), scene(sp, displays), isStop(true)
+	: QMainWindow(parent), scene(sp, displays), isStop(true), timeInterval(200)
 {
 	step = -1;
 
@@ -15,6 +15,12 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	connect(ui.Pause, SIGNAL(clicked()), this, SLOT(Pause()));
 	connect(ui.actionSave, SIGNAL(triggered()), this, SLOT(Save()));
 	connect(ui.actionOpen, SIGNAL(triggered()), this, SLOT(Open()));
+	connect(ui.Method, SIGNAL(currentIndexChanged(int)), this, SLOT(methodChanged(int)));
+	connect(ui.action100ms, SIGNAL(triggered()), this, SLOT(time100()));
+	connect(ui.action200ms, SIGNAL(triggered()), this, SLOT(time200()));
+	connect(ui.action500ms, SIGNAL(triggered()), this, SLOT(time500()));
+	connect(ui.action1000ms, SIGNAL(triggered()), this, SLOT(time1000()));
+
 
 	ui.Next->setDisabled(true);
 	ui.Pre->setDisabled(true);
@@ -29,6 +35,7 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 
 void SimplePolygonConvexHull::Calculate()
 {
+	// 判断是否结束了插入
 	if (!scene.isEndInserting())
 	{
 		if (sp.points.size() == 0)
@@ -37,34 +44,41 @@ void SimplePolygonConvexHull::Calculate()
 			QMessageBox::warning(this, "Warning", "The polygon is not completed.");
 		return;
 	}
+
+	// 对sp和displays进行整理
 	sp.normalize();
 	displays.clear();
 	sp.convexHull.clear();
 
 	int methodId = ui.Method->currentIndex();
 	method = getMethodById(methodId);
+	ui.Pause->setText("Start");
 
+	// 如果为只显示结果的模式
 	if (ui.Result->isChecked())
 	{
 		method->getConvexHull(sp);
 		ui.ProcessControl->setDisabled(true);
+		ui.ProcessControl->setValue(0);
 		ui.Next->setDisabled(true);
 		ui.Pre->setDisabled(true);
 		ui.Pause->setDisabled(true);
 		step = 0;
 		isStop = true;
 	}
+	// 如果为显示演示的模式
 	else if (ui.Display->isChecked())
 	{
 		method->getConvexHullForDisplay(sp, displays);
 		ui.ProcessControl->setMinimum(-1);
 		ui.ProcessControl->setMaximum(displays.size());
+		ui.ProcessControl->setValue(-1);
 		ui.ProcessControl->setDisabled(false);
 		ui.Next->setDisabled(false);
 		ui.Pre->setDisabled(false);
 		ui.Pause->setDisabled(false);
 		step = -1;
-		isStop = false;
+		isStop = true;
 	}
 	scene.display(step);
 }
@@ -107,13 +121,32 @@ void SimplePolygonConvexHull::Clear()
 
 void SimplePolygonConvexHull::Pause()
 {
-	if (!isStop)
+	// 按下的按钮为Start
+	if (isStop)
 	{
-
+		int size = displays.size();
+		if (step >= size)
+		{
+			step = 0;
+			scene.display(step);
+			ui.ProcessControl->setValue(0);
+		}
+		ui.ProcessControl->setDisabled(true);
+		ui.Next->setDisabled(true);
+		ui.Pre->setDisabled(true);
+		timerId = startTimer(timeInterval);
+		isStop = false;
+		ui.Pause->setText("Pause");
 	}
+	// 按下的按钮为Stop
 	else
 	{
-
+		ui.ProcessControl->setDisabled(false);
+		ui.Next->setDisabled(false);
+		ui.Pre->setDisabled(false);
+		killTimer(timerId);
+		isStop = true;
+		ui.Pause->setText("Continue");
 	}
 }
 
@@ -175,4 +208,47 @@ void SimplePolygonConvexHull::Open()
 
 	scene.endInsert();
 	scene.display(-1);
+}
+
+void SimplePolygonConvexHull::methodChanged(int k)
+{
+	// 假设需要一切换方法，就将进度条归0
+	// ui.ProcessControl->setValue(0);
+}
+
+// 计时器进程
+void SimplePolygonConvexHull::timerEvent(QTimerEvent *event)
+{
+	int size = displays.size();
+	if (step < size)
+		next();
+	else
+	{
+		ui.ProcessControl->setDisabled(false);
+		ui.Next->setDisabled(false);
+		ui.Pre->setDisabled(false);
+		killTimer(timerId);
+		isStop = true;
+		ui.Pause->setText("Restart");
+	}
+}
+
+void SimplePolygonConvexHull::time100()
+{
+	timeInterval = 100;
+}
+
+void SimplePolygonConvexHull::time200()
+{
+	timeInterval = 200;
+}
+
+void SimplePolygonConvexHull::time500()
+{
+	timeInterval = 500;
+}
+
+void SimplePolygonConvexHull::time1000()
+{
+	timeInterval = 1000;
 }

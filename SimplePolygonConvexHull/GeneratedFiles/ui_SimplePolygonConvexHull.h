@@ -34,6 +34,10 @@ public:
     QAction *actionSave;
     QAction *actionExit;
     QAction *actionHelp;
+    QAction *action100ms;
+    QAction *action200ms;
+    QAction *action500ms;
+    QAction *action1000ms;
     QWidget *centralWidget;
     QWidget *widget;
     QComboBox *Method;
@@ -49,6 +53,8 @@ public:
     QGraphicsView *graphicsView;
     QMenuBar *menuBar;
     QMenu *menuFile;
+    QMenu *menuSetting;
+    QMenu *menuDisplay_Time;
 
     void setupUi(QMainWindow *SimplePolygonConvexHullClass)
     {
@@ -65,6 +71,14 @@ public:
         actionExit->setObjectName(QStringLiteral("actionExit"));
         actionHelp = new QAction(SimplePolygonConvexHullClass);
         actionHelp->setObjectName(QStringLiteral("actionHelp"));
+        action100ms = new QAction(SimplePolygonConvexHullClass);
+        action100ms->setObjectName(QStringLiteral("action100ms"));
+        action200ms = new QAction(SimplePolygonConvexHullClass);
+        action200ms->setObjectName(QStringLiteral("action200ms"));
+        action500ms = new QAction(SimplePolygonConvexHullClass);
+        action500ms->setObjectName(QStringLiteral("action500ms"));
+        action1000ms = new QAction(SimplePolygonConvexHullClass);
+        action1000ms->setObjectName(QStringLiteral("action1000ms"));
         centralWidget = new QWidget(SimplePolygonConvexHullClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         widget = new QWidget(centralWidget);
@@ -115,12 +129,22 @@ public:
         menuBar->setGeometry(QRect(0, 0, 1000, 23));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
+        menuSetting = new QMenu(menuBar);
+        menuSetting->setObjectName(QStringLiteral("menuSetting"));
+        menuDisplay_Time = new QMenu(menuSetting);
+        menuDisplay_Time->setObjectName(QStringLiteral("menuDisplay_Time"));
         SimplePolygonConvexHullClass->setMenuBar(menuBar);
 
         menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuSetting->menuAction());
         menuFile->addAction(actionOpen);
         menuFile->addAction(actionSave);
         menuFile->addAction(actionExit);
+        menuSetting->addAction(menuDisplay_Time->menuAction());
+        menuDisplay_Time->addAction(action100ms);
+        menuDisplay_Time->addAction(action200ms);
+        menuDisplay_Time->addAction(action500ms);
+        menuDisplay_Time->addAction(action1000ms);
 
         retranslateUi(SimplePolygonConvexHullClass);
 
@@ -134,6 +158,10 @@ public:
         actionSave->setText(QApplication::translate("SimplePolygonConvexHullClass", "Save", Q_NULLPTR));
         actionExit->setText(QApplication::translate("SimplePolygonConvexHullClass", "Exit", Q_NULLPTR));
         actionHelp->setText(QApplication::translate("SimplePolygonConvexHullClass", "Help", Q_NULLPTR));
+        action100ms->setText(QApplication::translate("SimplePolygonConvexHullClass", "100ms", Q_NULLPTR));
+        action200ms->setText(QApplication::translate("SimplePolygonConvexHullClass", "200ms", Q_NULLPTR));
+        action500ms->setText(QApplication::translate("SimplePolygonConvexHullClass", "500ms", Q_NULLPTR));
+        action1000ms->setText(QApplication::translate("SimplePolygonConvexHullClass", "1000ms", Q_NULLPTR));
         Method->clear();
         Method->insertItems(0, QStringList()
          << QApplication::translate("SimplePolygonConvexHullClass", "Sklansky 1972", Q_NULLPTR)
@@ -159,9 +187,11 @@ public:
         Clear->setShortcut(QApplication::translate("SimplePolygonConvexHullClass", "C", Q_NULLPTR));
         Result->setText(QApplication::translate("SimplePolygonConvexHullClass", "result", Q_NULLPTR));
         Display->setText(QApplication::translate("SimplePolygonConvexHullClass", "display", Q_NULLPTR));
-        Pause->setText(QApplication::translate("SimplePolygonConvexHullClass", "Pause", Q_NULLPTR));
+        Pause->setText(QApplication::translate("SimplePolygonConvexHullClass", "Start", Q_NULLPTR));
         Pause->setShortcut(QApplication::translate("SimplePolygonConvexHullClass", "Left", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("SimplePolygonConvexHullClass", "File", Q_NULLPTR));
+        menuSetting->setTitle(QApplication::translate("SimplePolygonConvexHullClass", "Setting", Q_NULLPTR));
+        menuDisplay_Time->setTitle(QApplication::translate("SimplePolygonConvexHullClass", "Display Time", Q_NULLPTR));
     } // retranslateUi
 
 };
