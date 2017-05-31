@@ -23,7 +23,6 @@ public:
 		return instance;
 
 	}
-	void getHalfConvexHull(SimplePolygon &sp, int max, int min);
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);
 };

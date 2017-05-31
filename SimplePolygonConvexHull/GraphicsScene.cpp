@@ -1,4 +1,5 @@
 #include "GraphicsScene.h"
+#include <cmath>
 
 // 开始插入点，更改状态为正在插入点。
 // 因为开始插入将消除过去的内容，因此所有数据会消除。
