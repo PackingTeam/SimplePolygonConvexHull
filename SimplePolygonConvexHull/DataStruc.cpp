@@ -25,6 +25,16 @@ void Area::getQPolygon(QPolygonF &qpolygon)
 	qpolygon << temp;
 }
 
+void Display::clearAll()
+{
+	points.clear();
+	pointColors.clear();
+	lines.clear();
+	lineColors.clear();
+	areas.clear();
+	areaColors.clear();
+}
+
 // 将其转化为显示用的polygon
 void SimplePolygon::getQPolygon(QPolygonF &qpolygon)
 {
@@ -134,8 +144,19 @@ void SimplePolygon::clearAll()
 }
 
 // 判定当前的简单多边形是否合法，即是否存在自交、重合嵌套等
+// 默认已经经过normalize()
+// 使用暴力方法，对于大点集，后续可以使用扫描线算法进行改进
 bool SimplePolygon::isLegal()
 {
+	int size = points.size();
+	for (int i = 0; i < points.size(); i++)
+	{
+		for (int j = 2; j < points.size() - 1; j++)
+		{
+			if (intersect(points[i%size], points[(i + 1) % size], points[(i + j) % size], points[(i + j + 1) % size]))
+				return false;
+		}
+	}
 	return true;
 }
 

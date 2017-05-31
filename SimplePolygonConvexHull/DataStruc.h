@@ -122,6 +122,7 @@ public:
 	Colors lineColors;
 	Areas areas;
 	Colors areaColors;
+	void clearAll();
 };
 
 typedef vector<Display> Displays;
