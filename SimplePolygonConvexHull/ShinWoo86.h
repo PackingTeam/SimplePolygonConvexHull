@@ -15,6 +15,7 @@ private:
 	// ½ûÖ¹Îö¹¹º¯Êý
 	~ShinWoo86() {}
 	static ShinWoo86* instance;
+	Display createDisplay(SimplePolygon& sp, vector<int>& hull, Point& support, int leftIndex, int rightIndex, int curIndex);
 
 public:
 	static ShinWoo86* Instance() {

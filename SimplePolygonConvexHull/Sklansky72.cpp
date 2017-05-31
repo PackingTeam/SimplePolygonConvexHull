@@ -7,8 +7,10 @@ void Sklansky72::getConvexHull(SimplePolygon & sp)
 {
 	int size = sp.points.size();
 	int start = sp.getLeftMostThenLowestPoint();
+
 	Points & points = sp.points;
 	vector<int> & result = sp.convexHull;
+
 	int next = 0, rsize;
 	while (next < size)
 	{
@@ -19,9 +21,7 @@ void Sklansky72::getConvexHull(SimplePolygon & sp)
 			next++;
 		}
 		else
-		{
 			result.pop_back();
-		}
 	}
 	rsize = result.size();
 	while (rsize > 3 && !toLeft(points[result[rsize - 2]], points[result[rsize - 1]], points[start]))

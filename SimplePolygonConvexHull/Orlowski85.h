@@ -15,6 +15,8 @@ private:
 	// ½ûÖ¹Îö¹¹º¯Êý
 	~Orlowski85() {}
 	static Orlowski85* instance;
+	void displayIJK(Display &temp, Points &points, vector<int> &result);
+	void displayJ_1JK(Display &temp, Points &points, vector<int> &result);
 
 public:
 	static Orlowski85* Instance() {
