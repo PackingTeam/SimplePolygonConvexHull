@@ -106,7 +106,10 @@ Displays getHalfConvexHullForDisplay(SimplePolygon &sp, int max, int min)
 	auto size = sp.points.size();
 	int i = (max + 1) % size;
 
-	if (i == min) return displays;
+	if (i == min) {
+		sp.convexHull.insert(sp.convexHull.cend(), convexHull.cbegin(), convexHull.cend());
+		return displays;
+	}
 	convexHull.push_back(i);
 	displays.push_back(showConvexHull(sp, convexHull));
 
