@@ -31,6 +31,8 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	scene.setSceneRect(-sceneWidth/2, -sceneHeight/2, sceneWidth, sceneHeight);
 	ui.graphicsView->setScene(&scene);
 	ui.graphicsView->scale(1, -1);
+
+	ui.graphicsView->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 }
 
 void SimplePolygonConvexHull::Calculate()
@@ -51,6 +53,12 @@ void SimplePolygonConvexHull::Calculate()
 	sp.convexHull.clear();
 
 	killTimer(timerId);
+
+	if (!sp.isLegal())
+	{
+		QMessageBox::warning(this, "Warning", "The polygon is illegal.");
+		return;
+	}
 
 	int methodId = ui.Method->currentIndex();
 	method = getMethodById(methodId);
