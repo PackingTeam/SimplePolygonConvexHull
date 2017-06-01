@@ -9,21 +9,19 @@ extern Algorithm* getMethodById(int id)
 		return (Algorithm*)McCallumAvis79::Instance();
 	case 2: // Sklansky 1982
 		return (Algorithm*)Sklansky82::Instance();
-	case 3: // ElGindy, Avis & Toussaint 1983
-		return (Algorithm*)ElGindyAvisToussaint83::Instance();
-	case 4: // Lee 1983 - Graham & Yao 1983
+	case 3: // Lee 1983 - Graham & Yao 1983
 		return (Algorithm*)LeeGrahamYao83::Instance();
-	case 5: // Ghosh & Shyamasundar 1983
+	case 4: // Ghosh & Shyamasundar 1983
 		return (Algorithm*)GhoshShyamasundar83::Instance();
-	case 6: // Bhattacharya & ElGindy 1984
+	case 5: // Bhattacharya & ElGindy 1984
 		return (Algorithm*)BhattacharyaElGindy84::Instance();
-	case 7: // Orlowski 1985
+	case 6: // Orlowski 1985
 		return (Algorithm*)Orlowski85::Instance();
-	case 8: // Preparata & Shamos 1985
+	case 7: // Preparata & Shamos 1985
 		return (Algorithm*)PreparataShamos85::Instance();
-	case 9: // Shin & Woo 1986
+	case 8: // Shin & Woo 1986
 		return (Algorithm*)ShinWoo86::Instance();
-	case 10: // Melkman 1987
+	case 9: // Melkman 1987
 		return (Algorithm*)Melkman87::Instance();
 	}
 	return nullptr;

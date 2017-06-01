@@ -3,7 +3,6 @@
 #include "Algorithm.h"
 #include "Sklansky72.h"
 #include "BhattacharyaElGindy84.h"
-#include "ElGindyAvisToussaint83.h"
 #include "GhoshShyamasundar83.h"
 #include "LeeGrahamYao83.h"
 #include "McCallumAvis79.h"

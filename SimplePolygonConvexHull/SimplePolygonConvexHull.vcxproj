@@ -73,7 +73,6 @@
     <ClCompile Include="AlgorithmFactory.cpp" />
     <ClCompile Include="BhattacharyaElGindy84.cpp" />
     <ClCompile Include="DataStruc.cpp" />
-    <ClCompile Include="ElGindyAvisToussaint83.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_SimplePolygonConvexHull.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -128,7 +127,6 @@
     <ClInclude Include="Algorithm.h" />
     <ClInclude Include="BhattacharyaElGindy84.h" />
     <ClInclude Include="DataStruc.h" />
-    <ClInclude Include="ElGindyAvisToussaint83.h" />
     <ClInclude Include="GeneratedFiles\ui_SimplePolygonConvexHull.h" />
     <ClInclude Include="GhoshShyamasundar83.h" />
     <ClInclude Include="GraphicsScene.h" />
