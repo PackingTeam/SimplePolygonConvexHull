@@ -9,9 +9,9 @@ private:
 	// 禁止外部初始化
 	Orlowski85() {}
 	// 禁止拷贝函数
-	Orlowski85(Orlowski85 const&) {}
+	Orlowski85(Orlowski85 const&) = delete;
 	// 禁止赋值拷贝
-	Orlowski85& operator=(Orlowski85 const&) {}
+	Orlowski85& operator=(Orlowski85 const&) = delete;
 	// 禁止析构函数
 	~Orlowski85() {}
 	static Orlowski85* instance;

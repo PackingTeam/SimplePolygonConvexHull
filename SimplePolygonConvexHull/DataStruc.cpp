@@ -149,9 +149,9 @@ void SimplePolygon::clearAll()
 bool SimplePolygon::isLegal()
 {
 	int size = points.size();
-	for (int i = 0; i < points.size(); i++)
+	for (int i = 0; i < size; i++)
 	{
-		for (int j = 2; j < points.size() - 1; j++)
+		for (int j = 2; j < size - 1; j++)
 		{
 			if (intersect(points[i%size], points[(i + 1) % size], points[(i + j) % size], points[(i + j + 1) % size]))
 				return false;
@@ -166,7 +166,7 @@ void SimplePolygon::normalize()
 {
 	double x1, y1, x2, y2;
 	int j;
-	for (int i = 0; i < points.size();) {
+	for (decltype(points.size()) i = 0; i < points.size();) {
 		j = (i + 1) % points.size();
 		x1 = points[i].x;
 		y1 = points[i].y;

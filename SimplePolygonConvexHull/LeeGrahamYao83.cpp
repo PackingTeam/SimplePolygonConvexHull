@@ -156,6 +156,8 @@ downHullFinish:
 Display LeeGrahamYao83::createDisplay(vector<int>& hull, SimplePolygon& sp, int L1, int E1, int L2, int E2, int index) {
 	Display ret;
 
+	int size = hull.size();
+
 	for (auto i : hull) {
 		ret.points.push_back(sp.points[i]);
 		ret.pointColors.push_back(Qt::green);
@@ -169,7 +171,7 @@ Display LeeGrahamYao83::createDisplay(vector<int>& hull, SimplePolygon& sp, int 
 	ret.lines.push_back(Line(sp.points[hull[0]], sp.points[hull[1]], LINE));
 	ret.lineColors.push_back(Qt::red);
 
-	for (int i = 1; i < hull.size(); ++i) {
+	for (int i = 1; i < size; ++i) {
 		ret.lines.push_back(Line(sp.points[hull[i]], sp.points[hull[(i + 1) % hull.size()]], LINE));
 		ret.lineColors.push_back(Qt::green);
 	}

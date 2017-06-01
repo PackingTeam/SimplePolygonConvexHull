@@ -9,9 +9,9 @@ private:
 	// 禁止外部初始化
 	LeeGrahamYao83() {}
 	// 禁止拷贝函数
-	LeeGrahamYao83(LeeGrahamYao83 const&) {}
+	LeeGrahamYao83(LeeGrahamYao83 const&) = delete;
 	// 禁止赋值拷贝
-	LeeGrahamYao83& operator=(LeeGrahamYao83 const&) {}
+	LeeGrahamYao83& operator=(LeeGrahamYao83 const&) = delete;
 	// 禁止析构函数
 	~LeeGrahamYao83() {}
 	static LeeGrahamYao83* instance;

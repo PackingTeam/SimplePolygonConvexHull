@@ -118,7 +118,8 @@ void Orlowski85::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 void Orlowski85::displayIJK(Display &temp, Points &points, vector<int> &result)
 {
 	temp.clearAll();
-	for (int i = 0; i < result.size() - 3; i++)
+	int size = result.size();
+	for (int i = 0; i < size - 3; i++)
 	{
 		temp.points.push_back(points[result[i]]);
 		temp.pointColors.push_back(Qt::green);
@@ -138,7 +139,8 @@ void Orlowski85::displayIJK(Display &temp, Points &points, vector<int> &result)
 void Orlowski85::displayJ_1JK(Display &temp, Points &points, vector<int> &result)
 {
 	temp.clearAll();
-	for (int i = 0; i < result.size() - 3; i++)
+	int size = result.size();
+	for (int i = 0; i < size - 3; i++)
 	{
 		temp.points.push_back(points[result[i]]);
 		temp.pointColors.push_back(Qt::green);

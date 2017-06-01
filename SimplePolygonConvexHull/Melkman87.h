@@ -9,9 +9,9 @@ private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	Melkman87() {}
 	// ½ûÖ¹¿½±´º¯Êı
-	Melkman87(Melkman87 const&) {}
+	Melkman87(Melkman87 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
-	Melkman87& operator=(Melkman87 const&) {}
+	Melkman87& operator=(Melkman87 const&) = delete;
 	// ½ûÖ¹Îö¹¹º¯Êı
 	~Melkman87() {}
 	static Melkman87* instance;
