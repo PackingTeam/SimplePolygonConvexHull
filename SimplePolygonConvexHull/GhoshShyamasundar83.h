@@ -9,9 +9,9 @@ private:
 	// 禁止外部初始化
 	GhoshShyamasundar83() {}
 	// 禁止拷贝函数
-	GhoshShyamasundar83(GhoshShyamasundar83 const&) {}
+	GhoshShyamasundar83(GhoshShyamasundar83 const&) = delete;
 	// 禁止赋值拷贝
-	GhoshShyamasundar83& operator=(GhoshShyamasundar83 const&) {}
+	GhoshShyamasundar83& operator=(GhoshShyamasundar83 const&) = delete;
 	// 禁止析构函数
 	~GhoshShyamasundar83() {}
 	static GhoshShyamasundar83* instance;

@@ -9,9 +9,9 @@ private:
 	// 禁止外部初始化
 	McCallumAvis79() {}
 	// 禁止拷贝函数
-	McCallumAvis79(McCallumAvis79 const&) {}
+	McCallumAvis79(McCallumAvis79 const&) = delete;
 	// 禁止赋值拷贝
-	McCallumAvis79& operator=(McCallumAvis79 const&) {}
+	McCallumAvis79& operator=(McCallumAvis79 const&) = delete;
 	// 禁止析构函数
 	~McCallumAvis79() {}
 	static McCallumAvis79* instance;

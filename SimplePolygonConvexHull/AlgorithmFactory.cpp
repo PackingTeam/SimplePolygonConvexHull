@@ -26,4 +26,5 @@ extern Algorithm* getMethodById(int id)
 	case 10: // Melkman 1987
 		return (Algorithm*)Melkman87::Instance();
 	}
+	return nullptr;
 }

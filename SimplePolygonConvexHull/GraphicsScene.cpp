@@ -35,11 +35,12 @@ void GraphicsScene::display(int step)
 {
 	clear();
 	displayPolygon();
+	int displays_size = displays.size();
 	if (step < 0)
 	{
 		return;
 	}
-	else if (step >= displays.size())
+	else if (step >= displays_size)
 	{
 		displayConvexHull();
 	}
