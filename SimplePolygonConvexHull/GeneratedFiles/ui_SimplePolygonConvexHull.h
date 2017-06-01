@@ -149,7 +149,6 @@ public:
          << QApplication::translate("SimplePolygonConvexHullClass", "Sklansky 1972", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "McCallum & Avis 1979", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "Sklansky 1982", Q_NULLPTR)
-         << QApplication::translate("SimplePolygonConvexHullClass", "ElGindy, Avis & Toussaint 1983", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "Lee 1983 - Graham & Yao 1983", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "Ghosh & Shyamasundar 1983", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "Bhattacharya & ElGindy 1984", Q_NULLPTR)

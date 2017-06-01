@@ -82,9 +82,6 @@
     <ClCompile Include="BhattacharyaElGindy84.cpp">
       <Filter>Source Files\Algorithms Impl</Filter>
     </ClCompile>
-    <ClCompile Include="ElGindyAvisToussaint83.cpp">
-      <Filter>Source Files\Algorithms Impl</Filter>
-    </ClCompile>
     <ClCompile Include="GhoshShyamasundar83.cpp">
       <Filter>Source Files\Algorithms Impl</Filter>
     </ClCompile>
@@ -144,9 +141,6 @@
       <Filter>Header Files\Algorithms Header</Filter>
     </ClInclude>
     <ClInclude Include="Sklansky82.h">
-      <Filter>Header Files\Algorithms Header</Filter>
-    </ClInclude>
-    <ClInclude Include="ElGindyAvisToussaint83.h">
       <Filter>Header Files\Algorithms Header</Filter>
     </ClInclude>
     <ClInclude Include="LeeGrahamYao83.h">
