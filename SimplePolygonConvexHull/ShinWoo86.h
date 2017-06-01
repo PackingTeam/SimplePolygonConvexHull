@@ -9,9 +9,9 @@ private:
 	// 禁止外部初始化
 	ShinWoo86() {}
 	// 禁止拷贝函数
-	ShinWoo86(ShinWoo86 const&) {}
+	ShinWoo86(ShinWoo86 const&) = delete;
 	// 禁止赋值拷贝
-	ShinWoo86& operator=(ShinWoo86 const&) {}
+	ShinWoo86& operator=(ShinWoo86 const&) = delete;
 	// 禁止析构函数
 	~ShinWoo86() {}
 	static ShinWoo86* instance;

@@ -9,9 +9,9 @@ private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	ElGindyAvisToussaint83() {}
 	// ½ûÖ¹¿½±´º¯Êı
-	ElGindyAvisToussaint83(ElGindyAvisToussaint83 const&) {}
+	ElGindyAvisToussaint83(ElGindyAvisToussaint83 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
-	ElGindyAvisToussaint83& operator=(ElGindyAvisToussaint83 const&) {}
+	ElGindyAvisToussaint83& operator=(ElGindyAvisToussaint83 const&) = delete;
 	// ½ûÖ¹Îö¹¹º¯Êı
 	~ElGindyAvisToussaint83() {}
 	static ElGindyAvisToussaint83* instance;

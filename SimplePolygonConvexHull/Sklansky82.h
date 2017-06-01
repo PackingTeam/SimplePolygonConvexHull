@@ -9,9 +9,9 @@ private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	Sklansky82() {}
 	// ½ûÖ¹¿½±´º¯Êı
-	Sklansky82(Sklansky82 const&) {}
+	Sklansky82(Sklansky82 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
-	Sklansky82& operator=(Sklansky82 const&) {}
+	Sklansky82& operator=(Sklansky82 const&) = delete;
 	// ½ûÖ¹Îö¹¹º¯Êı
 	~Sklansky82() {}
 	static Sklansky82* instance;
