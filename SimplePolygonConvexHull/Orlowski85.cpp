@@ -14,16 +14,18 @@ void Orlowski85::getConvexHull(SimplePolygon & sp)
 	Point point0(points[start].x, points[start].y + 2 * tolerance);
 
 	// 防止多次运行方法添加重复的dull point
-	if ((points[(start - 1 + size) % size].y - point0.y) < tolerance)
+	if (abs(points[(start - 1 + size) % size].y - point0.y) > tolerance)
 	{
 		points.insert(points.begin() + start, point0);
 		size++;
 	}
+	else
+		start--;
 
 	for (int i = 0; i < 4; i++)
 		result.push_back((start + i) % size);
 
-	while (result.back() != result[2])
+	while (result.back() != result[1])
 	{
 		while (!toLeft(points[result[result.size() - 3]], points[result[result.size() - 2]], points[result[result.size() - 1]]))
 			result.erase(result.begin() + result.size() - 2);
@@ -55,21 +57,23 @@ void Orlowski85::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 	vector<int> & result = sp.convexHull;
 
 	// dull point: point0
-	Point point0(points[start].x, points[start].y + 5);
+	Point point0(points[start].x, points[start].y + 2 * tolerance);
 
 	// 防止多次运行方法添加重复的dull point
-	if ((points[(start - 1 + size) % size].y - point0.y) < tolerance)
+	if (abs(points[(start - 1 + size) % size].y - point0.y) > tolerance)
 	{
 		points.insert(points.begin() + start, point0);
 		size++;
 	}
+	else
+		start--;
 
 	for (int i = 0; i < 4; i++)
 		result.push_back((start + i) % size);
 
 	Display temp;
 
-	while (result.back() != result[2])
+	while (result.back() != result[1])
 	{
 		// 添加演示所需显示内容
 		displayIJK(temp, points, result);
@@ -101,7 +105,7 @@ void Orlowski85::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays
 
 			while (toLeft(points[result[result.size() - 3]], points[result[result.size() - 2]], points[result[result.size() - 1]]))
 			{
-				result.push_back((result.back() + 1) % size);
+				result.push_back((result[result.size() - 1] + 1) % size);
 				result.erase(result.begin() + result.size() - 2);
 
 				// 添加演示所需显示内容
@@ -149,10 +153,10 @@ void Orlowski85::displayJ_1JK(Display &temp, Points &points, vector<int> &result
 	temp.pointColors.push_back(Qt::red);
 	temp.points.push_back(points[result[result.size() - 2]]);
 	temp.pointColors.push_back(Qt::yellow);
-	temp.points.push_back(points[(result[result.size() - 2] - 1) % points.size()]);
+	temp.points.push_back(points[(result[result.size() - 2] - 1 + points.size()) % points.size()]);
 	temp.pointColors.push_back(Qt::darkBlue);
 
-	Line line3(points[(result[result.size() - 2] - 1) % points.size()], points[result[result.size() - 2]], LINE);
+	Line line3(points[(result[result.size() - 2] - 1 + points.size()) % points.size()], points[result[result.size() - 2]], LINE);
 	temp.lines.push_back(line3);
 	temp.lineColors.push_back(Qt::blue);
 }

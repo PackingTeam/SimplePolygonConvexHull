@@ -276,16 +276,8 @@
     <property name="title">
      <string>Setting</string>
     </property>
-    <widget class="QMenu" name="menuDisplay_Time">
-     <property name="title">
-      <string>Display Time</string>
-     </property>
-     <addaction name="action100ms"/>
-     <addaction name="action200ms"/>
-     <addaction name="action500ms"/>
-     <addaction name="action1000ms"/>
-    </widget>
-    <addaction name="menuDisplay_Time"/>
+    <addaction name="actionInterval_Time"/>
+    <addaction name="actionGenerate"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSetting"/>
@@ -305,29 +297,14 @@
     <string>Exit</string>
    </property>
   </action>
-  <action name="actionHelp">
+  <action name="actionInterval_Time">
    <property name="text">
-    <string>Help</string>
+    <string>Interval Time</string>
    </property>
   </action>
-  <action name="action100ms">
+  <action name="actionGenerate">
    <property name="text">
-    <string>100ms</string>
-   </property>
-  </action>
-  <action name="action200ms">
-   <property name="text">
-    <string>200ms</string>
-   </property>
-  </action>
-  <action name="action500ms">
-   <property name="text">
-    <string>500ms</string>
-   </property>
-  </action>
-  <action name="action1000ms">
-   <property name="text">
-    <string>1000ms</string>
+    <string>Generate</string>
    </property>
   </action>
  </widget>
