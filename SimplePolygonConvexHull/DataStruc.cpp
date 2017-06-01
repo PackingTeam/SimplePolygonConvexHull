@@ -265,3 +265,27 @@ void SplitString(const string& s, vector<string>& v, const string& c)
 	if (pos1 != s.length())
 		v.push_back(s.substr(pos1));
 }
+
+void generateSimplePolygon(SimplePolygon& sp, int num, int width, int height)
+{
+	sp.clearAll();
+
+	Point2D		*gSimplePolygon;
+	int			gNumSimplePolygon;
+
+	Point2D *point = new Point2D[num];
+
+	for (int i = 0; i < num; i++)
+	{
+		point[i].x = (rand() % width) - width / 2;
+		point[i].y = (rand() % height) - height / 2;
+	}
+
+	GenerateSimplePolygon(point, num, gSimplePolygon, gNumSimplePolygon);
+
+	for (int i = 0; i < gNumSimplePolygon; i++)
+		sp.points.push_back(Point(gSimplePolygon[i].x, gSimplePolygon[i].y));
+
+	delete[]point;
+	delete[]gSimplePolygon;
+}

@@ -44,6 +44,9 @@
     <Filter Include="Header Files\Algorithms Header">
       <UniqueIdentifier>{3512714b-a3bd-4ed6-99a3-f4454ba56247}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{8b159734-44be-4efb-862e-a868f9a33338}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -102,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="PreparataShamos85.cpp">
       <Filter>Source Files\Algorithms Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\GenerateSimplePolygon.cpp">
+      <Filter>lib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +169,27 @@
     </ClInclude>
     <ClInclude Include="Melkman87.h">
       <Filter>Header Files\Algorithms Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\SrVector3.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\SrVector2.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\SrSimpleTypes.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\SrMath.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\SrGeometricTools.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\SrDataType.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\GenerateSimplePolygon.h">
+      <Filter>lib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
