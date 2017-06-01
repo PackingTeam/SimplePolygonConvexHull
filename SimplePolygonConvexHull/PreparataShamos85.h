@@ -8,19 +8,15 @@ class PreparataShamos85 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	PreparataShamos85() {}
+
+public:
 	// ½ûÖ¹¿½±´º¯Êı
 	PreparataShamos85(PreparataShamos85 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
 	PreparataShamos85& operator=(PreparataShamos85 const&) = delete;
-	// ½ûÖ¹Îö¹¹º¯Êı
-	~PreparataShamos85() {}
-	static PreparataShamos85* instance;
-
-public:
 	static PreparataShamos85* Instance() {
-		if (!instance)
-			instance = new PreparataShamos85();
-		return instance;
+		static PreparataShamos85 instance;
+		return &instance;
 
 	}
 	void getConvexHull(SimplePolygon & sp);
