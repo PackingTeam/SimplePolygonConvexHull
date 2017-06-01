@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QFileDialog>
+#include <QInputDialog>
 #include "GraphicsScene.h"
 #include "ui_SimplePolygonConvexHull.h"
 #include "AlgorithmFactory.h"
@@ -34,6 +35,8 @@ private:
 	int timerId;
 	// 计时间隔
 	int timeInterval;
+	// 生成点的数量
+	int generateNum;
 
 	// 用于操控演示步骤变化的方法
 	void next();
@@ -49,10 +52,8 @@ private slots:
 	void Save();
 	void Open();
 	void methodChanged(int k);
-	void time100();
-	void time200();
-	void time500();
-	void time1000();
+	void setTimeInterval();
+	void setGenerateNum();
 
 protected:
 	void timerEvent(QTimerEvent *event);

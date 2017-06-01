@@ -80,7 +80,7 @@ void GraphicsScene::display(int step)
 					double y = (x - line.a.x) / (line.b.x - line.a.x)*(line.b.y - line.a.y) + line.a.y;
 					item = new QGraphicsLineItem(line.a.x, line.a.y, x, y);
 				}
-				else if (line.b.x - line.a.x < tolerance)
+				else if (line.b.x - line.a.x < -tolerance)
 				{
 					double x = -2 * sceneWidth;
 					double y = (x - line.a.x) / (line.b.x - line.a.x)*(line.b.y - line.a.y) + line.a.y;
@@ -151,7 +151,17 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
 			if (isInsertingPoint)
 			{
 				QPointF point = event->scenePos();
-				sp.points.push_back(Point(point));
+				Point p(point);
+				
+				// 如果最后一个点在第一个点附近，则将多边形连接封闭
+				if (sp.points.size() > 1 && abs(p.x - sp.points[0].x) < maxSameDistance && abs(p.y - sp.points[0].y) < maxSameDistance)
+				{
+					endInsert();
+					displayPolygon();
+					return;
+				}
+
+				sp.points.push_back(p);
 
 				QGraphicsRectItem *item = new QGraphicsRectItem(point.x() - 1, point.y() - 1, 2, 2);
 				item->setBrush(Qt::black);
