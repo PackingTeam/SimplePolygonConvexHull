@@ -1,7 +1,5 @@
 #include "ShinWoo86.h"
 
-ShinWoo86* ShinWoo86::instance = NULL;
-
 void ShinWoo86::getConvexHull(SimplePolygon & sp)
 {
 	int N = (int)sp.points.size();

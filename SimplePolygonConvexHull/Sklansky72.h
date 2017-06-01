@@ -8,20 +8,15 @@ class Sklansky72 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	Sklansky72() {}
+
+public:
 	// ½ûÖ¹¿½±´º¯Êı
 	Sklansky72(Sklansky72 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
 	Sklansky72& operator=(Sklansky72 const&) = delete;
-	// ½ûÖ¹Îö¹¹º¯Êı
-	~Sklansky72() {}
-	static Sklansky72* instance;
-
-public:
 	static Sklansky72* Instance() {
-		if (!instance)
-			instance = new Sklansky72();
-		return instance;
-
+		static Sklansky72 instance;
+		return &instance;
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);

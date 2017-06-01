@@ -1,7 +1,5 @@
 #include "LeeGrahamYao83.h"
 
-LeeGrahamYao83* LeeGrahamYao83::instance = NULL;
-
 void LeeGrahamYao83::getConvexHull(SimplePolygon & sp)
 {
 	int N = (int)sp.points.size();

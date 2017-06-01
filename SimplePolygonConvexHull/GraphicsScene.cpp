@@ -196,7 +196,7 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
 // 不调用clear()方法
 void GraphicsScene::displayPolygon()
 {
-    for (const Point &p : sp.points)
+	for (const Point &p : sp.points)
 	{
 		QGraphicsRectItem *item = new QGraphicsRectItem(p.x - 1, p.y - 1, 2, 2);
 		item->setBrush(Qt::black);

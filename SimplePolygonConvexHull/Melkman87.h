@@ -8,20 +8,15 @@ class Melkman87 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	Melkman87() {}
+
+public:
 	// ½ûÖ¹¿½±´º¯Êı
 	Melkman87(Melkman87 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
 	Melkman87& operator=(Melkman87 const&) = delete;
-	// ½ûÖ¹Îö¹¹º¯Êı
-	~Melkman87() {}
-	static Melkman87* instance;
-
-public:
 	static Melkman87* Instance() {
-		if (!instance)
-			instance = new Melkman87();
-		return instance;
-
+		static Melkman87 instance;
+		return &instance;
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);

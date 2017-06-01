@@ -8,20 +8,15 @@ class ElGindyAvisToussaint83 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	ElGindyAvisToussaint83() {}
+
+public:
 	// ½ûÖ¹¿½±´º¯Êı
 	ElGindyAvisToussaint83(ElGindyAvisToussaint83 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
 	ElGindyAvisToussaint83& operator=(ElGindyAvisToussaint83 const&) = delete;
-	// ½ûÖ¹Îö¹¹º¯Êı
-	~ElGindyAvisToussaint83() {}
-	static ElGindyAvisToussaint83* instance;
-
-public:
 	static ElGindyAvisToussaint83* Instance() {
-		if (!instance)
-			instance = new ElGindyAvisToussaint83();
-		return instance;
-
+		static ElGindyAvisToussaint83 instance;
+		return &instance;
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);

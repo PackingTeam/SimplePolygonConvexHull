@@ -1,7 +1,5 @@
 #include "Melkman87.h"
 
-Melkman87* Melkman87::instance = NULL;
-
 void Melkman87::getConvexHull(SimplePolygon & sp)
 {
 	int N = (int)sp.points.size();

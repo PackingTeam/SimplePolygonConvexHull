@@ -1,7 +1,5 @@
 #include "GhoshShyamasundar83.h"
 
-GhoshShyamasundar83* GhoshShyamasundar83::instance = NULL;
-
 using namespace std;
 
 namespace gs83 {
@@ -65,8 +63,7 @@ void getHalfConvexHull(SimplePolygon &sp, int max, int min)
 	for (i = (i + 1) % size; i != min; i = (i + 1) % size) {
 		backtrackUntilLeftTurn(sp, sp.convexHull, sp.points[i]);
 
-		if ((sp.points[min].x < sp.points[max].x) ==
-		    (sp.points[i].x < sp.points[sp.convexHull.back()].x))
+		if ((sp.points[min].x < sp.points[max].x) == (sp.points[i].x < sp.points[sp.convexHull.back()].x))
 			sp.convexHull.push_back(i);
 	}
 
@@ -90,8 +87,7 @@ Displays getHalfConvexHullForDisplay(SimplePolygon &sp, int max, int min)
 		auto tmp = backtrackForDisplay(sp, convexHull, sp.points[i]);
 		displays.insert(displays.cend(), tmp.cbegin(), tmp.cend());
 
-		if ((sp.points[min].x < sp.points[max].x) ==
-		    (sp.points[i].x < sp.points[convexHull.back()].x))
+		if ((sp.points[min].x < sp.points[max].x) == (sp.points[i].x < sp.points[convexHull.back()].x))
 			convexHull.push_back(i);
 
 		displays.push_back(showConvexHull(sp, convexHull));

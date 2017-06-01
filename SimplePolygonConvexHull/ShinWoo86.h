@@ -8,21 +8,17 @@ class ShinWoo86 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	ShinWoo86() {}
+
+	Display createDisplay(SimplePolygon& sp, vector<int>& hull, Point& support, int leftIndex, int rightIndex, int curIndex);
+
+public:
 	// ½ûÖ¹¿½±´º¯Êý
 	ShinWoo86(ShinWoo86 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
 	ShinWoo86& operator=(ShinWoo86 const&) = delete;
-	// ½ûÖ¹Îö¹¹º¯Êý
-	~ShinWoo86() {}
-	static ShinWoo86* instance;
-	Display createDisplay(SimplePolygon& sp, vector<int>& hull, Point& support, int leftIndex, int rightIndex, int curIndex);
-
-public:
 	static ShinWoo86* Instance() {
-		if (!instance)
-			instance = new ShinWoo86();
-		return instance;
-
+		static ShinWoo86 instance;
+		return &instance;
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);
