@@ -8,20 +8,15 @@ class BhattacharyaElGindy84 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	BhattacharyaElGindy84() {}
+
+public:
 	// ½ûÖ¹¿½±´º¯Êı
 	BhattacharyaElGindy84(BhattacharyaElGindy84 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
 	BhattacharyaElGindy84& operator=(BhattacharyaElGindy84 const&) = delete;
-	// ½ûÖ¹Îö¹¹º¯Êı
-	~BhattacharyaElGindy84() {}
-	static BhattacharyaElGindy84* instance;
-
-public:
 	static BhattacharyaElGindy84* Instance() {
-		if (!instance)
-			instance = new BhattacharyaElGindy84();
-		return instance;
-
+		static BhattacharyaElGindy84 instance;
+		return &instance;
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);

@@ -8,20 +8,15 @@ class McCallumAvis79 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	McCallumAvis79() {}
+
+public:
 	// ½ûÖ¹¿½±´º¯Êý
 	McCallumAvis79(McCallumAvis79 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
 	McCallumAvis79& operator=(McCallumAvis79 const&) = delete;
-	// ½ûÖ¹Îö¹¹º¯Êý
-	~McCallumAvis79() {}
-	static McCallumAvis79* instance;
-
-public:
 	static McCallumAvis79* Instance() {
-		if (!instance)
-			instance = new McCallumAvis79();
-		return instance;
-
+		static McCallumAvis79 instance;
+		return &instance;
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);

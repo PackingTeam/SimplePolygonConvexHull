@@ -1,7 +1,5 @@
 #include "BhattacharyaElGindy84.h"
 
-BhattacharyaElGindy84* BhattacharyaElGindy84::instance = NULL;
-
 using namespace std;
 
 namespace be84 {

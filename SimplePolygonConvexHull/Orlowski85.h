@@ -8,22 +8,17 @@ class Orlowski85 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	Orlowski85() {}
-	// ½ûÖ¹¿½±´º¯Êý
-	Orlowski85(Orlowski85 const&) = delete;
-	// ½ûÖ¹¸³Öµ¿½±´
-	Orlowski85& operator=(Orlowski85 const&) = delete;
-	// ½ûÖ¹Îö¹¹º¯Êý
-	~Orlowski85() {}
-	static Orlowski85* instance;
 	void displayIJK(Display &temp, Points &points, vector<int> &result);
 	void displayJ_1JK(Display &temp, Points &points, vector<int> &result);
 
 public:
+	// ½ûÖ¹¿½±´º¯Êý
+	Orlowski85(Orlowski85 const&) = delete;
+	// ½ûÖ¹¸³Öµ¿½±´
+	Orlowski85& operator=(Orlowski85 const&) = delete;
 	static Orlowski85* Instance() {
-		if (!instance)
-			instance = new Orlowski85();
-		return instance;
-
+		static Orlowski85 instance;
+		return &instance;
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);

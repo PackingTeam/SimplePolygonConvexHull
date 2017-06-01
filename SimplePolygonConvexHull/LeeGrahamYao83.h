@@ -8,20 +8,15 @@ class LeeGrahamYao83 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	LeeGrahamYao83() {}
+
+public:
 	// ½ûÖ¹¿½±´º¯Êý
 	LeeGrahamYao83(LeeGrahamYao83 const&) = delete;
 	// ½ûÖ¹¸³Öµ¿½±´
 	LeeGrahamYao83& operator=(LeeGrahamYao83 const&) = delete;
-	// ½ûÖ¹Îö¹¹º¯Êý
-	~LeeGrahamYao83() {}
-	static LeeGrahamYao83* instance;
-
-public:
 	static LeeGrahamYao83* Instance() {
-		if (!instance)
-			instance = new LeeGrahamYao83();
-		return instance;
-
+		static LeeGrahamYao83 instance;
+		return &instance;
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);

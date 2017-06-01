@@ -4,8 +4,6 @@
 #include <utility>
 #include <vector>
 
-McCallumAvis79* McCallumAvis79::instance = NULL;
-
 using namespace std;
 
 namespace ma79 {
