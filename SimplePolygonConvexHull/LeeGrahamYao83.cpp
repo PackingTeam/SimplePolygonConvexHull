@@ -170,7 +170,7 @@ Display LeeGrahamYao83::createDisplay(vector<int>& hull, SimplePolygon& sp, int 
 	ret.lineColors.push_back(Qt::red);
 
 	for (int i = 1; i < hull.size(); ++i) {
-		ret.lines.push_back(Line(sp.points[hull[i]], sp.points[hull[(i + 1) % hull.size()]], LINE));
+		ret.lines.push_back(Line(sp.points[hull[i]], sp.points[hull[(i + 1) % hull.size()]], SEGMENT));
 		ret.lineColors.push_back(Qt::green);
 	}
 
