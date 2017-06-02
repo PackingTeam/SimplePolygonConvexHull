@@ -220,7 +220,7 @@ void SimplePolygonConvexHull::Open()
 {
 	QString filename = QFileDialog::getOpenFileName(this, tr("Load Simple Polygon Data"),
 		".", tr("Data Files (*.txt)"));
-	QTextCodec *code = QTextCodec::codecForName("gb18030");
+	QTextCodec *code = QTextCodec::codecForLocale();
 	if (code)    // 如果code为0，表示在运行的机器上没有装gb18030字符集。不过一般的中文windows系统中都安装了这一字符集  
 	{
 		string strStd = code->fromUnicode(filename).data();
