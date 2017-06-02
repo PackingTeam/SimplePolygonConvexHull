@@ -23,7 +23,7 @@ void PreparataShamos85::getConvexHull(SimplePolygon & sp)
 	// -1 表示添加的辅助点
 	// 横坐标与x_min一致 y坐标比x_min小
 	upHull.push_back(-1);
-	Point supportLeft(sp.points[leftIndex].x + 2, sp.points[leftIndex].y - 2);
+	Point supportLeft(sp.points[leftIndex].x + tolerance, sp.points[leftIndex].y - 2);
 	upHull.push_back(leftIndex);
 
 	int upHull_Size = 2;
@@ -77,7 +77,7 @@ void PreparataShamos85::getConvexHull(SimplePolygon & sp)
 	vector<int> downHull;
 	// 添加辅助点 x坐标等于x_max 在rightIndex的上方
 	downHull.push_back(-1);
-	Point supportRight(sp.points[rightIndex].x - 2, sp.points[rightIndex].y + 2);
+	Point supportRight(sp.points[rightIndex].x - tolerance, sp.points[rightIndex].y + 2);
 	downHull.push_back(rightIndex);
 	int downHull_Size = 2;
 
@@ -209,7 +209,7 @@ void PreparataShamos85::getConvexHullForDisplay(SimplePolygon & sp, Displays & d
 	// -1 表示添加的辅助点
 	// 横坐标与x_min一致 y坐标比x_min小
 	upHull.push_back(-1);
-	Point supportLeft(sp.points[leftIndex].x + 20, sp.points[leftIndex].y - 20);
+	Point supportLeft(sp.points[leftIndex].x + tolerance, sp.points[leftIndex].y - 20);
 	upHull.push_back(leftIndex);
 
 	int upHull_Size = 2;
@@ -266,7 +266,7 @@ void PreparataShamos85::getConvexHullForDisplay(SimplePolygon & sp, Displays & d
 	vector<int> downHull;
 	// 添加辅助点 x坐标等于x_max 在rightIndex的上方
 	downHull.push_back(-1);
-	Point supportRight(sp.points[rightIndex].x - 20, sp.points[rightIndex].y + 20);
+	Point supportRight(sp.points[rightIndex].x - tolerance, sp.points[rightIndex].y + 20);
 	downHull.push_back(rightIndex);
 	int downHull_Size = 2;
 

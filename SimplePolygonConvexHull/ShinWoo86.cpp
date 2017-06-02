@@ -23,14 +23,14 @@ void ShinWoo86::getConvexHull(SimplePolygon & sp)
 	// -1 表示添加的辅助点
 	// 横坐标与x_min一致 y坐标比x_min小
 	upHull.push_back(-1);
-	Point supportLeft(sp.points[leftIndex].x, sp.points[leftIndex].y - 2);
+	Point supportLeft(sp.points[leftIndex].x + tolerance, sp.points[leftIndex].y - 20);
 	upHull.push_back(leftIndex);
 
 	int upHull_Size = 2;
 
 	for (int i = leftIndex + 1; ; ++i) {
 		int index = i % N;
-		if (index == rightIndex) {
+		if ((index - 1 + N) % N == rightIndex) {
 			//upHull_Size++;
 			//upHull.push_back(rightIndex);
 			break;
@@ -40,13 +40,15 @@ void ShinWoo86::getConvexHull(SimplePolygon & sp)
 		bool flag1 = false;
 		// flag2：栈顶元素和它的前驱
 		bool flag2 = false;
+		// flag3：栈顶元素到最右端点
+		bool flag3 = false;
 
 		flag1 = upHull[upHull_Size - 2] == -1 ? toLeft(supportLeft, sp.points[upHull.back()], sp.points[index]) : toLeft(sp.points[upHull[upHull_Size - 2]], sp.points[upHull.back()], sp.points[index]);
 
 		if (flag1) {
 			// 在区域2
 			// 一直退栈直到flag1为true
-			while (true) {
+			while (upHull_Size > 2) {
 				upHull.pop_back();
 				upHull_Size--;
 				flag1 = upHull[upHull_Size - 2] == -1 ? toLeft(supportLeft, sp.points[upHull.back()], sp.points[index]) : toLeft(sp.points[upHull[upHull_Size - 2]], sp.points[upHull.back()], sp.points[index]);
@@ -59,20 +61,29 @@ void ShinWoo86::getConvexHull(SimplePolygon & sp)
 		//区域1
 		if (flag2)	continue;
 
-		upHull.push_back(index);
-		upHull_Size++;
+		flag3 = toLeft(sp.points[upHull.back()], sp.points[rightIndex], sp.points[index]);
+
+		if (flag3) {
+			// 区域3
+			upHull.push_back(index);
+			upHull_Size++;
+		}
+		else {
+			// 区域4
+			continue;
+		}
 	}
 
 	vector<int> downHull;
 	// 添加辅助点 x坐标等于x_max 在rightIndex的上方
 	downHull.push_back(-1);
-	Point supportRight(sp.points[rightIndex].x, sp.points[rightIndex].y + 2);
+	Point supportRight(sp.points[rightIndex].x - tolerance, sp.points[rightIndex].y + 20);
 	downHull.push_back(rightIndex);
 	int downHull_Size = 2;
 
 	for (int i = rightIndex + 1; ; ++i) {
 		int index = i % N;
-		if (index == leftIndex) {
+		if ((index - 1 + N) % N == leftIndex) {
 			//downHull_Size++;
 			//downHull.push_back(leftIndex);
 			break;
@@ -88,7 +99,7 @@ void ShinWoo86::getConvexHull(SimplePolygon & sp)
 		if (flag1) {
 			// 在区域2
 			// 一直退栈直到flag1为true
-			while (true) {
+			while (downHull_Size > 2) {
 				downHull.pop_back();
 				downHull_Size--;
 				flag1 = downHull[downHull_Size - 2] == -1 ? toLeft(supportRight, sp.points[downHull.back()], sp.points[index]) : toLeft(sp.points[downHull[downHull_Size - 2]], sp.points[downHull.back()], sp.points[index]);
@@ -188,14 +199,14 @@ void ShinWoo86::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 	// -1 表示添加的辅助点
 	// 横坐标与x_min一致 y坐标比x_min小
 	upHull.push_back(-1);
-	Point supportLeft(sp.points[leftIndex].x, sp.points[leftIndex].y - 20);
+	Point supportLeft(sp.points[leftIndex].x + tolerance, sp.points[leftIndex].y - 20);
 	upHull.push_back(leftIndex);
 
 	int upHull_Size = 2;
 
 	for (int i = leftIndex + 1; ; ++i) {
 		int index = i % N;
-		if (index == rightIndex) {
+		if ((index - 1 + N) % N == rightIndex) {
 			//upHull_Size++;
 			//upHull.push_back(rightIndex);
 			break;
@@ -205,6 +216,8 @@ void ShinWoo86::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 		bool flag1 = false;
 		// flag2：栈顶元素和它的前驱
 		bool flag2 = false;
+		// flag3：栈顶元素到最右端点
+		bool flag3 = false;
 
 		displays.push_back(createDisplay(sp, upHull, supportLeft, leftIndex, rightIndex, index));
 
@@ -213,7 +226,7 @@ void ShinWoo86::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 		if (flag1) {
 			// 在区域2
 			// 一直退栈直到flag1为true
-			while (true) {
+			while (upHull_Size > 2) {
 				upHull.pop_back();
 				upHull_Size--;
 				displays.push_back(createDisplay(sp, upHull, supportLeft, leftIndex, rightIndex, index));
@@ -227,20 +240,29 @@ void ShinWoo86::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 		//区域1
 		if (flag2)	continue;
 
-		upHull.push_back(index);
-		upHull_Size++;
+		flag3 = toLeft(sp.points[upHull.back()], sp.points[rightIndex], sp.points[index]);
+
+		if (flag3) {
+			// 区域3
+			upHull.push_back(index);
+			upHull_Size++;
+		}
+		else {
+			// 区域4
+			continue;
+		}
 	}
 
 	vector<int> downHull;
 	// 添加辅助点 x坐标等于x_max 在rightIndex的上方
 	downHull.push_back(-1);
-	Point supportRight(sp.points[rightIndex].x, sp.points[rightIndex].y + 20);
+	Point supportRight(sp.points[rightIndex].x - tolerance, sp.points[rightIndex].y + 20);
 	downHull.push_back(rightIndex);
 	int downHull_Size = 2;
 
 	for (int i = rightIndex + 1; ; ++i) {
 		int index = i % N;
-		if (index == leftIndex) {
+		if ((index - 1 + N) % N == leftIndex) {
 			//downHull_Size++;
 			//downHull.push_back(leftIndex);
 			break;
@@ -250,6 +272,8 @@ void ShinWoo86::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 		bool flag1 = false;
 		// flag2：栈顶元素和它的前驱
 		bool flag2 = false;
+		// flag3：栈顶元素到最右端点
+		bool flag3 = false;
 
 		displays.push_back(createDisplay(sp, downHull, supportRight, rightIndex, leftIndex, index));
 
@@ -258,7 +282,7 @@ void ShinWoo86::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 		if (flag1) {
 			// 在区域2
 			// 一直退栈直到flag1为true
-			while (true) {
+			while (downHull_Size > 2) {
 				downHull.pop_back();
 				downHull_Size--;
 				displays.push_back(createDisplay(sp, downHull, supportRight, rightIndex, leftIndex, index));
@@ -272,6 +296,8 @@ void ShinWoo86::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 		//区域1
 		if (flag2)	continue;
 
+		flag3 = toLeft(sp.points[downHull.back()], sp.points[leftIndex], sp.points[index]);
+		
 		downHull.push_back(index);
 		downHull_Size++;
 	}

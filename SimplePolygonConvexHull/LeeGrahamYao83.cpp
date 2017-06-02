@@ -1,7 +1,5 @@
 #include "LeeGrahamYao83.h"
 
-//LeeGrahamYao83* LeeGrahamYao83::instance = NULL;
-
 void LeeGrahamYao83::getConvexHull(SimplePolygon & sp)
 {
 	int N = (int)sp.points.size();
@@ -169,7 +167,8 @@ Display LeeGrahamYao83::createDisplay(vector<int>& hull, SimplePolygon& sp, int 
 	ret.lines.push_back(Line(sp.points[hull[0]], sp.points[hull[1]], LINE));
 	ret.lineColors.push_back(Qt::red);
 
-	for (int i = 1; i < hull.size(); ++i) {
+	int hullsize = hull.size();
+	for (int i = 1; i < hullsize; ++i) {
 		ret.lines.push_back(Line(sp.points[hull[i]], sp.points[hull[(i + 1) % hull.size()]], SEGMENT));
 		ret.lineColors.push_back(Qt::green);
 	}

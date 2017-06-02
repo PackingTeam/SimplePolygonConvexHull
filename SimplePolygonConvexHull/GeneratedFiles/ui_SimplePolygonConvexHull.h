@@ -35,6 +35,7 @@ public:
     QAction *actionExit;
     QAction *actionInterval_Time;
     QAction *actionGenerate;
+    QAction *actionHelp;
     QWidget *centralWidget;
     QWidget *widget;
     QComboBox *Method;
@@ -69,6 +70,8 @@ public:
         actionInterval_Time->setObjectName(QStringLiteral("actionInterval_Time"));
         actionGenerate = new QAction(SimplePolygonConvexHullClass);
         actionGenerate->setObjectName(QStringLiteral("actionGenerate"));
+        actionHelp = new QAction(SimplePolygonConvexHullClass);
+        actionHelp->setObjectName(QStringLiteral("actionHelp"));
         centralWidget = new QWidget(SimplePolygonConvexHullClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         widget = new QWidget(centralWidget);
@@ -127,7 +130,7 @@ public:
         menuBar->addAction(menuSetting->menuAction());
         menuFile->addAction(actionOpen);
         menuFile->addAction(actionSave);
-        menuFile->addAction(actionExit);
+        menuFile->addAction(actionHelp);
         menuSetting->addAction(actionInterval_Time);
         menuSetting->addAction(actionGenerate);
 
@@ -144,18 +147,18 @@ public:
         actionExit->setText(QApplication::translate("SimplePolygonConvexHullClass", "Exit", Q_NULLPTR));
         actionInterval_Time->setText(QApplication::translate("SimplePolygonConvexHullClass", "Interval Time", Q_NULLPTR));
         actionGenerate->setText(QApplication::translate("SimplePolygonConvexHullClass", "Generate", Q_NULLPTR));
+        actionHelp->setText(QApplication::translate("SimplePolygonConvexHullClass", "Help", Q_NULLPTR));
         Method->clear();
         Method->insertItems(0, QStringList()
-         << QApplication::translate("SimplePolygonConvexHullClass", "Sklansky 1972", Q_NULLPTR)
+         << QApplication::translate("SimplePolygonConvexHullClass", "Sklansky 1972 (wrong)", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "McCallum & Avis 1979", Q_NULLPTR)
-         << QApplication::translate("SimplePolygonConvexHullClass", "Sklansky 1982", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "Lee 1983 - Graham & Yao 1983", Q_NULLPTR)
-         << QApplication::translate("SimplePolygonConvexHullClass", "Ghosh & Shyamasundar 1983", Q_NULLPTR)
+         << QApplication::translate("SimplePolygonConvexHullClass", "Ghosh & Shyamasundar 1983 (wrong)", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "Bhattacharya & ElGindy 1984", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "Orlowski 1985", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "Preparata & Shamos 1985", Q_NULLPTR)
          << QApplication::translate("SimplePolygonConvexHullClass", "Shin & Woo 1986", Q_NULLPTR)
-         << QApplication::translate("SimplePolygonConvexHullClass", "Melkman 1987", Q_NULLPTR)
+         << QApplication::translate("SimplePolygonConvexHullClass", "Melkman 1987 (best)", Q_NULLPTR)
         );
         Calculate->setText(QApplication::translate("SimplePolygonConvexHullClass", "Calculate", Q_NULLPTR));
         Calculate->setShortcut(QApplication::translate("SimplePolygonConvexHullClass", "Return", Q_NULLPTR));

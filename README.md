@@ -1,45 +1,45 @@
-# 简单多边形的线性时间凸包算法项目
+- # 简单多边形的线性时间凸包算法项目
 
-> 本项目为清华大学计算几何课程作业。
->
-> 小组成员： @spwlyzx, @zyeric, @xskxzr
->
-> 由邓俊辉老师指导。
->
-> 基于以下网址提到的算法：http://cgm.cs.mcgill.ca/~athens/cs601/
+  > 本项目为清华大学计算几何课程作业。
+  >
+  > 小组成员： @spwlyzx, @zyeric, @xskxzr
+  >
+  > 由邓俊辉老师指导。
+  >
+  > 基于以下网址提到的算法：[A History of Linear-time Convex Hull Algorithms for Simple Polygons](http://cgm.cs.mcgill.ca/~athens/cs601/)
 
-### 文件列表
+  ### 操作流程
 
-- Form Files ----- 界面布局
-  - SimplePolygonConvexHull.ui
-- Generated Files ----- 由Qt生成的中间文件
-- Header Files ----- 头文件集合
-  - SimplePolygonConvexHull.h ----- 界面主类内部元素定义
-  - DataStruc.h ----- 所需的主要数据结构
-  - GraphicsScene.h ----- 界面显示必要文件，演示和其他显示功能都在其中实现
-  - Algorithm.h ----- 为方便方法之间的切换，提取出各个算法的公用类，并具体实现为各个子类
-  - AlgorithmFactory.h ----- 用于根据id生成统一的Algorithm类，方便方法调用
-  - Algorithms Header ----- 包含继承自Algorithm类的各个子类的头文件
-- Resource Files ----- 界面所使用到的资源文件
-- Source Files ----- cpp文件集合
-  - main.cpp ----- 程序入口
-  - SimplePolygonConvexHull.cpp ----- 主要包含界面响应以及与后端程序交互
-  - DataStruc.cpp ----- 对应头文件的实现
-  - GraphicsScene.cpp ----- 界面显示必要文件，演示和其他显示功能都在其中实现
-  - AlgorithmFactory.cpp ----- 对应头文件的实现
-  - Algorithms Impl ----- 包含对应header中的算法实现文件
+  - 具体一次操作流程为：
+    - 鼠标左击依次输入点，右击结束输入。
+      - 点击clear()可以消除之前所有的输入，重新进行多边形输入。
+    - 选择方法，选择显示结果(result)还是演示(displays)，并点击计算按钮后，系统根据选择的方法自动计算。
+    - displays状态下，点击计算后，有三种操作演示进度的方式。
+      - 点击start，将根据在Setting->Interval Time中设置的值，自动进行演示。演示中随时可以点击Pause暂停，并使用其他两种方式继续演示。
+      - 点击Pre和Start来单步演示。
+      - 使用滚动条来快速定位演示进度。
+    - 演示途中切换方法会立即清除当前的演示，但保留当前的简单多边形。
+    - 点击Setting->Generate可以通过输入点的数量，来生成随机的简单多边形。
 
-### 公共知识
 
-- 具体一次操作流程为：
-  - 鼠标左击依次输入点，右击结束输入。
-    - 点击clear()可以消除之前所有的输入，重新进行多边形输入。
-  - 选择方法，选择显示结果(result)还是演示(displays)，并点击计算按钮后，系统根据选择的方法新建对应的算法子类
-  - 根据显示结果的不同，调用该算法的 getConvexHull (SimplePolygon & sp)或getConvexHullForDisplay (SimplePolygon & sp, Displays & displays)方法，其中sp为传入的简单多边形数据，displays为返回的演示过程
-  - displays中包含了每一步演示中，所需要显示的点、线、区域内容。
-  - 前端系统接收到返回值后，按顺序对displays中的命令进行处理。并可以在任意步骤之间跳转而不需要额外的时间。
-- 在使用直线划分平面时，考虑默认的界面中，已经限定了各个点坐标的界，即实际上被划分的平面可以认为是一个正方形。即每一次画的仍然是线段。
-- 颜色的使用最好一致，符合DataStruc中的内容。
-- 已经修改为原点在界面中心，x轴水平向右，y轴垂直向上。
-- 读写文件注意不能有中文路径（后续有时间再处理），注意读写权限问题。
-- 根据时间来自动演示的功能尚待完成，目前没有思路，可能需要多线程。
+  ### 文件列表
+
+  - Form Files ----- 界面布局
+    - SimplePolygonConvexHull.ui
+  - Generated Files ----- 由Qt生成的中间文件
+  - Header Files ----- 头文件集合
+    - SimplePolygonConvexHull.h ----- 界面主类内部元素定义
+    - DataStruc.h ----- 所需的主要数据结构
+    - GraphicsScene.h ----- 界面显示必要文件，演示和其他显示功能都在其中实现
+    - Algorithm.h ----- 为方便方法之间的切换，提取出各个算法的公用类，并具体实现为各个子类
+    - AlgorithmFactory.h ----- 用于根据id生成统一的Algorithm类，方便方法调用
+    - Algorithms Header ----- 包含继承自Algorithm类的各个子类的头文件
+  - Resource Files ----- 界面所使用到的资源文件
+  - Source Files ----- cpp文件集合
+    - main.cpp ----- 程序入口
+    - SimplePolygonConvexHull.cpp ----- 主要包含界面响应以及与后端程序交互
+    - DataStruc.cpp ----- 对应头文件的实现
+    - GraphicsScene.cpp ----- 界面显示必要文件，演示和其他显示功能都在其中实现
+    - AlgorithmFactory.cpp ----- 对应头文件的实现
+    - Algorithms Impl ----- 包含对应header中的算法实现文件
+  - lib ----- 依赖的外部源码，即随机生成简单多边形的算法

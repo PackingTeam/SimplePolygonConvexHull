@@ -46,7 +46,7 @@
      </property>
      <item>
       <property name="text">
-       <string>Sklansky 1972</string>
+       <string>Sklansky 1972 (wrong)</string>
       </property>
      </item>
      <item>
@@ -56,17 +56,12 @@
      </item>
      <item>
       <property name="text">
-       <string>Sklansky 1982</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
        <string>Lee 1983 - Graham &amp; Yao 1983</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Ghosh &amp; Shyamasundar 1983</string>
+       <string>Ghosh &amp; Shyamasundar 1983 (wrong)</string>
       </property>
      </item>
      <item>
@@ -91,7 +86,7 @@
      </item>
      <item>
       <property name="text">
-       <string>Melkman 1987</string>
+       <string>Melkman 1987 (best)</string>
       </property>
      </item>
     </widget>
@@ -265,7 +260,7 @@
     </property>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
-    <addaction name="actionExit"/>
+    <addaction name="actionHelp"/>
    </widget>
    <widget class="QMenu" name="menuSetting">
     <property name="title">
@@ -300,6 +295,11 @@
   <action name="actionGenerate">
    <property name="text">
     <string>Generate</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
    </property>
   </action>
  </widget>
