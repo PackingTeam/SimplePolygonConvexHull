@@ -3,6 +3,8 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QFileDialog>
+#include <QDesktopServices>
+#include <QUrl>
 #include <QInputDialog>
 #include "GraphicsScene.h"
 #include "ui_SimplePolygonConvexHull.h"
@@ -54,6 +56,7 @@ private slots:
 	void methodChanged(int k);
 	void setTimeInterval();
 	void setGenerateNum();
+	void help();
 
 protected:
 	void timerEvent(QTimerEvent *event);

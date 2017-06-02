@@ -10,6 +10,5 @@
 #include "Orlowski85.h"
 #include "PreparataShamos85.h"
 #include "ShinWoo86.h"
-#include "Sklansky82.h"
 
 extern Algorithm* getMethodById(int id);

@@ -18,6 +18,7 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	connect(ui.Method, SIGNAL(currentIndexChanged(int)), this, SLOT(methodChanged(int)));
 	connect(ui.actionInterval_Time, SIGNAL(triggered()), this, SLOT(setTimeInterval()));
 	connect(ui.actionGenerate, SIGNAL(triggered()), this, SLOT(setGenerateNum()));
+	connect(ui.actionHelp, SIGNAL(triggered()), this, SLOT(help()));
 
 	ui.Next->setDisabled(true);
 	ui.Pre->setDisabled(true);
@@ -219,8 +220,20 @@ void SimplePolygonConvexHull::Open()
 
 void SimplePolygonConvexHull::methodChanged(int k)
 {
-	// 假设需要一切换方法，就将进度条归0
-	// ui.ProcessControl->setValue(0);
+	ui.ProcessControl->setValue(0);
+	ui.ProcessControl->setDisabled(true);
+	ui.Next->setDisabled(true);
+	ui.Pre->setDisabled(true);
+	ui.Pause->setDisabled(true);
+	killTimer(timerId);
+	isStop = true;
+	ui.Pause->setText("Start");
+
+	displays.clear();
+	sp.convexHull.clear();
+
+	step = -1;
+	scene.display(-1);
 }
 
 // 计时器进程
@@ -258,4 +271,9 @@ void SimplePolygonConvexHull::setGenerateNum()
 		scene.endInsert();
 		scene.display(-1);
 	}
+}
+
+void SimplePolygonConvexHull::help()
+{
+	QDesktopServices::openUrl(QUrl("https://github.com/micourse/SimplePolygonConvexHull/wiki"));
 }
