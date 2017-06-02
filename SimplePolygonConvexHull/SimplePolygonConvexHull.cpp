@@ -187,8 +187,8 @@ void SimplePolygonConvexHull::Save()
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save Simple Polygon Data"),
 		".", tr("Data Files (*.txt)"));
 	QTextCodec *code = QTextCodec::codecForLocale();
-	if (code)    // 如果code为0，表示在运行的机器上没有装gb18030字符集。不过一般的中文windows系统中都安装了这一字符集  
-	{
+//	if (code)    // 如果code为0，表示在运行的机器上没有装gb18030字符集。不过一般的中文windows系统中都安装了这一字符集
+//	{
 		string strStd = code->fromUnicode(filename).data();
 		ofstream f(strStd);
 		if (!filename.isEmpty() && !f)
@@ -200,20 +200,20 @@ void SimplePolygonConvexHull::Save()
 			return;
 		f << sp.toString() << endl;
 		f.close();
-	}
-	else
-	{
-		ofstream f(filename.toStdString());
-		if (!filename.isEmpty() && !f)
-		{
-			QMessageBox::warning(this, "Warning", "Because the system doesn't support GB18030, so the path should not contain chinese.");
-			return;
-		}
-		else if (filename.isEmpty())
-			return;
-		f << sp.toString() << endl;
-		f.close();
-	}
+//	}
+//	else
+//	{
+//		ofstream f(filename.toStdString());
+//		if (!filename.isEmpty() && !f)
+//		{
+//			QMessageBox::warning(this, "Warning", "Because the system doesn't support GB18030, so the path should not contain chinese.");
+//			return;
+//		}
+//		else if (filename.isEmpty())
+//			return;
+//		f << sp.toString() << endl;
+//		f.close();
+//	}
 }
 
 void SimplePolygonConvexHull::Open()
@@ -221,8 +221,8 @@ void SimplePolygonConvexHull::Open()
 	QString filename = QFileDialog::getOpenFileName(this, tr("Load Simple Polygon Data"),
 		".", tr("Data Files (*.txt)"));
 	QTextCodec *code = QTextCodec::codecForLocale();
-	if (code)    // 如果code为0，表示在运行的机器上没有装gb18030字符集。不过一般的中文windows系统中都安装了这一字符集  
-	{
+//	if (code)    // 如果code为0，表示在运行的机器上没有装gb18030字符集。不过一般的中文windows系统中都安装了这一字符集
+//	{
 		string strStd = code->fromUnicode(filename).data();
 		fstream f(strStd);
 		if (!filename.isEmpty() && !f)
@@ -239,25 +239,25 @@ void SimplePolygonConvexHull::Open()
 
 		scene.endInsert();
 		scene.display(-1);
-	}
-	else
-	{
-		fstream f(filename.toStdString());
-		if (!filename.isEmpty() && !f)
-		{
-			QMessageBox::warning(this, "Warning", "Because the system doesn't support GB18030, so the path should not contain chinese.");
-			return;
-		}
-		else if (filename.isEmpty())
-			return;
-		string temp;
-		f >> temp;
-		sp.setPolygon(temp);
-		f.close();
+//	}
+//	else
+//	{
+//		fstream f(filename.toStdString());
+//		if (!filename.isEmpty() && !f)
+//		{
+//			QMessageBox::warning(this, "Warning", "Because the system doesn't support GB18030, so the path should not contain chinese.");
+//			return;
+//		}
+//		else if (filename.isEmpty())
+//			return;
+//		string temp;
+//		f >> temp;
+//		sp.setPolygon(temp);
+//		f.close();
 
-		scene.endInsert();
-		scene.display(-1);
-	}
+//		scene.endInsert();
+//		scene.display(-1);
+//	}
 }
 
 void SimplePolygonConvexHull::methodChanged(int k)
