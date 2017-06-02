@@ -125,6 +125,7 @@ void getHalfConvexHull(SimplePolygon &sp, int max, int min)
 			rejectedConvexHull.push_back(convexHull.back());
 			convexHull.pop_back();
 			backtrackUntilLeftTurn(sp, convexHull, sp.points[i]);
+			convexHull.push_back(i);
 		}
 	}
 
@@ -177,6 +178,7 @@ Displays getHalfConvexHullForDisplay(SimplePolygon &sp, int max, int min)
 			rejectedConvexHull.push_back(convexHull.back());
 			convexHull.pop_back();
 			auto tmp = backtrackConvexHullForDisplay(sp, convexHull, rejectedConvexHull, sp.points[i]);
+			convexHull.push_back(i);
 			displays.insert(displays.cend(), tmp.cbegin(), tmp.cend());
 		}
 
