@@ -1,4 +1,5 @@
 #include "BhattacharyaElGindy84.h"
+#include <cmath>
 
 using namespace std;
 
@@ -9,6 +10,12 @@ void backtrackUntilLeftTurn(SimplePolygon &sp, vector<int> &convexHull, const Po
 	while (convexHull.size() >= 2 &&
 	       !toLeft(sp.points[convexHull[convexHull.size() - 2]], sp.points[convexHull.back()], p))
 		convexHull.pop_back();
+}
+
+// 根据x的位置: true--min--true--y(true)--false--max--false
+bool lowerOf(double x, double y, double min, double max)
+{
+	return (x < y) == (min < max) || abs(x - y) < tolerance;
 }
 
 // 从max到min构造一半的凸包
@@ -31,9 +38,9 @@ void getHalfConvexHull(SimplePolygon &sp, int max, int min)
 			                  sp.points[top]); i = (i + 1) % size);
 		}
 
-		else if (toConvexHullLeft && (sp.points[min].x < sp.points[max].x) != (sp.points[i].x < sp.points[top].x)) {
-			for (; (sp.points[min].x < sp.points[max].x) !=
-			       (sp.points[(i + 1) % size].x < sp.points[top].x); i = (i + 1) % size);
+		else if (toConvexHullLeft && !lowerOf(sp.points[i].x, sp.points[top].x, sp.points[min].x, sp.points[max].x)) {
+			for (; !lowerOf(sp.points[(i + 1) % size].x, sp.points[top].x, sp.points[min].x, sp.points[max].x);
+			     i = (i + 1) % size);
 		}
 
 		else {
@@ -127,9 +134,9 @@ Displays getHalfConvexHullForDisplay(SimplePolygon &sp, int max, int min)
 				displays.push_back(showCheck(sp, convexHull, sp.points[(i + 1) % size]));
 		}
 
-		else if (toConvexHullLeft && (sp.points[min].x < sp.points[max].x) != (sp.points[i].x < sp.points[top].x)) {
-			for (; (sp.points[min].x < sp.points[max].x) !=
-			       (sp.points[(i + 1) % size].x < sp.points[top].x); i = (i + 1) % size)
+		else if (toConvexHullLeft && !lowerOf(sp.points[i].x, sp.points[top].x, sp.points[min].x, sp.points[max].x)) {
+			for (; !lowerOf(sp.points[(i + 1) % size].x, sp.points[top].x, sp.points[min].x, sp.points[max].x);
+			     i = (i + 1) % size)
 				displays.push_back(showCheck(sp, convexHull, sp.points[(i + 1) % size]));
 		}
 
