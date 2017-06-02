@@ -264,10 +264,11 @@
    </widget>
    <widget class="QMenu" name="menuSetting">
     <property name="title">
-     <string>Setting</string>
+     <string>Advance</string>
     </property>
     <addaction name="actionInterval_Time"/>
     <addaction name="actionGenerate"/>
+    <addaction name="actionCounter_Examle"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSetting"/>
@@ -300,6 +301,11 @@
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionCounter_Examle">
+   <property name="text">
+    <string>Counter Examle</string>
    </property>
   </action>
  </widget>

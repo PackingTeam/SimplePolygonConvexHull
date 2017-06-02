@@ -36,6 +36,7 @@ public:
     QAction *actionInterval_Time;
     QAction *actionGenerate;
     QAction *actionHelp;
+    QAction *actionCounter_Examle;
     QWidget *centralWidget;
     QWidget *widget;
     QComboBox *Method;
@@ -72,6 +73,8 @@ public:
         actionGenerate->setObjectName(QStringLiteral("actionGenerate"));
         actionHelp = new QAction(SimplePolygonConvexHullClass);
         actionHelp->setObjectName(QStringLiteral("actionHelp"));
+        actionCounter_Examle = new QAction(SimplePolygonConvexHullClass);
+        actionCounter_Examle->setObjectName(QStringLiteral("actionCounter_Examle"));
         centralWidget = new QWidget(SimplePolygonConvexHullClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         widget = new QWidget(centralWidget);
@@ -133,6 +136,7 @@ public:
         menuFile->addAction(actionHelp);
         menuSetting->addAction(actionInterval_Time);
         menuSetting->addAction(actionGenerate);
+        menuSetting->addAction(actionCounter_Examle);
 
         retranslateUi(SimplePolygonConvexHullClass);
 
@@ -148,6 +152,7 @@ public:
         actionInterval_Time->setText(QApplication::translate("SimplePolygonConvexHullClass", "Interval Time", Q_NULLPTR));
         actionGenerate->setText(QApplication::translate("SimplePolygonConvexHullClass", "Generate", Q_NULLPTR));
         actionHelp->setText(QApplication::translate("SimplePolygonConvexHullClass", "Help", Q_NULLPTR));
+        actionCounter_Examle->setText(QApplication::translate("SimplePolygonConvexHullClass", "Counter Examle", Q_NULLPTR));
         Method->clear();
         Method->insertItems(0, QStringList()
          << QApplication::translate("SimplePolygonConvexHullClass", "Sklansky 1972 (wrong)", Q_NULLPTR)
@@ -174,7 +179,7 @@ public:
         Pause->setText(QApplication::translate("SimplePolygonConvexHullClass", "Start", Q_NULLPTR));
         Pause->setShortcut(QApplication::translate("SimplePolygonConvexHullClass", "Left", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("SimplePolygonConvexHullClass", "File", Q_NULLPTR));
-        menuSetting->setTitle(QApplication::translate("SimplePolygonConvexHullClass", "Setting", Q_NULLPTR));
+        menuSetting->setTitle(QApplication::translate("SimplePolygonConvexHullClass", "Advance", Q_NULLPTR));
     } // retranslateUi
 
 };

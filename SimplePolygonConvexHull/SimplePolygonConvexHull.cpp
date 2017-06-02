@@ -19,6 +19,7 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	connect(ui.actionInterval_Time, SIGNAL(triggered()), this, SLOT(setTimeInterval()));
 	connect(ui.actionGenerate, SIGNAL(triggered()), this, SLOT(setGenerateNum()));
 	connect(ui.actionHelp, SIGNAL(triggered()), this, SLOT(help()));
+	connect(ui.actionCounter_Examle, SIGNAL(triggered()), this, SLOT(displayCounterExample()));
 
 	ui.Next->setDisabled(true);
 	ui.Pre->setDisabled(true);
@@ -185,37 +186,78 @@ void SimplePolygonConvexHull::Save()
 	}
 	QString filename = QFileDialog::getSaveFileName(this, tr("Save Simple Polygon Data"),
 		".", tr("Data Files (*.txt)"));
-	ofstream f(filename.toStdString());
-	if (!filename.isEmpty() && !f)
+	QTextCodec *code = QTextCodec::codecForName("gb18030");
+	if (code)    // 如果code为0，表示在运行的机器上没有装gb18030字符集。不过一般的中文windows系统中都安装了这一字符集  
 	{
-		QMessageBox::warning(this, "Warning", "The path should not contain chinese.");
-		return;
+		string strStd = code->fromUnicode(filename).data();
+		ofstream f(strStd);
+		if (!filename.isEmpty() && !f)
+		{
+			QMessageBox::warning(this, "Warning", "Some error about path happens, please try path includes no chinese.");
+			return;
+		}
+		else if (filename.isEmpty())
+			return;
+		f << sp.toString() << endl;
+		f.close();
 	}
-	else if (filename.isEmpty())
-		return;
-	f << sp.toString() << endl;
-	f.close();
+	else
+	{
+		ofstream f(filename.toStdString());
+		if (!filename.isEmpty() && !f)
+		{
+			QMessageBox::warning(this, "Warning", "Because the system doesn't support GB18030, so the path should not contain chinese.");
+			return;
+		}
+		else if (filename.isEmpty())
+			return;
+		f << sp.toString() << endl;
+		f.close();
+	}
 }
 
 void SimplePolygonConvexHull::Open()
 {
 	QString filename = QFileDialog::getOpenFileName(this, tr("Load Simple Polygon Data"),
 		".", tr("Data Files (*.txt)"));
-	fstream f(filename.toStdString());
-	if (!filename.isEmpty() && !f)
+	QTextCodec *code = QTextCodec::codecForName("gb18030");
+	if (code)    // 如果code为0，表示在运行的机器上没有装gb18030字符集。不过一般的中文windows系统中都安装了这一字符集  
 	{
-		QMessageBox::warning(this, "Warning", "The path should not contain chinese.");
-		return;
-	}
-	else if (filename.isEmpty())
-		return;
-	string temp;
-	f >> temp;
-	sp.setPolygon(temp);
-	f.close();
+		string strStd = code->fromUnicode(filename).data();
+		fstream f(strStd);
+		if (!filename.isEmpty() && !f)
+		{
+			QMessageBox::warning(this, "Warning", "Some error about path happens, please try path includes no chinese.");
+			return;
+		}
+		else if (filename.isEmpty())
+			return;
+		string temp;
+		f >> temp;
+		sp.setPolygon(temp);
+		f.close();
 
-	scene.endInsert();
-	scene.display(-1);
+		scene.endInsert();
+		scene.display(-1);
+	}
+	else
+	{
+		fstream f(filename.toStdString());
+		if (!filename.isEmpty() && !f)
+		{
+			QMessageBox::warning(this, "Warning", "Because the system doesn't support GB18030, so the path should not contain chinese.");
+			return;
+		}
+		else if (filename.isEmpty())
+			return;
+		string temp;
+		f >> temp;
+		sp.setPolygon(temp);
+		f.close();
+
+		scene.endInsert();
+		scene.display(-1);
+	}
 }
 
 void SimplePolygonConvexHull::methodChanged(int k)
@@ -234,6 +276,11 @@ void SimplePolygonConvexHull::methodChanged(int k)
 
 	step = -1;
 	scene.display(-1);
+
+	if (k == 0 || k == 3)
+		ui.actionCounter_Examle->setDisabled(false);
+	else
+		ui.actionCounter_Examle->setDisabled(true);
 }
 
 // 计时器进程
@@ -276,4 +323,23 @@ void SimplePolygonConvexHull::setGenerateNum()
 void SimplePolygonConvexHull::help()
 {
 	QDesktopServices::openUrl(QUrl("https://github.com/micourse/SimplePolygonConvexHull/wiki"));
+}
+
+void SimplePolygonConvexHull::displayCounterExample()
+{
+	int id = ui.Method->currentIndex();
+	if (id == 0)
+	{
+		sp.setPolygon(Sklansky72::counterExample);
+		scene.endInsert();
+		scene.display(-1);
+	}
+	else if (id == 3)
+	{
+		sp.setPolygon(GhoshShyamasundar83::counterExample);
+		scene.endInsert();
+		scene.display(-1);
+	}
+	else
+		QMessageBox::warning(this, "Warning", "This method is correct.");
 }
