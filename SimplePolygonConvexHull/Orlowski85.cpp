@@ -1,4 +1,7 @@
 #include "Orlowski85.h"
+#include <cmath>
+
+using std::abs;
 
 void Orlowski85::getConvexHull(SimplePolygon & sp)
 {
