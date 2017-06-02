@@ -1,5 +1,7 @@
 #include "Sklansky72.h"
 
+const string Sklansky72::counterExample = "(-269.000000,-101.000000);(-54.000000,-93.000000);(-181.000000,-29.000000);(20.000000,38.000000);(-88.000000,-29.000000);(159.000000,-104.000000);(-91.000000,188.000000);";
+
 // 该算法假设传入的SimplePolygon中的points序列的第一个点，为最左最下点
 void Sklansky72::getConvexHull(SimplePolygon & sp)
 {

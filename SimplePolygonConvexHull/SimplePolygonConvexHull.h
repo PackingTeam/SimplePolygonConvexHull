@@ -5,6 +5,7 @@
 #include <QtWidgets/QFileDialog>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QTextCodec>
 #include <QInputDialog>
 #include "GraphicsScene.h"
 #include "ui_SimplePolygonConvexHull.h"
@@ -57,6 +58,7 @@ private slots:
 	void setTimeInterval();
 	void setGenerateNum();
 	void help();
+	void displayCounterExample();
 
 protected:
 	void timerEvent(QTimerEvent *event);

@@ -18,6 +18,7 @@ public:
 		static GhoshShyamasundar83 instance;
 		return &instance;
 	}
+	const static string counterExample;
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);
 };
