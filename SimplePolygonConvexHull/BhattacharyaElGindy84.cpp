@@ -23,16 +23,15 @@ void getHalfConvexHull(SimplePolygon &sp, int max, int min)
 
 	for (i = (i + 1) % size; i != min; i = (i + 1) % size) {
 		auto top = sp.convexHull.back();
-		auto toLeft0 = toLeft(sp.points[top == 0 ? size - 1 : top - 1], sp.points[top], sp.points[i]);
-
-		if (!toLeft0 && toLeft(sp.points[sp.convexHull[sp.convexHull.size() - 2]], sp.points[top], sp.points[i])) {
+		auto toConvexHullLeft = toLeft(sp.points[sp.convexHull[sp.convexHull.size() - 2]], sp.points[top], sp.points[i]);
+		if (toConvexHullLeft && !toLeft(sp.points[top == 0 ? size - 1 : top - 1], sp.points[top], sp.points[i])) {
 			for (; !intersect(sp.points[i],
 			                  sp.points[(i + 1) % size],
 			                  sp.points[sp.convexHull[sp.convexHull.size() - 2]],
 			                  sp.points[top]); i = (i + 1) % size);
 		}
 
-		else if (toLeft0 && (sp.points[min].x < sp.points[max].x) != (sp.points[i].x < sp.points[top].x)) {
+		else if (toConvexHullLeft && (sp.points[min].x < sp.points[max].x) != (sp.points[i].x < sp.points[top].x)) {
 			for (; (sp.points[min].x < sp.points[max].x) !=
 			       (sp.points[(i + 1) % size].x < sp.points[top].x); i = (i + 1) % size);
 		}
@@ -107,7 +106,10 @@ Displays getHalfConvexHullForDisplay(SimplePolygon &sp, int max, int min)
 	auto size = sp.points.size();
 	int i = (max + 1) % size;
 
-	if (i == min) return displays;
+	if (i == min) {
+		sp.convexHull.insert(sp.convexHull.cend(), convexHull.cbegin(), convexHull.cend());
+		return displays;
+	}
 	convexHull.push_back(i);
 	displays.push_back(showConvexHull(sp, convexHull));
 
@@ -115,9 +117,9 @@ Displays getHalfConvexHullForDisplay(SimplePolygon &sp, int max, int min)
 		displays.push_back(showCheck(sp, convexHull, sp.points[i]));
 
 		auto top = convexHull.back();
-		auto toLeft0 = toLeft(sp.points[top == 0 ? size - 1 : top - 1], sp.points[top], sp.points[i]);
+		auto toConvexHullLeft = toLeft(sp.points[convexHull[convexHull.size() - 2]], sp.points[top], sp.points[i]);
 
-		if (!toLeft0 && toLeft(sp.points[convexHull[convexHull.size() - 2]], sp.points[top], sp.points[i])) {
+		if (toConvexHullLeft && !toLeft(sp.points[top == 0 ? size - 1 : top - 1], sp.points[top], sp.points[i])) {
 			for (; !intersect(sp.points[i],
 			                  sp.points[(i + 1) % size],
 			                  sp.points[convexHull[convexHull.size() - 2]],
@@ -125,7 +127,7 @@ Displays getHalfConvexHullForDisplay(SimplePolygon &sp, int max, int min)
 				displays.push_back(showCheck(sp, convexHull, sp.points[(i + 1) % size]));
 		}
 
-		else if (toLeft0 && (sp.points[min].x < sp.points[max].x) != (sp.points[i].x < sp.points[top].x)) {
+		else if (toConvexHullLeft && (sp.points[min].x < sp.points[max].x) != (sp.points[i].x < sp.points[top].x)) {
 			for (; (sp.points[min].x < sp.points[max].x) !=
 			       (sp.points[(i + 1) % size].x < sp.points[top].x); i = (i + 1) % size)
 				displays.push_back(showCheck(sp, convexHull, sp.points[(i + 1) % size]));

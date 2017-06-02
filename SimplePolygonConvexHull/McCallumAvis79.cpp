@@ -100,7 +100,10 @@ void getHalfConvexHull(SimplePolygon &sp, int max, int min)
 	int i = (max + 1) % size;
 
 	for (; i != min && toLeft(sp.points[max], sp.points[min], sp.points[i]); i = (i + 1) % size);
-	if (i == min) return;
+	if (i == min) {
+		sp.convexHull.insert(sp.convexHull.cend(), convexHull.cbegin(), convexHull.cend());
+		return;
+	}
 	convexHull.push_back(i);
 
 	vector<int> rejectedConvexHull{min};
@@ -143,7 +146,10 @@ Displays getHalfConvexHullForDisplay(SimplePolygon &sp, int max, int min)
 		if (!toLeft(sp.points[max], sp.points[min], sp.points[i])) break;
 		displays.push_back(showConvexHull(sp, convexHull, rejectedConvexHull));
 	}
-	if (i == min) return displays;
+	if (i == min) {
+		sp.convexHull.insert(sp.convexHull.cend(), convexHull.cbegin(), convexHull.cend());
+		return displays;
+	}
 	convexHull.push_back(i);
 	displays.push_back(showConvexHull(sp, convexHull, rejectedConvexHull));
 
