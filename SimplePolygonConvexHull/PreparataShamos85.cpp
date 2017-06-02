@@ -1,7 +1,5 @@
 #include "PreparataShamos85.h"
 
-PreparataShamos85* PreparataShamos85::instance = NULL;
-
 void PreparataShamos85::getConvexHull(SimplePolygon & sp)
 {
 	int N = (int)sp.points.size();
@@ -147,7 +145,7 @@ Display PreparataShamos85::createDisplay(SimplePolygon& sp, vector<int>& hull, P
 
 	int hull_Size = (int)hull.size();
 
-	for (int i = 1; i < hull.size(); ++i) {
+	for (int i = 1; i < hull_Size; ++i) {
 		ret.points.push_back(sp.points[hull[i]]);
 		ret.pointColors.push_back(Qt::green);
 	}

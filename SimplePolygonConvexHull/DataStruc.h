@@ -5,12 +5,14 @@
 #include <QLineF>
 #include <QPolygonF>
 #include <deque>
+#include "./lib/GenerateSimplePolygon.h"
 
 using namespace std;
 
 #define tolerance 0.000001 // 定义容差为10^-6
 #define sceneWidth 990 // 界面显示的区域宽度
 #define sceneHeight 537 // 界面显示的区域高度
+#define maxSameDistance 10 // 在输入时，判定最后一个点和原来的点接合的距离
 
 // 颜色枚举类，用于区分颜色
 // 其他颜色根据情况使用。
@@ -122,6 +124,7 @@ public:
 	Colors lineColors;
 	Areas areas;
 	Colors areaColors;
+	void clearAll();
 };
 
 typedef vector<Display> Displays;
@@ -180,3 +183,6 @@ extern double getDirectedArea(const Points& points);
 
 // 用于分割字符串
 extern void SplitString(const string& s, std::vector<std::string>& v, const std::string& c);
+
+// 随机生成简单多边形
+extern void generateSimplePolygon(SimplePolygon& sp, int num, int width, int height);

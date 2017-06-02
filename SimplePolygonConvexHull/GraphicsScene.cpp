@@ -1,4 +1,5 @@
 #include "GraphicsScene.h"
+#include <cmath>
 
 // 开始插入点，更改状态为正在插入点。
 // 因为开始插入将消除过去的内容，因此所有数据会消除。
@@ -34,11 +35,12 @@ void GraphicsScene::display(int step)
 {
 	clear();
 	displayPolygon();
+	int displays_size = displays.size();
 	if (step < 0)
 	{
 		return;
 	}
-	else if (step >= displays.size())
+	else if (step >= displays_size)
 	{
 		displayConvexHull();
 	}
@@ -78,7 +80,7 @@ void GraphicsScene::display(int step)
 					double y = (x - line.a.x) / (line.b.x - line.a.x)*(line.b.y - line.a.y) + line.a.y;
 					item = new QGraphicsLineItem(line.a.x, line.a.y, x, y);
 				}
-				else if (line.b.x - line.a.x < tolerance)
+				else if (line.b.x - line.a.x < -tolerance)
 				{
 					double x = -2 * sceneWidth;
 					double y = (x - line.a.x) / (line.b.x - line.a.x)*(line.b.y - line.a.y) + line.a.y;
@@ -149,7 +151,17 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
 			if (isInsertingPoint)
 			{
 				QPointF point = event->scenePos();
-				sp.points.push_back(Point(point));
+				Point p(point);
+				
+				// 如果最后一个点在第一个点附近，则将多边形连接封闭
+				if (sp.points.size() > 1 && abs(p.x - sp.points[0].x) < maxSameDistance && abs(p.y - sp.points[0].y) < maxSameDistance)
+				{
+					endInsert();
+					displayPolygon();
+					return;
+				}
+
+				sp.points.push_back(p);
 
 				QGraphicsRectItem *item = new QGraphicsRectItem(point.x() - 1, point.y() - 1, 2, 2);
 				item->setBrush(Qt::black);
@@ -184,7 +196,7 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
 // 不调用clear()方法
 void GraphicsScene::displayPolygon()
 {
-    for (const Point &p : sp.points)
+	for (const Point &p : sp.points)
 	{
 		QGraphicsRectItem *item = new QGraphicsRectItem(p.x - 1, p.y - 1, 2, 2);
 		item->setBrush(Qt::black);

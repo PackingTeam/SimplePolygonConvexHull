@@ -25,6 +25,16 @@ void Area::getQPolygon(QPolygonF &qpolygon)
 	qpolygon << temp;
 }
 
+void Display::clearAll()
+{
+	points.clear();
+	pointColors.clear();
+	lines.clear();
+	lineColors.clear();
+	areas.clear();
+	areaColors.clear();
+}
+
 // 将其转化为显示用的polygon
 void SimplePolygon::getQPolygon(QPolygonF &qpolygon)
 {
@@ -134,8 +144,19 @@ void SimplePolygon::clearAll()
 }
 
 // 判定当前的简单多边形是否合法，即是否存在自交、重合嵌套等
+// 默认已经经过normalize()
+// 使用暴力方法，对于大点集，后续可以使用扫描线算法进行改进
 bool SimplePolygon::isLegal()
 {
+	int size = points.size();
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 2; j < size - 1; j++)
+		{
+			if (intersect(points[i%size], points[(i + 1) % size], points[(i + j) % size], points[(i + j + 1) % size]))
+				return false;
+		}
+	}
 	return true;
 }
 
@@ -145,7 +166,7 @@ void SimplePolygon::normalize()
 {
 	double x1, y1, x2, y2;
 	int j;
-	for (int i = 0; i < points.size();) {
+	for (decltype(points.size()) i = 0; i < points.size();) {
 		j = (i + 1) % points.size();
 		x1 = points[i].x;
 		y1 = points[i].y;
@@ -243,4 +264,28 @@ void SplitString(const string& s, vector<string>& v, const string& c)
 	}
 	if (pos1 != s.length())
 		v.push_back(s.substr(pos1));
+}
+
+void generateSimplePolygon(SimplePolygon& sp, int num, int width, int height)
+{
+	sp.clearAll();
+
+	Point2D		*gSimplePolygon;
+	int			gNumSimplePolygon;
+
+	Point2D *point = new Point2D[num];
+
+	for (int i = 0; i < num; i++)
+	{
+		point[i].x = (rand() % width) - width / 2;
+		point[i].y = (rand() % height) - height / 2;
+	}
+
+	GenerateSimplePolygon(point, num, gSimplePolygon, gNumSimplePolygon);
+
+	for (int i = 0; i < gNumSimplePolygon; i++)
+		sp.points.push_back(Point(gSimplePolygon[i].x, gSimplePolygon[i].y));
+
+	delete[]point;
+	delete[]gSimplePolygon;
 }

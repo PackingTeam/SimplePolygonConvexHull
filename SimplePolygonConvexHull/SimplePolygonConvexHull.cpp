@@ -16,11 +16,8 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	connect(ui.actionSave, SIGNAL(triggered()), this, SLOT(Save()));
 	connect(ui.actionOpen, SIGNAL(triggered()), this, SLOT(Open()));
 	connect(ui.Method, SIGNAL(currentIndexChanged(int)), this, SLOT(methodChanged(int)));
-	connect(ui.action100ms, SIGNAL(triggered()), this, SLOT(time100()));
-	connect(ui.action200ms, SIGNAL(triggered()), this, SLOT(time200()));
-	connect(ui.action500ms, SIGNAL(triggered()), this, SLOT(time500()));
-	connect(ui.action1000ms, SIGNAL(triggered()), this, SLOT(time1000()));
-
+	connect(ui.actionInterval_Time, SIGNAL(triggered()), this, SLOT(setTimeInterval()));
+	connect(ui.actionGenerate, SIGNAL(triggered()), this, SLOT(setGenerateNum()));
 
 	ui.Next->setDisabled(true);
 	ui.Pre->setDisabled(true);
@@ -31,6 +28,8 @@ SimplePolygonConvexHull::SimplePolygonConvexHull(QWidget *parent)
 	scene.setSceneRect(-sceneWidth/2, -sceneHeight/2, sceneWidth, sceneHeight);
 	ui.graphicsView->setScene(&scene);
 	ui.graphicsView->scale(1, -1);
+
+	ui.graphicsView->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 }
 
 void SimplePolygonConvexHull::Calculate()
@@ -49,6 +48,14 @@ void SimplePolygonConvexHull::Calculate()
 	sp.normalize();
 	displays.clear();
 	sp.convexHull.clear();
+
+	killTimer(timerId);
+
+	if (!sp.isLegal())
+	{
+		QMessageBox::warning(this, "Warning", "The polygon is illegal.");
+		return;
+	}
 
 	int methodId = ui.Method->currentIndex();
 	method = getMethodById(methodId);
@@ -233,22 +240,22 @@ void SimplePolygonConvexHull::timerEvent(QTimerEvent *event)
 	}
 }
 
-void SimplePolygonConvexHull::time100()
+void SimplePolygonConvexHull::setTimeInterval()
 {
-	timeInterval = 100;
+	bool ok;
+	int temp = QInputDialog::getInt(this, tr("Set display time interval"), tr("Time Interval(ms):"), timeInterval, 10, 20000, 10, &ok);
+	if (ok)
+		timeInterval = temp;
 }
 
-void SimplePolygonConvexHull::time200()
+void SimplePolygonConvexHull::setGenerateNum()
 {
-	timeInterval = 200;
-}
-
-void SimplePolygonConvexHull::time500()
-{
-	timeInterval = 500;
-}
-
-void SimplePolygonConvexHull::time1000()
-{
-	timeInterval = 1000;
+	bool ok;
+	int temp = QInputDialog::getInt(this, tr("Generate a simple polygon"), tr("points' num:"), timeInterval, 5, 2000, 1, &ok);
+	if (ok)
+	{
+		generateSimplePolygon(sp, temp, sceneWidth, sceneHeight);
+		scene.endInsert();
+		scene.display(-1);
+	}
 }

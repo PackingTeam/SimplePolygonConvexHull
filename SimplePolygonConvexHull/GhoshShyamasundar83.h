@@ -8,22 +8,16 @@ class GhoshShyamasundar83 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	GhoshShyamasundar83() {}
-	// ½ûÖ¹¿½±´º¯Êý
-	GhoshShyamasundar83(GhoshShyamasundar83 const&) {}
-	// ½ûÖ¹¸³Öµ¿½±´
-	GhoshShyamasundar83& operator=(GhoshShyamasundar83 const&) {}
-	// ½ûÖ¹Îö¹¹º¯Êý
-	~GhoshShyamasundar83() {}
-	static GhoshShyamasundar83* instance;
 
 public:
+	// ½ûÖ¹¿½±´º¯Êý
+	GhoshShyamasundar83(GhoshShyamasundar83 const&) = delete;
+	// ½ûÖ¹¸³Öµ¿½±´
+	GhoshShyamasundar83& operator=(GhoshShyamasundar83 const&) = delete;
 	static GhoshShyamasundar83* Instance() {
-		if (!instance)
-			instance = new GhoshShyamasundar83();
-		return instance;
-
+		static GhoshShyamasundar83 instance;
+		return &instance;
 	}
-	void getHalfConvexHull(SimplePolygon &sp, int max, int min);
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);
 };

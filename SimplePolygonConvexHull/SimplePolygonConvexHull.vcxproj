@@ -73,7 +73,6 @@
     <ClCompile Include="AlgorithmFactory.cpp" />
     <ClCompile Include="BhattacharyaElGindy84.cpp" />
     <ClCompile Include="DataStruc.cpp" />
-    <ClCompile Include="ElGindyAvisToussaint83.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_SimplePolygonConvexHull.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -89,6 +88,7 @@
     <ClCompile Include="GhoshShyamasundar83.cpp" />
     <ClCompile Include="GraphicsScene.cpp" />
     <ClCompile Include="LeeGrahamYao83.cpp" />
+    <ClCompile Include="lib\GenerateSimplePolygon.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="McCallumAvis79.cpp" />
     <ClCompile Include="Melkman87.cpp" />
@@ -127,11 +127,17 @@
     <ClInclude Include="Algorithm.h" />
     <ClInclude Include="BhattacharyaElGindy84.h" />
     <ClInclude Include="DataStruc.h" />
-    <ClInclude Include="ElGindyAvisToussaint83.h" />
     <ClInclude Include="GeneratedFiles\ui_SimplePolygonConvexHull.h" />
     <ClInclude Include="GhoshShyamasundar83.h" />
     <ClInclude Include="GraphicsScene.h" />
     <ClInclude Include="LeeGrahamYao83.h" />
+    <ClInclude Include="lib\GenerateSimplePolygon.h" />
+    <ClInclude Include="lib\SrDataType.h" />
+    <ClInclude Include="lib\SrGeometricTools.h" />
+    <ClInclude Include="lib\SrMath.h" />
+    <ClInclude Include="lib\SrSimpleTypes.h" />
+    <ClInclude Include="lib\SrVector2.h" />
+    <ClInclude Include="lib\SrVector3.h" />
     <ClInclude Include="McCallumAvis79.h" />
     <ClInclude Include="Melkman87.h" />
     <ClInclude Include="Orlowski85.h" />

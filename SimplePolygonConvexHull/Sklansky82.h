@@ -8,20 +8,15 @@ class Sklansky82 : Algorithm
 private:
 	// ½ûÖ¹Íâ²¿³õÊ¼»¯
 	Sklansky82() {}
-	// ½ûÖ¹¿½±´º¯Êı
-	Sklansky82(Sklansky82 const&) {}
-	// ½ûÖ¹¸³Öµ¿½±´
-	Sklansky82& operator=(Sklansky82 const&) {}
-	// ½ûÖ¹Îö¹¹º¯Êı
-	~Sklansky82() {}
-	static Sklansky82* instance;
 
 public:
+	// ½ûÖ¹¿½±´º¯Êı
+	Sklansky82(Sklansky82 const&) = delete;
+	// ½ûÖ¹¸³Öµ¿½±´
+	Sklansky82& operator=(Sklansky82 const&) = delete;
 	static Sklansky82* Instance() {
-		if (!instance)
-			instance = new Sklansky82();
-		return instance;
-
+		static Sklansky82 instance;
+		return &instance;
 	}
 	void getConvexHull(SimplePolygon & sp);
 	void getConvexHullForDisplay(SimplePolygon & sp, Displays & displays);
