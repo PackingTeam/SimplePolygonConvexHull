@@ -64,7 +64,7 @@ void Partition(PointList& ptList, const Point2D& p0, const Point2D& p1, PointLis
 //随机取得两个不同的点
 void RandomPointIndex(int n, int& p0, int& p1)
 {
-	
+	srand(time(NULL));
 	p0 = rand() % n;
 	do 
 	{
