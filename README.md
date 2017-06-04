@@ -7,6 +7,8 @@
   > 由邓俊辉老师指导。
   >
   > 基于以下网址提到的算法：[A History of Linear-time Convex Hull Algorithms for Simple Polygons](http://cgm.cs.mcgill.ca/~athens/cs601/)
+  >
+  > 环境配置：vs2015+Qt5.8+win10
 
 ### 操作流程
 
