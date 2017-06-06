@@ -102,7 +102,7 @@ void GraphicsScene::display(int step)
 					}
 				}
 			}
-			else if (line.type == LINE)
+			else /* if (line.type == LINE) */
 			{
 				if (abs(line.a.x - line.b.x) < tolerance)
 				{
