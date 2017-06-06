@@ -3,7 +3,6 @@
 void LeeGrahamYao83::getConvexHull(SimplePolygon & sp)
 {
 	int N = (int)sp.points.size();
-	Points& points = sp.points;
 	vector<int>& result = sp.convexHull;
 
 	if (N == 3) {
@@ -189,7 +188,6 @@ Display LeeGrahamYao83::createDisplay(vector<int>& hull, SimplePolygon& sp, int 
 void LeeGrahamYao83::getConvexHullForDisplay(SimplePolygon & sp, Displays & displays)
 {
 	int N = (int)sp.points.size();
-	Points& points = sp.points;
 	vector<int>& result = sp.convexHull;
 
 	if (N == 3) {

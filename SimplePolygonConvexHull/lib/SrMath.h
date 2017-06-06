@@ -500,14 +500,14 @@ SR_INLINE SrI32 SrMath::sign(SrI32 a)
 	}
 
 SR_INLINE bool SrMath::isFinite(SrF32 f)
-	{
-		return (0 == ((_FPCLASS_SNAN | _FPCLASS_QNAN | _FPCLASS_NINF | _FPCLASS_PINF) & _fpclass(f) ));
-	}
+    {
+	    return fpclassify(f) != FP_INFINITE && fpclassify(f) != FP_NAN;
+    }
 		
 SR_INLINE bool SrMath::isFinite(SrF64 f)
-	{
-		return (0 == ((_FPCLASS_SNAN | _FPCLASS_QNAN | _FPCLASS_NINF | _FPCLASS_PINF) & _fpclass(f) ));
-	}
+    {
+	    return fpclassify(f) != FP_INFINITE && fpclassify(f) != FP_NAN;
+    }
 SR_INLINE SrF32 SrMath::max(SrF32 a,SrF32 b)
 {
 	return (a < b) ? b : a;
